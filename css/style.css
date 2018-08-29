@@ -1,0 +1,237 @@
+/*CSS*/
+body, ul {
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    width: 100%;
+    height: 70px;
+    background-color: #fff;
+    border: 1.6px solid #ccc;
+    border-style: inset;
+    position: fixed;
+
+}
+/*---------LOGO---------*/
+#logo {
+    width: 10%;
+    height: 100%;
+    float: left;
+    background-image: url(../imagens/iconLib.png);
+    background-size: 47% 96%;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    
+}
+
+/*-------FIM LOGO---------*/
+
+/*CLASSES E IDS DO MENU*/
+#menu {
+    width: 60%;
+    height: 100%;
+    float: left;
+    
+}
+
+#menu-header {
+    list-style: none;
+    height: 100%;
+   
+}
+
+.item {
+    width: 14%;
+    height: 80%;
+    color: #000;
+    float: left;
+    text-align: center;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 30px;
+    padding-top: 14px;
+    
+}
+
+
+
+.item:hover {
+    background-color: #eaf1fc;
+    transition: 0.4s;
+    border-bottom: 4px solid black;
+    height: 79%;
+}
+/*--------FIM DO MENU----------------*/
+
+
+/*-----------------LOGIN-------------*/
+#login {
+    width: 30%;
+    height: 100%;
+    float: left;
+
+}
+
+#containerLogin {
+    width: 100%;
+    height: 100%;
+}
+
+.txtLogin {
+    width: 40%;
+    height: 30px;
+    float: left;
+    font-family: sans-serif;
+    font-size: 22px;
+    margin-top: 5px;
+    
+}
+
+.campo {
+    width: 40%;
+    height: 40px;
+    float: left;
+}
+
+.txtDados {
+    width: 96%;
+    height: 60%;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #e5e5e5;
+    font-size: 20px;
+}
+
+#containerBtn {
+    width: 20%;
+    height: 70px;
+    float: left;
+    margin-top: -35px;
+    
+}
+
+#btnLogar {
+    width: 70%;
+    height: 40px;
+    margin-left: 18px;
+    margin-top: 26px;
+    background-color: #7cff90;
+    font-size: 20px;
+    border: 1px solid #39dd52;
+    border-radius: 6px;
+    border-style: none;
+}
+/*fim header*/
+
+/*conteudo geral*/
+#containerGeral {
+    width: 100%;
+    height: 1400px;
+    background-color: aqua;
+}
+
+.divisorLateral{
+    height: 100%;
+    width: 15%;
+    background-color: aquamarine;
+    float: left;
+}
+
+#containerCentral {
+    height: 100%;
+    width: 70%;
+    background-color: darkblue;
+    float: left;
+}
+
+#containerSlider {
+    width: 100%;
+    height: 25%;
+    background-color: deepskyblue;
+}
+
+#containerContent {
+    height: 60%;
+    width: 100%;
+    background-color: #fff;
+}
+
+#painelRolagem {
+    height: 100%;
+    width: 22%;
+    background-color: darkcyan;
+    float: left;
+}
+
+.containerLivraria {
+    height: 50%;
+    width: 78%;
+    float: left;
+}
+
+.containerLivro {
+    width: 304px;
+    height: 97.6%;
+    float: left;
+    border: 5px solid #8f65c6;
+    color: #0e6682;
+   
+}
+
+.containerLivroFoto {
+    width: 100%;
+    height: 47%;
+    
+}
+
+.imgLivro {
+    width: 149px;
+    height: 190px;
+    margin-top: 5px;
+    /*centralizando uma imagem*/
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+
+
+.containerLivroDados {
+    height: 57%;
+    width: 100%;
+    padding: 6px;
+    text-align: left;
+    line-height: 17px;
+    font-size: 15px;
+    font-family: sans-serif;
+    margin-top: 16px;
+    
+}
+
+.caracteristicas {
+    height: 140px;
+    width: 98%;
+    margin-bottom: 20px;
+    
+}
+
+.plusIcon {
+    height: 19px;
+    width: 19px;
+    margin-top: 2px;
+   
+   
+}
+
+/*fim conteúdo*/
+
+/*rodapé*/
+footer {
+    width: 100%;
+    height: 15%;
+    background-color: aqua;
+    
+}
+/*fim rodaope*/
