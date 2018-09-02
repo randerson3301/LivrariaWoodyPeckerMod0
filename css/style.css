@@ -49,17 +49,16 @@ header {
     float: left;
     text-align: center;
     font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 30px;
+    font-size: 1.8em;
     padding-top: 14px;
     
 }
 
 
-
 .item:hover {
     background-color: #eaf1fc;
     transition: 0.4s;
-    border-bottom: 4px solid black;
+    border-bottom: 4px solid #ec008c;
     height: 79%;
 }
 /*--------FIM DO MENU----------------*/
@@ -128,14 +127,14 @@ header {
 #containerGeral {
     width: 100%;
     height: 1400px;
-    background-color: aqua;
+    
 }
 
 .divisorLateral{
     height: 100%;
     width: 15%;
-    background-color: aquamarine;
     float: left;
+    background-color: #e5fffd;
 }
 
 #containerCentral {
@@ -160,8 +159,20 @@ header {
 #painelRolagem {
     height: 100%;
     width: 22%;
-    background-color: darkcyan;
+    background-color: #b0e4fc;
     float: left;
+}
+
+.itemRolagem {
+    width: 100%;
+    height: 28px;
+    font-family: sans-serif;
+    background-color: #efdc04;
+    font-size: 19px;
+    border-top: 2px solid #fff;
+    text-align: center;
+    color: #0000ff;
+    padding-top: 7px;
 }
 
 .containerLivraria {
@@ -171,13 +182,15 @@ header {
 }
 
 .containerLivro {
-    width: 304px;
+    width: 31.9%;
     height: 97.6%;
     float: left;
-    border: 5px solid #8f65c6;
+    border: 5px solid #ec008c;
     color: #0e6682;
    
 }
+
+
 
 .containerLivroFoto {
     width: 100%;
@@ -199,30 +212,65 @@ header {
 
 
 .containerLivroDados {
-    height: 57%;
+    height: 53%;
     width: 100%;
-    padding: 6px;
     text-align: left;
     line-height: 17px;
-    font-size: 15px;
+    font-size: 0.9em;
     font-family: sans-serif;
-    margin-top: 16px;
+    
     
 }
 
+.tituloLivro {
+    width: 100%;
+    height: 15%;
+}
+
+.descLivro{
+    width: 100%;
+    height: 61%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.preco {
+    width: 100%;
+    height: 9%;
+    margin-top: 10px;
+}
+
+.containerDetalhes {
+    width: 100%;
+    height: 14%;
+   
+}
+
+.divisorDetalhes {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+.detalhes {
+    width: 50%;
+    height: 100%;
+    float: left;
+   line-height: -15px;
+    color: #ec008c;
+}
 .caracteristicas {
     height: 140px;
     width: 98%;
     margin-bottom: 20px;
+    overflow-x: hidden;
+    overflow-y: scroll;
     
 }
 
 .plusIcon {
     height: 19px;
     width: 19px;
-    margin-top: 2px;
-   
-   
 }
 
 /*fim conteúdo*/
@@ -231,7 +279,7 @@ header {
 footer {
     width: 100%;
     height: 15%;
-    background-color: aqua;
+    background-color: #4552b2;
     
 }
 /*fim rodaope*/
