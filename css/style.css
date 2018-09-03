@@ -1,3 +1,6 @@
+
+
+/*---------------------------------------*/
 /*CSS*/
 body, ul {
     padding: 0;
@@ -57,7 +60,7 @@ header {
 
 .item:hover {
     background-color: #eaf1fc;
-    transition: 0.4s;
+    transition: 0.2s;
     border-bottom: 4px solid #ec008c;
     height: 79%;
 }
@@ -131,17 +134,36 @@ header {
 }
 
 .divisorLateral{
-    height: 100%;
+    height: 78.6%;
     width: 15%;
     float: left;
-    background-color: #e5fffd;
+    background-color: #0000ff;
+    padding-top: 300px;
+}
+
+.containerLinks {
+    width: 40%;
+    height: 330px;
+    background-color: aqua;
+    
+}
+
+.iconRedeSocial {
+    width: 100%;
+    height: 33%;
+    background-color: bisque;
 }
 
 #containerCentral {
     height: 100%;
     width: 70%;
-    background-color: darkblue;
     float: left;
+}
+
+#containerForm {
+    width: 100%;
+    height: 85%;
+   color: #000;
 }
 
 #containerSlider {
