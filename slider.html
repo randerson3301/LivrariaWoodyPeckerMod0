@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <title>Slider</title>
+        <meta charset="utf-8">
+         <link href="css/style.css" rel="stylesheet" type="text/css">
+    </head>
+    
+    <body onload="setTimeout(incrementar(), 1000);">
+        <div class="slider" id="slider" >
+            <div class="divisor">
+                <button class="btnSlider" onclick="mudarImg(decrementar())"
+                        id="setaEsquerda"></button>
+            </div>
+            <div class="painelCentral"></div>
+            <div class="divisor">
+                <button class="btnSlider" onclick="mudarImg(incrementar())" id="setaDireita"></button>
+            </div>
+        </div>
+        
+        <script>
+            var slider = document.getElementById("slider");
+            var n = 0;
+            
+            function incrementar() {
+                return n++;    
+            }
+            
+            function decrementar() {
+                if(n > 0) {
+                    return n--;    
+                } else {
+                    n = 2;
+                }
+                
+            }
+            
+            function mudarImg() {
+                switch(n) {
+                    case 1:
+                        slider.style.backgroundImage = "url('imagens/lib1.jpg')";
+                        break;
+                    case 2:
+                        slider.style.backgroundImage = "url('imagens/lib2.jpg')";            break;
+                    default:
+                        slider.style.backgroundImage = "url('imagens/lib0.jpg')";
+                        n = 0;
+                 }
+            }
+            
+            
+        </script>
+    </body>
+</html>

@@ -6,7 +6,38 @@
         <link href="css/reset.css" rel="stylesheet" type="text/css"> 
         <link href="css/style.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+        
+        <!-- usando a biblioteca jquery-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+            // adicionando rolagem suave a todos os links
+            $("a").on('click', function(event) {
 
+            // Está verificando se a já não existe um hash,
+            //que é o sustenido da URl
+            if (this.hash !== "") {
+              // evita o comportamento padrão da âncora
+              event.preventDefault();
+
+            // armazena o hash
+            var hash = this.hash;
+
+            /*usando a função animate() do jquery para 
+              dar o feito de scroll suave na página*/  
+            /*
+                o 800 representa a quantidade de milisegundos para a page nos levar até o link esperado
+            */
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top
+            }, 800, function(){
+        //adicionando o sustenido para a URL quando o scroll estiver finalizado
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+});
+</script>
     </head>
     
     <body>
@@ -15,7 +46,7 @@
             <div id="logo"> </div>
             <nav id="menu">
                 <ul id="menu-header">
-                    <li class="item"><a class="link">home</a></li>
+                    
                     <li class="item"><a class="link">Autores</a></li>
                     <li class="item"><a class="link">Sobre</a></li>
                     <li class="item"><a class="link">Promoções</a></li>
@@ -27,7 +58,7 @@
                  </ul>
             </nav>
             <div id="login">
-                  <div                id="containerLogin">
+                  <div id="containerLogin">
                     <form action="#" name="FrmLogin">
                         <div class="txtLogin">
                         Usuário
@@ -55,19 +86,64 @@
             <div id="containerGeral">
                 <div class="divisorLateral"> </div>
                 <div id="containerCentral">
-                   <div id="containerSlider"></div> 
+                   <div class="slider" id="slider">
+                        <div class="divisor">
+                            <button class="btnSlider" onclick="mudarImg(prevImg())" id="setaEsquerda"></button>
+                        </div>
+                        <div class="painelCentral"></div>
+                        <div class="divisor">
+                            <button class="btnSlider" onclick="mudarImg(proxImg())" id="setaDireita"></button>
+                        </div>
+                    </div> 
+                    
+                    <!-- código em js do slider -->
+                    <script>
+                        
+                        var slider = document.getElementById("slider");
+                        var n = 0;
+
+                        function proxImg() {
+                            return n++;    
+                        }
+
+                        function prevImg() {
+                            if(n > 0) {
+                                return n--;    
+                            } else {
+                                n = 2;
+                            }
+
+                        }
+
+                        function mudarImg() {
+                            switch(n) {
+                                case 1:
+                                    slider.style.backgroundImage = "url('imagens/lib1.jpg')";
+                                    break;
+                                case 2:
+                                    slider.style.backgroundImage = "url('imagens/lib2.jpg')";            break;
+                                default:
+                                    slider.style.backgroundImage = "url('imagens/lib0.jpg')";
+                                    n = 0;
+                            }
+                        }
+                    </script>
                     
                     <div id="containerContent">
                         <div id="painelRolagem">
+                            <a href="#livros1">
+                                <div class="itemRolagem">
+                                    Container 1
+                                </div>
+                            </a>
                             <div class="itemRolagem">
-                                Container 1
-                            </div>
-                            <div class="itemRolagem">
+                                 <a href="#livros2">
                                 Container 2
+                                </a>
                             </div>
                         </div>
                         
-                        <div class="containerLivraria">
+                        <session class="containerLivraria" id="livros1">
                             <div class="containerLivro">
                                 <!-- Container da foto -->
                                 <div class="containerLivroFoto">
@@ -167,8 +243,8 @@
                                     </div>
                                 </div>
                             </div> 
-                        </div>
-                        <div class="containerLivraria">
+                        </session>
+                        <session class="containerLivraria" id="livros2">
                             <div class="containerLivro">
                                 <!-- Container da foto -->
                                 <div class="containerLivroFoto">
@@ -272,7 +348,7 @@
                                     </div>
                                 </div>
                             </div> 
-                        </div>
+                        </session>
                      </div>
                      <!-- FIM CONTEÚDO -->
                      <!-- INICIO RODAPÉ -->
@@ -283,7 +359,15 @@
                 </div>
                 <div class="divisorLateral"> 
                     <div class="containerLinks">
-                        <div class="iconRedeSocial"></div>
+                        <a href="https://www.facebook.com/" target="_blank">
+                            <div class="iconRedeSocial" id="faceIcon"></div>
+                        </a>
+                        <a href="https://twitter.com/" target="_blank">
+                            <div class="iconRedeSocial" id="twitterIcon"></div>
+                        </a>
+                        <a href="https://instagram.com/" target="_blank">
+                            <div class="iconRedeSocial" id="instaIcon"></div>
+                         </a>   
                     </div>
                 </div>
             </div>
