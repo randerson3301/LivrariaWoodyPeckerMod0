@@ -37,7 +37,13 @@
 });
         //código para funcionamento do slider    
         var n = 0;
-                        
+        
+         function timer() {
+           proxImg();
+           setTimeout(mudarImg(), 7000);
+           
+         }
+            
          function proxImg() {
               return n++;    
          }
@@ -55,20 +61,20 @@
               switch(n) {
                    case 1:
                         slider.style.backgroundImage = "url('imagens/lib1.jpg')";
+                        
                         break;
                    case 2:
-                        slider.style.backgroundImage = "url('imagens/lib2.jpg')";       break;
+                        slider.style.backgroundImage = "url('imagens/lib2.jpg')";
+                        
+                      break;
                    default: slider.style.backgroundImage = "url('imagens/lib0.jpg')";
                         n = 0;
+                     
               }
+             
         }
             
-        function timer() {
-           proxImg();
-           setTimeout(mudarImg(), 7000);
-            
-            
-        }
+       
 </script>
     </head>
     
@@ -82,10 +88,10 @@
                     <li class="item"><a class="link" href="autores.html">Autores</a></li>
                     <li class="item"><a class="link" href="sobre.html">Sobre</a></li>
                     <li class="item"><a class="link">Promoções</a></li>
-                    <li class="item"><a class="link">Nossas Lojas</a></li>
+                    <li class="item"><a class="link">Lojas</a></li>
                     <li class="item"><a class="link">Livro do Mês</a></li>
                     <a href="faleConosco.html">
-                        <li class="item">Fale Conosco</li>
+                        <li class="item">Contato</li>
                     </a>
                  </ul>
             </nav>
@@ -116,8 +122,20 @@
         
         <!-- Conteúdo da page-->
             <div id="containerGeral">
-                <div class="divisorLateral"> </div>
-                <div id="containerCentral">
+               
+                    <div class="divisorLateral"> 
+                    <div class="containerLinks">
+                        <a href="https://www.facebook.com/" target="_blank">
+                            <div class="iconRedeSocial" id="faceIcon"></div>
+                        </a>
+                        <a href="https://twitter.com/" target="_blank">
+                            <div class="iconRedeSocial" id="twitterIcon"></div>
+                        </a>
+                        <a href="https://instagram.com/" target="_blank">
+                            <div class="iconRedeSocial" id="instaIcon"></div>
+                         </a>   
+                    </div>
+                </div>
                    <div class="slider" id="slider">
                         <div class="divisor">
                             <button class="btnSlider" onclick="mudarImg(prevImg())" id="setaEsquerda"></button>
@@ -131,7 +149,6 @@
                     <!-- código em js do slider -->
                     <script>
                          var slider = document.getElementById("slider");
-                        
                     </script>
                     
                     <div id="containerContent">
@@ -357,27 +374,8 @@
                      </div>
                      <!-- FIM CONTEÚDO -->
                      <!-- INICIO RODAPÉ -->
-                    <footer>
-
-                    </footer>
+                    <footer></footer>
                 <!-- FIM RODAPÉ -->
-                </div>
-                <div class="divisorLateral"> 
-                    <div class="containerLinks">
-                        <a href="https://www.facebook.com/" target="_blank">
-                            <div class="iconRedeSocial" id="faceIcon"></div>
-                        </a>
-                        <a href="https://twitter.com/" target="_blank">
-                            <div class="iconRedeSocial" id="twitterIcon"></div>
-                        </a>
-                        <a href="https://instagram.com/" target="_blank">
-                            <div class="iconRedeSocial" id="instaIcon"></div>
-                         </a>   
-                    </div>
-                </div>
             </div>
-       
-        
-       
-    </body>
+     </body>
 </html>

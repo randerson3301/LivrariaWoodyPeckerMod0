@@ -1,7 +1,7 @@
-/*tentativa de slider*/
+/*slider*/
 .slider {
     width: 100%;
-    height: 350px;
+    height: 400px;
     background-color: aqua;
     transition: 0.7s;
     background-image: url(../imagens/lib0.jpg);
@@ -12,7 +12,8 @@
     width: 50px;
     height: 200px;
     float: left;
-    padding-top: 150px;
+    padding-top: 200px;
+    
     
 }
 
@@ -38,7 +39,7 @@
 
 
 .painelCentral {
-    width: 856.2px;
+    width: 1100px;
     height: 100%;
     float: left;
     
@@ -57,22 +58,22 @@
 body, ul {
     padding: 0;
     margin: 0;
-    color: #0e6682;
+    color: #fff;
     font-family: sans-serif;
 }
 
 header {
     width: 100%;
-    height: 70px;
-    background-color: #fff;
-    border: 1.6px solid #ccc;
+    height: 120px;
+    background-color: #0a2b60;
     border-style: inset;
     position: fixed;
 
 }
 
-a:link {
+a {
     text-decoration: none;
+    color: inherit;
     
 }
 
@@ -82,7 +83,7 @@ a:link {
     height: 100%;
     float: left;
     background-image: url(../imagens/logo.png);
-    background-size: 300px 300px;
+    background-size: 420px 470px;
     background-repeat: no-repeat;
     background-position: center;
     
@@ -108,13 +109,12 @@ a:link {
 }
 
 .item {
-    width: 14%;
-    height: 80%;
+    width: 15.5%;
+    height: 80px;
     float: left;
     text-align: center;
-    font-size: 22px;
-    padding-top: 14px;
-    
+    font-size: 28px;
+    padding-top: 40px;
 }
 
 
@@ -122,7 +122,9 @@ a:link {
     background-color: #eaf1fc;
     transition: 0.2s;
     border-bottom: 4px solid #00a018;
-    height: 79%;
+    height: 76px;
+    color: #0a2b60;
+   
 }
 /*--------FIM DO MENU----------------*/
 
@@ -130,9 +132,11 @@ a:link {
 /*-----------------LOGIN-------------*/
 #login {
     width: 25%;
-    height: 100%;
+    height: 100px;
     float: left;
-
+    padding-top: 20px;
+    
+    
 }
 
 #containerLogin {
@@ -145,7 +149,7 @@ a:link {
     height: 30px;
     float: left;
     font-family: sans-serif;
-    font-size: 22px;
+    font-size: 27px;
     margin-top: 5px;
     
 }
@@ -158,11 +162,15 @@ a:link {
 
 .txtDados {
     width: 96%;
-    height: 60%;
+    height: 80%;
     border-radius: 10px;
     border-style: solid;
     border-color: #e5e5e5;
-    font-size: 20px;
+    font-size: 25px;
+}
+
+.txtDados:focus {
+    border: "";
 }
 
 #containerBtn {
@@ -188,31 +196,36 @@ a:link {
 
 /*conteudo geral*/
 #containerGeral {
-    width: 1366px;
+    width: 1200px;
     height: 1400px;
-    background-color: #79f1f2;
-    
+    min-height: 1400px;
+    overflow: hidden;
+    background-color: #fff;
+    margin: auto;
+    box-shadow: 1px 1px 10px #000;
 }
 
 #containerGeralSobre {
-    width: 1366px;
+    width: 100%;
     height: 1000px;
     background-color: #79f1f2;
     
 }
 
 .divisorLateral{
-    height: 78.6%;
-    width: 204.9px;
-    float: left;
-    padding-top: 300px;
+    height: 220px;
+    width: 95px;
+    position: fixed;
+    margin-left: 1200px;
+    margin-top: 300px;
     
 }
 
 .containerLinks {
-    width: 40%;
+    width: 80%;
     height: 240px;
     background-color: aqua;
+     box-shadow: 0px 1px 10px #000;
     
 }
 
@@ -241,8 +254,9 @@ a:link {
 
 #containerCentral {
     height: 100%;
-    width: 956.2px;
+    width: 1200px;
     float: left;
+    
    
 }
 
@@ -250,6 +264,7 @@ a:link {
     height: 85%;
     width: 100%;
     background-color: white;
+    color: #0a2b60;
 }
 
 #descSobre {
@@ -303,7 +318,7 @@ a:link {
 #containerImgsAutor {
     width: 100%;
     height: 45%;
-    margin-bottom: 2%;
+  
     
 }
 
@@ -313,7 +328,8 @@ a:link {
     background-image: url(../imagens/800-animal-farm-0.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-   float: left; 
+    float: left; 
+    
 }
 
 #imgBook1 {
@@ -323,6 +339,7 @@ a:link {
     background-repeat: no-repeat;
     background-size: cover;
     float: left;
+   
 }
 
 #imgPrincipalAutor {
@@ -332,6 +349,7 @@ a:link {
     background-repeat: no-repeat;
     background-size: cover;
     float: left;
+    
 }
 
 #containerDescAutor {
@@ -345,9 +363,9 @@ a:link {
 
 .tituloLaranja {
     width: 99%;
-    height: 9%;
+    height: 11%;
     padding-left: 1%;
-    padding-top: 3%;
+    padding-top: 1%;
     font-size: 40px;
     background-color: #ffd187;
     text-align: center;
@@ -373,7 +391,7 @@ a:link {
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
     background-color: #fff;
-    
+    color: #0a2b60;
     
 }
 
@@ -383,7 +401,7 @@ p {
 #painelRolagem {
     height: 100%;
     width: 22%;
-    background-color: #3feac3;
+    background-color: #fff;
     float: left;
 }
 
@@ -402,15 +420,20 @@ p {
     height: 50%;
     width: 78%;
     float: left;
-     background-color: #79f1f2;
+    margin-bottom: 15px;
 }
 
 .containerLivro {
-    width: 31.9%;
+    width: 280px;
     height: 97.6%;
     float: left;
-    border:5px solid #79f1f2;
+    margin-right: 15px;
+    
+    border:5px solid #fff;
     color: #0e6682;
+    
+    /*val1: esquerda val2: pra baixo val3: desfoque da cor val4: cor*/
+    box-shadow: 4px 4px 20px #000;
     background-color: #fff;
    
 }
@@ -504,8 +527,9 @@ p {
 
 /*rodapé*/
 footer {
+    margin-top: 24px;
     width: 100%;
-    height: 15%;
+    height: 15.4%;
     background-color: #2da1a3;
     
 }
