@@ -58,6 +58,7 @@ body, ul {
     padding: 0;
     margin: 0;
     color: #0e6682;
+    font-family: sans-serif;
 }
 
 header {
@@ -72,6 +73,7 @@ header {
 
 a:link {
     text-decoration: none;
+    
 }
 
 /*---------LOGO---------*/
@@ -110,8 +112,7 @@ a:link {
     height: 80%;
     float: left;
     text-align: center;
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 1.8em;
+    font-size: 22px;
     padding-top: 14px;
     
 }
@@ -193,6 +194,13 @@ a:link {
     
 }
 
+#containerGeralSobre {
+    width: 1366px;
+    height: 1000px;
+    background-color: #79f1f2;
+    
+}
+
 .divisorLateral{
     height: 78.6%;
     width: 204.9px;
@@ -238,6 +246,33 @@ a:link {
    
 }
 
+#containerSobre {
+    height: 85%;
+    width: 100%;
+    background-color: white;
+}
+
+#descSobre {
+    height: 51%;
+    width: 98.2%;
+    padding-top: 2%;
+    line-height: 27px;
+    font-family: sans-serif;
+    font-size: 23px;
+    text-align: justify;
+    padding-right: 0.9%;
+    padding-left: 0.9%;
+    
+}
+#imgLivraria {
+    width: 100%;
+    height: 40%;
+    background-image: url(../imagens/imgLivraria.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 #containerForm {
     width: 100%;
     height: 85%;
@@ -252,21 +287,24 @@ a:link {
 }
 
 #containerAutor {
-    height: 85%;
+    height: 83%;
     width: 100%;
-    background-color: #fff;
+    margin-bottom: 2%;
+   
 }
 
 #fichaAutor {
     height: 100%;
     width: 100%;
-    background-color: #ccc;
+    
+    
 }
 
 #containerImgsAutor {
     width: 100%;
     height: 45%;
-    background-color: dodgerblue;
+    margin-bottom: 2%;
+    
 }
 
 #imgBook2 {
@@ -298,18 +336,49 @@ a:link {
 
 #containerDescAutor {
     width: 100%;
-    height: 55%;
-    background-color: forestgreen;
+    height: 53%;
+    
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    
 }
 
-#nomeAutor {
+.tituloLaranja {
     width: 99%;
     height: 9%;
     padding-left: 1%;
-    background-color: darkviolet;
     padding-top: 3%;
-    font-size: 27px;
+    font-size: 40px;
+    background-color: #ffd187;
+    text-align: center;
     font-family: sans-serif;
+   
+}
+
+.tituloLaranjaRadius {
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px; 
+}
+
+#bioAutor {
+    width: 98.2%;
+    height: 86%;
+    padding-top: 2%;
+    line-height: 27px;
+    font-family: sans-serif;
+    font-size: 23px;
+    text-align: justify;
+    padding-right: 0.9%;
+    padding-left: 0.9%;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background-color: #fff;
+    
+    
+}
+
+p {
+   text-indent: 60px; 
 }
 #painelRolagem {
     height: 100%;
@@ -428,6 +497,8 @@ a:link {
     height: 19px;
     width: 19px;
 }
+
+
 
 /*fim conteúdo*/
 
