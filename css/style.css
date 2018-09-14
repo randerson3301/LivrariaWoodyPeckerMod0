@@ -13,7 +13,7 @@
     height: 200px;
     float: left;
     padding-top: 200px;
-    
+   
     
 }
 
@@ -45,14 +45,6 @@
     
 }
 
-
-
-
-
-
-
-
-
 /*---------------------------------------*/
 /*CSS*/
 body, ul {
@@ -83,7 +75,7 @@ a {
     height: 100%;
     float: left;
     background-image: url(../imagens/logo.png);
-    background-size: 420px 470px;
+    background-size: 310px 450px;
     background-repeat: no-repeat;
     background-position: center;
     
@@ -109,11 +101,11 @@ a {
 }
 
 .item {
-    width: 15.5%;
+    width: 16.4%;
     height: 80px;
     float: left;
     text-align: center;
-    font-size: 28px;
+    font-size: 24px;
     padding-top: 40px;
 }
 
@@ -168,11 +160,6 @@ a {
     border-color: #e5e5e5;
     font-size: 25px;
 }
-
-.txtDados:focus {
-    border: "";
-}
-
 #containerBtn {
     width: 20%;
     height: 70px;
@@ -197,20 +184,17 @@ a {
 /*conteudo geral*/
 #containerGeral {
     width: 1200px;
-    height: 1400px;
+    height: 1600px;
     min-height: 1400px;
     overflow: hidden;
     background-color: #fff;
     margin: auto;
     box-shadow: 1px 1px 10px #000;
+    color: #0a2b60;
+    font-size: 25px;
+    font-family: sans-serif;
 }
 
-#containerGeralSobre {
-    width: 100%;
-    height: 1000px;
-    background-color: #79f1f2;
-    
-}
 
 .divisorLateral{
     height: 220px;
@@ -224,9 +208,6 @@ a {
 .containerLinks {
     width: 80%;
     height: 240px;
-    background-color: aqua;
-     box-shadow: 0px 1px 10px #000;
-    
 }
 
 .iconRedeSocial {
@@ -235,6 +216,7 @@ a {
     background-color: #fff;
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    box-shadow: 0px 1px 10px #000;
     
 }
 
@@ -251,20 +233,33 @@ a {
      background-image: url(../imagens/insta.png);
 }
 
-
-#containerCentral {
-    height: 100%;
-    width: 1200px;
-    float: left;
-    
-   
-}
-
-#containerSobre {
-    height: 85%;
+#containerConteudo {
+    height: 1240px;
     width: 100%;
     background-color: white;
     color: #0a2b60;
+    padding-top: 120px;
+}
+
+
+
+.containerLoja {
+    width: 100%;
+    height: 230px;
+    background-color: #fff;
+    box-shadow: 0px 0px 15px #000;
+    text-align: center; 
+    line-height: 32px;
+    margin-bottom: 50px;
+    
+}
+
+
+
+.bookStore {
+    width: 300px;
+    height: 230px;
+    float: left;
 }
 
 #descSobre {
@@ -281,7 +276,7 @@ a {
 }
 #imgLivraria {
     width: 100%;
-    height: 40%;
+    height: 400px;
     background-image: url(../imagens/imgLivraria.jpeg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -361,22 +356,50 @@ a {
     
 }
 
+#containerLivroMes {
+    width: 100%;
+    height: 1100px;
+    text-align: justify;
+    line-height: 28px;
+    te
+    
+}
+
+#imgLivroMes {
+    width: 400px;
+    height: 550px;
+    float: left;
+}
+
+
+
 .tituloLaranja {
     width: 99%;
-    height: 11%;
+    height: 60px;
     padding-left: 1%;
     padding-top: 1%;
     font-size: 40px;
-    background-color: #ffd187;
+    background-color: #f2641d;
     text-align: center;
     font-family: sans-serif;
+    color: #fff;
    
 }
 
-.tituloLaranjaRadius {
-    border-top-right-radius: 25px;
-    border-top-left-radius: 25px; 
+#containerLivroMes > .tituloLaranja {
+    width: 788px;
+    float: left;
+    margin-bottom: 8px;
 }
+
+.containerLoja > .tituloLaranja {
+    width: 888px;
+    float: left;
+    height: 45px;
+    font-size: 33px;
+    margin-bottom: 8px;
+}
+
 
 #bioAutor {
     width: 98.2%;
@@ -397,6 +420,8 @@ a {
 
 p {
    text-indent: 60px; 
+    margin-left: 15px;
+     margin-right: 15px;
 }
 #painelRolagem {
     height: 100%;
@@ -417,10 +442,23 @@ p {
 }
 
 .containerLivraria {
-    height: 50%;
+    height: 470px;
     width: 78%;
     float: left;
     margin-bottom: 15px;
+    
+}
+
+.promos {
+    width: 100%;
+    padding-left: 160px;
+    
+}
+
+.precoVelho {
+    text-decoration: line-through;
+    color: #000;
+    font-size: 13px;
 }
 
 .containerLivro {
@@ -428,12 +466,12 @@ p {
     height: 97.6%;
     float: left;
     margin-right: 15px;
-    
+    font-size: 24px;
     border:5px solid #fff;
     color: #0e6682;
     
     /*val1: esquerda val2: pra baixo val3: desfoque da cor val4: cor*/
-    box-shadow: 4px 4px 20px #000;
+    box-shadow: 4px 4px 10px #000;
     background-color: #fff;
    
 }
@@ -473,6 +511,7 @@ p {
 .tituloLivro {
     width: 100%;
     height: 15%;
+    font-size: 18px;
 }
 
 .descLivro{
@@ -480,12 +519,14 @@ p {
     height: 61%;
     overflow-x: hidden;
     overflow-y: scroll;
+    font-size: 18px;
 }
 
 .preco {
     width: 100%;
     height: 9%;
     margin-top: 10px;
+    font-size: 18px;
 }
 
 .containerDetalhes {
@@ -504,8 +545,9 @@ p {
     width: 50%;
     height: 100%;
     float: left;
-   line-height: -15px;
+    line-height: -15px;
     color: #ec008c;
+    font-size: 18px;
 }
 .caracteristicas {
     height: 140px;
@@ -529,8 +571,8 @@ p {
 footer {
     margin-top: 24px;
     width: 100%;
-    height: 15.4%;
+    height: 260px;
     background-color: #2da1a3;
     
 }
-/*fim rodaope*/
+/*fim rodape*/

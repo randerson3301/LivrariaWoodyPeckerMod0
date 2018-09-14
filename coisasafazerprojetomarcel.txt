@@ -1,0 +1,25 @@
+Pages : promoção, lojas, livro do mês; //FINISHED
+
+problema no footer; //resolvi
+
+Page contato + conexão com banco(PHP e apenas INSERT)
+
+Editar o menu em todas as pages;
+
+retirar link das fontes;//FINISHED
+
+melhorar slider(automatiza-lo, criar spans ou index)
+
+editar a home para receber os livros dinamicamente;
+
+tirar divisor lateral //FINISHED
+
+validar html e css; //FINISHED(FALTA faleConosco)
+
+verificar elementos nao usados o css; //FINISHED
+
+colocar icone nas abas;
+
+baixar jquery;
+
+mudar nome dos links suaves
