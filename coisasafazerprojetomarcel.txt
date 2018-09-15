@@ -2,7 +2,7 @@ Pages : promoção, lojas, livro do mês; //FINISHED
 
 problema no footer; //resolvi
 
-Page contato + conexão com banco(PHP e apenas INSERT)
+Page contato + conexão com banco(PHP e apenas INSERT) //FALTA CONEXÃO
 
 Editar o menu em todas as pages;
 
@@ -22,4 +22,8 @@ colocar icone nas abas;
 
 baixar jquery;
 
-mudar nome dos links suaves
+mudar nome dos links suaves;
+
+colocar máscara nas caixas de texto
+
+    

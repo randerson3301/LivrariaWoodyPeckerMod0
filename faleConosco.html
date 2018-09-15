@@ -2,10 +2,9 @@
 <html lang="pt-br">
     <head>
         <meta charset="utf-8">
-        <title>Autores</title>
+        <title>Fale Conosco</title>
         <link href="css/reset.css" rel="stylesheet" type="text/css"> 
         <link href="css/style.css" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
 
     </head>
     
@@ -27,7 +26,7 @@
             </nav>
             <div id="login">
                   <div                id="containerLogin">
-                    <form action="#" name="FrmLogin">
+                    <form action="#" name="FrmLogin" >
                         <div class="txtLogin">
                         Usuário
                         </div>
@@ -67,23 +66,36 @@
                     </div>
                 <div id="containerCentral">
                     <div id="containerForm">
-                        <form>
+                        <form action="#" name="FrmContato" id="FrmContato">
                             <fieldset>
-                                <legend>Personalia:</legend>
-                                Name: <input type="text"><br>
-                                Email: <input type="email"><br>
-                                Date of birth: <input type="text">
+                                <legend>Entre em Contato conosco:</legend>
+                                <label for="txtNome">Nome:</label> <input type="text" class="txtDados" name="txtNome" >*<br><br>
+                                <label for="txtEmail">E-mail:</label> <input type="email" class="txtDados" name="txtEmail">*<br><br>
+                                <label for="rdoSexo" class="">Sexo:*<br></label>
+                                <input type="radio" name="rdoSexo" class="rdoSexo">Homem
+                                <input type="radio" name="rdoSexo">Mulher
+                                <br><br>
+                                <label for="txtProfissao">Profissão:</label> <input type="text" class="txtDados" name="txtProfissao" >*
+                                <br><br>
+                                <label for="txtTel">Telefone:<br></label> <input type="tel" class="txtDados shortxt" name="txtTel" ><br><br>
+                                <label for="txtCel">Celular:<br></label> <input type="text" class="txtDados shortxt" name="txtCel" >*
+                                <br><br>
+                                <label for="txtHomePage">Sua Home Page:</label> <input type="text" class="txtDados" name="txtHomePage" >
+                                <br><br>
+                                <label for="txtLinkFace">Deixe seu link do face:</label> <input type="text" class="txtDados" name="txtLinkFace" >
+                                <br><br>
+                                <label for="txtSugCrit">Deixe sua Crítica/Sugestão:</label> <textarea name="txtSugCrit"> </textarea>
+                                <br><br>
+                                <label for="txtInfoProduto">Informações de Produto:</label> <textarea name="txtInfoProduto"> </textarea>
+                                <br>
+                                <span id="txtObg">"*" significa obrigatório </span>
+                                <br><br>
+                                <input type="submit" value="Enviar" name="btnSubmit"
+                                   id="btnSubmit">
                           </fieldset>
                         </form>
                     </div>
-                     <div class="painelLateral"></div>
-                    <!--
-                    <form action="" name="frmFaleConosco">
-                        <fieldset>
-                            <legend> Insira os dados para o nosso contato</legend>
-                        </fieldset>
-                    </form>
-                   -->
+                    
                      <!-- FIM CONTEÚDO -->
                      <!-- INICIO RODAPÉ -->
                     <footer>
@@ -93,6 +105,6 @@
                 </div>
                 
                 </div>
-            </div>
+            
        </body>
 </html>

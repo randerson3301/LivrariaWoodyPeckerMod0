@@ -134,7 +134,11 @@ a {
 #containerLogin {
     width: 100%;
     height: 100%;
+    
 }
+
+ 
+
 
 .txtLogin {
     width: 40%;
@@ -159,6 +163,7 @@ a {
     border-style: solid;
     border-color: #e5e5e5;
     font-size: 25px;
+    margin-top: 3px;
 }
 #containerBtn {
     width: 20%;
@@ -284,11 +289,41 @@ a {
 }
 
 #containerForm {
-    width: 100%;
-    height: 85%;
-   color: #000;
+    width: 625px;
+    height: 1200px;
+    color: #0a2b60;
+    margin-top: 135px;
+    margin-left: auto;
+    margin-right: auto;
+   /* border: 1px solid #000;*/
+    box-shadow: 1px 1px 7px #000;
+    border-radius: 15px;
+    padding-top: 25px;
+    padding-left: 25px;
+
 }
 
+#txtObg {
+    font-size: 15px;
+}
+
+textarea {
+    resize: none;
+    width: 96%;
+    height: 102px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #e5e5e5;
+    font-size: 25px;
+    margin-top: 3px;
+
+}
+legend {
+    color: #f2641d;
+    font-size: 40px;
+    margin-bottom: 20px;
+    text-align: center;
+}
 
 #containerContent {
     height: 60%;
@@ -303,6 +338,9 @@ a {
    
 }
 
+.shortxt {
+    width: 40%;
+}
 #fichaAutor {
     height: 100%;
     width: 100%;
@@ -361,8 +399,22 @@ a {
     height: 1100px;
     text-align: justify;
     line-height: 28px;
-    te
     
+    
+}
+
+#btnSubmit {
+    border: none;
+    border-radius: 14px;
+    background-color: coral;
+    color: #fff;
+    font-size: 19px;
+    width: 130px;
+    height: 50px;
+    display: block;
+    border-style: groove;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #imgLivroMes {
