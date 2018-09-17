@@ -1,3 +1,42 @@
+<?php 
+    /* Essas variaveis armazenam os dados necessários para a conexão com o banco*/
+    $host = "localhost";
+    $database = "db_woody_woodpecker";
+    $user = "randerson";
+    $password = "r@nd3rs0n";
+    
+    if(!$conexao = mysqli_connect($host, $user, $password, $database)) {
+        echo("<script>
+                alert('Não foi possível realizar a conexão');
+        </script>");
+    }
+
+    if(isset($_GET["btnSubmit"])) {
+        
+        #Resgatando os values do form
+        $nome = $_GET["txtNome"];
+        $email = $_GET["txtEmail"];
+        $sexo = $_GET["rdoSexo"];
+        $profissao = $_GET["txtProfissao"];
+        $telefone = $_GET["txtTel"];
+        $celular = $_GET["txtCel"];
+        $homepage = $_GET["txtHomePage"];
+        $contaface = $_GET["txtLinkFace"];
+        /*critica ou sugestão*/
+        $critOuSug =  $_GET["txtSugCrit"];
+        $infoProduto =  $_GET["txtInfoProduto"];
+        
+        $sql = "insert into tbl_fale_conosco(nomeContato, emailContato, sexoContato, profissao, telefone, celular, homePage, contaFacebook, critica_e_sugestao, infoProduto) values('".$nome."', '".$email."', '".$sexo."', '".$profissao."', '".$telefone."', '".$celular."', '".$homepage."', '".$contaface."', '".$critOuSug."', '".$infoProduto."')";
+        
+    //echo($sql);
+        
+        mysqli_query($conexao, $sql);
+        header('location:faleConosco.php');
+    }
+    
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -20,12 +59,12 @@
                     <li class="item"><a class="link" href="nossas-lojas.html">Lojas</a></li>
                     <li class="item"><a class="link" href="livro-do-mes.html">Livro do Mês</a></li>
                     
-                        <li class="item"><a href="faleConosco.html">Contato</a></li>
+                        <li class="item"><a href="faleConosco.php">Contato</a></li>
                  </ul>
             </nav>
             <div id="login">
-                  <div                id="containerLogin">
-                    <form action="#" name="FrmLogin" >
+                  <div id="containerLogin">
+                    <form action="faleConosco.php" name="FrmLogin" >
                         <div class="txtLogin">
                         Usuário
                         </div>
@@ -71,10 +110,11 @@
                                 <label for="txtNome">Nome:</label> <input type="text" class="txtDados" name="txtNome" id="txtNome" required>*<br><br>
                                 <label for="txtEmail">E-mail:</label> <input type="email" class="txtDados" name="txtEmail" id="txtEmail" required>*<br><br>
                                 Sexo:*<br>
-                                <input type="radio" name="rdoSexo" class="rdoSexo" id="rdoH">Homem
-                                <input type="radio" name="rdoSexo" id="rdoM" >Mulher
+                                <input type="radio" name="rdoSexo" class="rdoSexo" value="M">Masculino
+                                <input type="radio" name="rdoSexo"
+                                value="F" >Feminino
                                 <br><br>
-                                <label for="txtProfissao">Profissão:</label> <input type="text" class="txtDados" name="txtProfissao " id="txtProfissao" required>*
+                                <label for="txtProfissao">Profissão:</label> <input type="text" class="txtDados" name="txtProfissao" id="txtProfissao" required>*
                                 <br><br>
                                 <label for="txtTel">Telefone:<br></label> <input type="tel" class="txtDados shortxt" name="txtTel" id="txtTel" ><br><br>
                                 <label for="txtCel">Celular:<br></label> <input type="text" class="txtDados shortxt" name="txtCel" id="txtCel" required>*

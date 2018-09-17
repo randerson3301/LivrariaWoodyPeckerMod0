@@ -9,6 +9,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
             $(document).ready(function(){
+                
+                
             // adicionando rolagem suave a todos os links
             $("a").on('click', function(event) {
 
@@ -35,14 +37,17 @@
     } // End if
   });
 });
-        //código para funcionamento do slider    
+        //código para funcionamento do slider            
         var n = 0;
         
          function timer() {
-           proxImg();
-           setTimeout(mudarImg(), 7000);
+            var time = window.setTimeout(proxImg(), 7000);
+            mudarImg();
+            window.clearTimeout(time);
+        }
+               
            
-         }
+         
             
          function proxImg() {
               return n++;    
@@ -55,20 +60,19 @@
               n = 2;
           }
 
-          }
+        }
 
          function mudarImg() {
               switch(n) {
                    case 1:
                         slider.style.backgroundImage = "url('imagens/lib1.jpg')";
-                        
                         break;
                    case 2:
                         slider.style.backgroundImage = "url('imagens/lib2.jpg')";
-                        
                       break;
                    default: slider.style.backgroundImage = "url('imagens/lib0.jpg')";
                         n = 0;
+                      
                      
               }
              
@@ -81,17 +85,16 @@
     <body onload="timer()">
         <!-- Cabeçalho do site-->
         <header>
-            <a href="home.html"><div id="logo"> </div></a>
+           <a href="home.html"><div id="logo"> </div></a>
             <nav id="menu">
                 <ul id="menu-header">
-                    
                     <li class="item"><a class="link" href="autores.html">Autores</a></li>
                     <li class="item"><a class="link" href="sobre.html">Sobre</a></li>
-                    <li class="item"><a class="link">Promoções</a></li>
-                    <li class="item"><a class="link">Lojas</a></li>
-                    <li class="item"><a class="link">Livro do Mês</a></li>
-                     <li class="item"><a href="faleConosco.html">Contato</a></li>
+                    <li class="item"><a class="link" href="promocoes.html">Promoções</a></li>
+                    <li class="item"><a class="link" href="nossas-lojas.html">Lojas</a></li>
+                    <li class="item"><a class="link" href="livro-do-mes.html">Livro do Mês</a></li>
                     
+                        <li class="item"><a href="faleConosco.php">Contato</a></li>
                  </ul>
             </nav>
             <div id="login">

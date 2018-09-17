@@ -2,19 +2,19 @@ Pages : promoção, lojas, livro do mês; //FINISHED
 
 problema no footer; //resolvi
 
-Page contato + conexão com banco(PHP e apenas INSERT) //FALTA CONEXÃO
+Page contato + conexão com banco(PHP e apenas INSERT) //Finished
 
-Editar o menu em todas as pages;
+Editar o menu em todas as pages; //FINISHED
 
 retirar link das fontes;//FINISHED
 
 melhorar slider(automatiza-lo, criar spans ou index)
 
-editar a home para receber os livros dinamicamente;
+editar a home para receber os livros dinamicamente; //nao sei se funciona, mas fiz
 
 tirar divisor lateral //FINISHED
 
-validar html e css; //FINISHED(FALTA faleConosco)
+validar html e css; //FINISHED
 
 verificar elementos nao usados o css; //FINISHED
 
@@ -26,4 +26,12 @@ mudar nome dos links suaves;
 
 colocar máscara nas caixas de texto
 
-    
+melhorar conteudo sobre
+testar outras cores nos btns e titulos de pages
+
+
+
+
+
+
+create user randerson@localhost identified by password('rvmlsdo');

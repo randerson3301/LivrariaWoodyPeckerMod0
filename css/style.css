@@ -74,14 +74,21 @@ a {
     width: 15%;
     height: 100%;
     float: left;
-    background-image: url(../imagens/logo.png);
-    background-size: 310px 450px;
+    background-image: 
+    url(../imagens/untitled.png);
+    
+    background-size: 200px 200px;
     background-repeat: no-repeat;
     background-position: center;
     
     
 }
 
+/*retirando a borda azul que fica quando o input é clicado*/
+textarea:focus, input:focus{
+    outline: none;
+    
+}
 
 
 /*-------FIM LOGO---------*/
@@ -113,7 +120,7 @@ a {
 .item:hover {
     background-color: #eaf1fc;
     transition: 0.2s;
-    border-bottom: 4px solid #00a018;
+    border-bottom: 4px solid #f2641d;
     height: 76px;
     color: #0a2b60;
    
@@ -190,7 +197,7 @@ a {
 #containerGeral {
     width: 1200px;
     height: 1600px;
-    min-height: 1400px;
+    min-height: 1600px;
     overflow: hidden;
     background-color: #fff;
     margin: auto;
@@ -495,7 +502,7 @@ p {
 
 .containerLivraria {
     height: 470px;
-    width: 78%;
+    width: 930px;
     float: left;
     margin-bottom: 15px;
     
@@ -519,11 +526,11 @@ p {
     float: left;
     margin-right: 15px;
     font-size: 24px;
-    border:5px solid #fff;
+    border:2px solid #dbdbdb;
     color: #0e6682;
     
     /*val1: esquerda val2: pra baixo val3: desfoque da cor val4: cor*/
-    box-shadow: 4px 4px 10px #000;
+    /*box-shadow: 1px 1px 40px #000;*/
     background-color: #fff;
    
 }
@@ -597,7 +604,6 @@ p {
     width: 50%;
     height: 100%;
     float: left;
-    line-height: -15px;
     color: #ec008c;
     font-size: 18px;
 }
