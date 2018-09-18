@@ -8,7 +8,7 @@ Editar o menu em todas as pages; //FINISHED
 
 retirar link das fontes;//FINISHED
 
-melhorar slider(automatiza-lo, criar spans ou index)
+melhorar slider(automatiza-lo, criar spans ou index) //FINISHED
 
 editar a home para receber os livros dinamicamente; //nao sei se funciona, mas fiz
 
@@ -22,9 +22,9 @@ colocar icone nas abas;
 
 baixar jquery;
 
-mudar nome dos links suaves;
+mudar nome dos links suaves; //finished
 
-colocar máscara nas caixas de texto
+colocar máscara nas caixas de texto //finished
 
 melhorar conteudo sobre
 testar outras cores nos btns e titulos de pages

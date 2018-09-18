@@ -4,7 +4,6 @@
     height: 400px;
     background-color: aqua;
     transition: 0.7s;
-    background-image: url(../imagens/lib0.jpg);
     background-size: 100% 100%;
 }
 
@@ -13,8 +12,18 @@
     height: 200px;
     float: left;
     padding-top: 200px;
-   
     
+    
+}
+
+#indexslider {
+    width: 50px;
+    height: 30px;
+    margin-top: 90px;
+    font-size: 18px;
+    text-align: center;
+    padding-top: 20px;
+    color: #fff;
 }
 
 
@@ -26,7 +35,10 @@
     border-radius: 24px;
     background-size: cover;
     padding: 0;
+    outline: none; 
 }
+
+
 
 #setaDireita {
      background-image: url(../imagens/setaDireita.png);
@@ -75,7 +87,7 @@ a {
     height: 100%;
     float: left;
     background-image: 
-    url(../imagens/untitled.png);
+    url(../imagens/logo-ww.png);
     
     background-size: 200px 200px;
     background-repeat: no-repeat;
