@@ -2,8 +2,8 @@
     /* Essas variaveis armazenam os dados necessários para a conexão com o banco*/
     $host = "localhost";
     $database = "db_woody_woodpecker";
-    $user = "root";
-    $password = "bcd127";
+    $user = "randerson";
+    $password = "r@nd3rs0n";
     
     if(!$conexao = mysqli_connect($host, $user, $password, $database)) {
         echo("<script>
@@ -102,7 +102,7 @@
                          </a>   
                     </div>
                     </div>
-                <div id="containerCentral">
+                <div id="containerMain">
                     <div id="containerForm">
                         <form action="#" name="FrmContato" id="FrmContato">
                             <fieldset>

@@ -161,10 +161,12 @@ textarea:focus, input:focus{
 }
 
 #containerHeader {
-    width: 1700px;
+    width: 1300px;
     height: 100%;
     margin-right: auto;
     margin-left: auto;
+    
+    
 }
 
 
@@ -267,16 +269,6 @@ textarea:focus, input:focus{
      background-image: url(../imagens/insta.png);
 }
 
-#containerConteudo {
-    height: 75%;
-    width: 100%;
-    background-color: white;
-    color: #0a2b60;
-    padding-top: 120px;
-}
-
-
-
 .containerLoja {
     width: 100%;
     height: 230px;
@@ -286,8 +278,12 @@ textarea:focus, input:focus{
     line-height: 32px;
     margin-bottom: 50px;
     
+    
 }
 
+.superior {
+    margin-top: 120px;
+}
 
 
 .bookStore {
@@ -310,7 +306,7 @@ textarea:focus, input:focus{
 }
 #imgLivraria {
     width: 100%;
-    height: 400px;
+    height: 500px;
     background-image: url(../imagens/imgLivraria.jpeg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -321,10 +317,11 @@ textarea:focus, input:focus{
     width: 625px;
     height: 1200px;
     color: #0a2b60;
+    margin-bottom: 83px;
     margin-top: 135px;
     margin-left: auto;
     margin-right: auto;
-   /* border: 1px solid #000;*/
+    /* border: 1px solid #000; */
     box-shadow: 1px 1px 7px #000;
     border-radius: 15px;
     padding-top: 25px;
@@ -355,15 +352,22 @@ legend {
 }
 
 #containerContent {
-    height: 60%;
+    height: 1020px;
     width: 100%;
     background-color: #fff;
 }
 
-#containerAutor {
-    height: 83%;
+#containerMain {
+    height: 1420px;
     width: 100%;
-    margin-bottom: 2%;
+    
+   
+}
+
+#containerMainMenor {
+    height: 1300px;
+    width: 100%;
+    
    
 }
 
@@ -425,17 +429,24 @@ legend {
 
 #containerLivroMes {
     width: 100%;
-    height: 1100px;
+    height: 980px;
     text-align: justify;
-    line-height: 28px;
+    line-height: 35px;
+    margin-top: 120px;
     
+    
+}
+
+#containerLivroMes > p {
+    margin: 10px;
+    padding-left: 10px;
     
 }
 
 #btnSubmit {
     border: none;
     border-radius: 14px;
-    background-color: #47c411;
+    background-color: #f2641d;
     color: #fff;
     font-size: 19px;
     width: 130px;
@@ -449,12 +460,12 @@ legend {
     width: 400px;
     height: 550px;
     float: left;
+    margin-right: 10px;
 }
 
 
-
 .tituloLaranja {
-    width: 99%;
+    width: 100%;
     height: 60px;
     padding-left: 1%;
     padding-top: 1%;
@@ -467,13 +478,13 @@ legend {
 }
 
 #containerLivroMes > .tituloLaranja {
-    width: 788px;
+    width: 780px;
     float: left;
     margin-bottom: 8px;
 }
 
 .containerLoja > .tituloLaranja {
-    width: 888px;
+    width: 900px;
     float: left;
     height: 45px;
     font-size: 33px;
@@ -599,6 +610,7 @@ p {
     width: 100%;
     height: 61%;
     font-size: 17px;
+    text-align: initial;
     
 }
 
@@ -655,10 +667,9 @@ p {
 
 /*rodapé*/
 footer {
-    margin-top: 24px;
+    height: 180px;
     width: 100%;
-    height: 40%;
-    background-color: #2da1a3;
+    background-color: #0a2b60;
     
 }
 /*fim rodape*/
