@@ -12,38 +12,40 @@
     <body>
         <!-- Cabeçalho do site-->
         <header>
-           <a href="home.html"><div id="logo"> </div></a>
-            <nav id="menu">
-                <ul id="menu-header">
+           <div id="containerHeader">
+                <a href="home.html"><div id="logo"> </div></a>
+                <nav id="menu">
+                    <ul id="menu-header">
                     <li class="item"><a class="link" href="autores.html">Autores</a></li>
                     <li class="item"><a class="link" href="sobre.html">Sobre</a></li>
                     <li class="item"><a class="link" href="promocoes.html">Promoções</a></li>
                     <li class="item"><a class="link" href="nossas-lojas.html">Lojas</a></li>
                     <li class="item"><a class="link" href="livro-do-mes.html">Livro do Mês</a></li>
                     
-                        <li class="item"><a href="faleConosco.php">Contato</a></li>
+                    <li class="item"><a href="faleConosco.php">Contato</a></li>
                  </ul>
             </nav>
-            <div id="login">
-                  <div id="containerLogin">
-                    <form action="#" name="FrmLogin">
-                        <div class="txtLogin">
-                        Usuário
-                        </div>
-                        <div class="txtLogin">
-                        Senha
-                        </div>
-                        <div class="campo">
-                            <input type="text" name="txtUser" class="txtDados" maxlength="40">
-                        </div>
-                        <div class="campo">
-                            <input type="password" name="txtSenha" class="txtDados" maxlength="40">
-                        </div>
+                <div id="login">
+                    <div id="containerLogin">
+                        <form action="#" name="FrmLogin">
+                            <div class="txtLogin">
+                                Usuário
+                            </div>
+                            <div class="txtLogin">
+                                Senha
+                            </div>
+                            <div class="campo">
+                                <input type="text" name="txtUser" class="txtDados" maxlength="40">
+                            </div>
+                            <div class="campo">
+                                <input type="password" name="txtSenha" class="txtDados" maxlength="40">
+                            </div>
                         
-                        <div id="containerBtn">
-                            <input type="submit" name="btnLogar" id="btnLogar" value="Ok">
-                        </div>
-                    </form>
+                            <div id="containerBtn">
+                                <input type="submit" name="btnLogar" id="btnLogar" value="Ok">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </header>
@@ -107,17 +109,15 @@
                                 <div class="containerLivroDados">
                                      <!-- titulo-->
                                     <div class="tituloLivro">
-                                        <h2>Título:&nbsp;The Fall Of Gondolin</h2>
+                                        <h2><span class="textTitulo">Título:</span>&nbsp;The Fall Of Gondolin</h2>
                                     </div>
                                     <!-- descrição do livro -->
                                     <div class="descLivro">
-                                       Descrição:&nbsp; No conto da queda de Gondolin são duas das maiores potências do mundo. Há Morgoth do mal extremo, invisível nesta história, mas reinando sobre um vasto poder militar de sua fortaleza de Angband. Profundamente oposto a Morgoth é Ulmo, segundo dentro pôde somente a Manwë, chefe dos Valar.
-
-                                        Central para esta inimizade dos deuses é a cidade de Gondolin, bonita, mas desconhecida. Foi construído e povoado por elfos Noldorin que, quando habitavam em Valinor, a terra dos deuses, rebelaram-se contra o seu governo e fugiram para a Terra-média. Turgon rei de Gondolin é odiado e temido acima de todos os seus inimigos por Morgoth, que procura em vão para descobrir a cidade maravilhosamente escondida, enquanto os deuses em Valinor em debate aquecido em grande parte se recusam a intervir em apoio dos desejos e projetos de Ulmo. 
+                                       <span class="textTitulo">Descrição:</span>&nbsp; No conto da queda de Gondolin são duas das maiores potências do mundo.
                                     </div>
                                     <!-- preço -->
                                     <div class="preco">
-                                        Preço: R$&nbsp;39,90
+                                        <span class="textTitulo">Preço:</span> R$&nbsp;39,90
                                     </div>
                                     <!-- detalhes -->
                                     <div class="containerDetalhes">
@@ -142,15 +142,15 @@
                                 <div class="containerLivroDados">
                                     <!-- titulo-->
                                     <div class="tituloLivro">
-                                        <h2> Título: Do Átomo ao Buraco Negro</h2>
+                                        <h2> <span class="textTitulo">Título:</span> Do Átomo ao Buraco Negro</h2>
                                     </div>
                                     <!-- descrição do livro -->
                                     <div class="descLivro">
-                                        Descrição: Criador do Poligonautas, canal de ciência no YouTube, com mais de 700 mil seguidores Depois de inventar a roda, aprender a manipular o fogo, desbravar os sete mares e espalhar sua presença pelo globo terrestre, o ser humano passou a mirar o céu: era o novo oceano a ser explorado. De lá pra cá muita coisa aconteceu e a curiosidade sobre o Universo só aumentou. Para nos ajudar nesta expedição, o autor e divulgador científico Schwarza embarca numa jornada que tem início no caótico universo quântico, passando por objetos que vão de planetas a buracos negros de tamanhos que desafiam a nossa imaginação. Em Do átomo ao buraco negro – para descomplicar a astronomia, entenda como funcionam as estrelas, galáxias, quasares, planetas e mais de 60 objetos astronômicos, em um livro que vai além do que os seus olhos podem ver.
+                                       <span class="textTitulo">Descrição:</span> Criador do Poligonautas, canal de ciência no YouTube, com mais de 700 mil seguidores.
                                     </div>
                                     <!-- preço -->
                                     <div class="preco">
-                                        Preço: R$&nbsp;39,90
+                                       <span class="textTitulo">Preço:</span> R$;39,90
                                     </div>
                                     <!-- detalhes -->
                                     <div class="containerDetalhes">
@@ -173,17 +173,15 @@
                                 <div class="containerLivroDados">
                                     <!-- titulo-->
                                     <div class="tituloLivro">
-                                        <h2>Título: 1984</h2>
+                                        <h2><span class="textTitulo">Título:</span> 1984</h2>
                                     </div>
                                     <!-- descrição do livro -->
                                     <div class="descLivro">
-                                        Descrição: O livro é considerado um clássico moderno. Ele questiona, de diversas formas e em vários momentos, os excessos delirantes do poder. Além disso, embora tenha sido publicado em 1949, mostra-se muito atual ao tratar de questões atemporais, que atingem todos que o leem, independentemente da idade, sexo, cor ou classe social. 
-
-                                        É por esses motivos, dentre outros, que “1984” é tido como um livro indispensável para o entendimento da história moderna e é altamente recomendado para empresários, funcionários de diferentes segmentos e universitários de diversos cursos. O livro não é só uma crítica ao totalitarismo, mas também um alerta sobre o nível de submissão dos indivíduos.
+                                        <span class="textTitulo">Descrição:</span> O livro é considerado um clássico moderno. Ele questiona, de diversas formas e em vários momentos, os excessos delirantes do poder. 
                                     </div>
                                     <!-- preço -->
                                     <div class="preco">
-                                        Preço: R$&nbsp;39,90
+                                        <span class="textTitulo">Preço:</span> R$&nbsp;39,90
                                     </div>
                                     <!-- detalhes -->
                                     <div class="containerDetalhes">
@@ -208,23 +206,16 @@
                                 <div class="containerLivroDados">
                                     <!-- titulo-->
                                     <div class="tituloLivro">
-                                        <h2>Título: O Alquimista</h2>
+                                        <h2><span class="textTitulo">Título:</span> O Alquimista</h2>
                                     </div>
                                     <!-- descrição do livro -->
                                     <div class="descLivro">
-                                        Descrição: Paulo Coelho já inspirou mais de 200 milhões de leitores por todo o mundo com este romance encantador. 
-                                        Esta história, brilhante em sua simplicidade e com uma sabedoria que nos estimula, 
-                                        é sobre um jovem pastor da Andaluzia chamado Santiago que viaja de sua cidade natal na Espanha 
-                                        para o deserto do Egito em busca de um tesouro escondido perto das Pirâmides. Ao longo do caminho, 
-                                        ele encontra uma cigana, um homem que se diz rei e um alquimista, que lhe indicam a direção para a sua busca. 
-                                        Ninguém sabe que tesouro é esse, ou se Santiago será capaz de ultrapassar os obstáculos de seu trajeto. 
-                                        Mas o que começa como uma jornada para encontrar bens mundanos se transforma na descoberta do tesouro que se encontra dentro dele mesmo. 
-                                        Emocionante e profundamente humano, este clássico contemporâneo é um testamento eterno do poder transformador dos nossos sonhos 
-                                        e da importância de ouvirmos nossos corações.
+                                       <span class="textTitulo">Descrição:</span> Paulo Coelho já inspirou mais de 200 milhões de leitores por todo o mundo com este romance encantador. 
+                                        Esta história, brilhante em sua simplicidade e com uma sabedoria que nos estimula.
                                     </div>
                                     <!-- preço -->
                                     <div class="preco">
-                                        Preço: R$&nbsp;39,90
+                                        <span class="textTitulo">Preço:</span> R$&nbsp;39,90
                                     </div>
                                     <!-- detalhes -->
                                     <div class="containerDetalhes">
@@ -247,16 +238,15 @@
                                 <div class="containerLivroDados">
                                     <!-- titulo-->
                                     <div class="tituloLivro">
-                                        <h2>Título: Laranja Mecânica</h2>
+                                        <h2> <span class="textTitulo">Título:</span> Laranja Mecânica</h2>
                                     </div>
                                     <!-- descrição do livro -->
                                     <div class="descLivro">
-                                        Descrição: Narrada pelo protagonista, o adolescente Alex, esta brilhante e perturbadora história cria uma sociedade futurista em que a violência atinge proporções gigantescas e provoca uma reposta igualmente agressiva de um governo totalitário. A estranha linguagem utilizada por Alex - soberbamente engendrada pelo autor - empresta uma dimensão quase lírica ao texto. Ao lado de '1984', de George Orwell, e 'Admirável Mundo Novo', de Aldous Huxley, 'Laranja Mecânica' é um dos ícones literários da alienação pós-industrial que caracterizou o século XX. Adaptado com maestria para o cinema em 1972 por Stanley Kubrick, é uma obra marcante: depois da sua leitura, você jamais será o mesmo.
-                                        Agora em nova tradução brasileira.
+                                         <span class="textTitulo">Descrição:</span> Narrada pelo protagonista, o adolescente Alex,<br> esta brilhante e perturbadora história cria uma sociedade futurista em que <br>a violência atinge proporções gigantescas e provoca uma reposta igualmente agressiva de um governo totalitário.
                                     </div>
                                     <!-- preço -->
                                     <div class="preco">
-                                        Preço: R$&nbsp;39,90
+                                        <span class="textTitulo">Preço:</span> R$&nbsp;39,90
                                     </div>
                                     <!-- detalhes -->
                                     <div class="containerDetalhes">
@@ -279,16 +269,16 @@
                                 <div class="containerLivroDados">
                                     <!-- titulo-->
                                     <div class="tituloLivro">
-                                        <h2>Título: O Alienista</h2>
+                                        <h2><span class="textTitulo">Título:</span> O Alienista</h2>
                                     </div>
                                     <!-- descrição do livro -->
                                     <div class="descLivro">
-                                        Descrição:  Escrito dos mais aclamados, Machados de Assis representa um dos pontos culminantes da literatura brasileira. Dentro de sua obra, O alienista é central. Pela permanente inversão do avesso e do direito, da norma e da exceção, temas constantes de sua vasta bibliografia e para os quais o autor deu algumas das melhores contribuintes ficcionais. As atividades a seguir pretendem ampliar a compreensão desta obra e deste tempo. Desenvolva-as após a leitura do livro, dos Diários de um Clássico, da Contextualização Histórica e da Entrevista Imaginária.
+                                       <span class="textTitulo">Descrição:</span>  Escrito dos mais aclamados, Machados de Assis representa um dos pontos culminantes da literatura brasileira. Dentro de sua obra, O alienista é central.
 
                                     </div>
                                     <!-- preço -->
                                     <div class="preco">
-                                        Preço: R$&nbsp;39,90
+                                        <span class="textTitulo">Preço:</span> R$&nbsp;39,90
                                     </div>
                                     <!-- detalhes -->
                                     <div class="containerDetalhes">
