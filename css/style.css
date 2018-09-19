@@ -197,11 +197,12 @@ textarea:focus, input:focus{
     height: 40px;
     margin-left: 18px;
     margin-top: 26px;
-    background-color: #7cff90;
+    background-color: #47c411;
     font-size: 20px;
     border: 1px solid #39dd52;
     border-radius: 6px;
     border-style: none;
+    color: #fff;
 }
 /*fim header*/
 
@@ -425,13 +426,12 @@ legend {
 #btnSubmit {
     border: none;
     border-radius: 14px;
-    background-color: coral;
+    background-color: #47c411;
     color: #fff;
     font-size: 19px;
     width: 130px;
     height: 50px;
     display: block;
-    border-style: groove;
     margin-left: auto;
     margin-right: auto;
 }

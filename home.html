@@ -6,78 +6,7 @@
         <link href="css/reset.css" rel="stylesheet" type="text/css"> 
         <link href="css/style.css" rel="stylesheet" type="text/css">
         
-        <!-- usando a biblioteca jquery-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function(){
-                mudarImg(n);
-                
-                //automatizando o slider
-                setInterval(function(){ mudarImg(n++)}, 5500);
-            // adicionando rolagem suave a todos os links
-            $("a").on('click', function(event) {
-
-            // Está verificando se a já não existe um hash,
-            //que é o sustenido da URl
-            if (this.hash !== "") {
-              // evita o comportamento padrão da âncora
-              event.preventDefault();
-
-            // armazena o hash
-            var hash = this.hash;
-
-            /*usando a função animate() do jquery para 
-              dar o feito de scroll suave na página*/  
-            /*
-                o 800 representa a quantidade de milisegundos para a page nos levar até o link esperado
-            */
-            $('html, body').animate({
-                scrollTop: $(hash).offset().top
-            }, 800, function(){
-        //adicionando o sustenido para a URL quando o scroll estiver finalizado
-        window.location.hash = hash;
-      });
-    } // End if
-  });
-});
-        //código para funcionamento do slider            
-        var slider = document.getElementById('slider');
-        var n = 0;
-        
-        function proxImg() {
-              return n++;    
-         }
-
-        function prevImg() {
-          if(n > 0) {
-             return n--;    
-          } else {
-              n = 2;
-          }
-
-        }
-        
-        
-        function mudarImg() {
-              switch(n) {
-                   case 1:
-                        slider.style.backgroundImage = "url('imagens/lib1.jpg')";
-                        break;
-                   case 2:
-                        slider.style.backgroundImage = "url('imagens/lib2.jpg')";
-                        break;
-                   default: 
-                        slider.style.backgroundImage = "url('imagens/lib0.jpg')";
-                        n = 0;
-                      
-                     
-              }
-             //colocando um contador no slider
-             document.getElementById('indexslider').innerHTML = n + 1 +  "/3";   
-             
-             
-        }
-</script>
+       
     </head>
     
     <body>
@@ -137,7 +66,7 @@
                     </div>
                 </div>
                    
-<!-- ------------- SLIDER--------- -->
+                    <!--      SLIDER            -->
                     <div class="slider" id="slider">
                         <div class="divisor">
                             <button class="btnSlider" onclick="mudarImg(prevImg())" id="setaEsquerda"></button>
@@ -151,12 +80,6 @@
                             <button      class="btnSlider" onclick="mudarImg(proxImg())" id="setaDireita"></button>
                         </div>
                     </div> 
-                    
-                    <!-- código em js do slider -->
-                    <script>
-                         var slider = document.getElementById("slider");
-                    </script>
-                    
                     <div id="containerContent">
                         <div id="painelRolagem">
                             <a href="#livros1">
@@ -383,5 +306,8 @@
                     <footer></footer>
                 <!-- FIM RODAPÉ -->
             </div>
+         <!-- usando a biblioteca jquery-->
+        <script src="js/jquery.js"></script>
+        <script src="js/script.js"></script>
      </body>
 </html>

@@ -35,8 +35,6 @@
     }
     
 ?>
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -45,37 +43,7 @@
         <link href="css/reset.css" rel="stylesheet" type="text/css"> 
         <link href="css/style.css" rel="stylesheet" type="text/css">
         
-        <script>
-            function validar(caracter, blocktype, id) {
-                document.getElementById(id).style = "background: #fff;";
-                
-                 if(blocktype == "num") {
-                /*Transformando a letra em ascii, o código de identificação*/
-                if(window.event)
-                    var letra = caracter.charCode; 
-                else
-                    var letra = caracter.which;
-                
-                if(letra > 47 && letra <= 57) {
-                    document.getElementById(id).style="background: #f00;";
-                    return false; /*Cancela a ação da tecla*/
-                }  
-                 
-             } else if(blocktype == "txt") {
-                 if(window.event)
-                    var letra = caracter.charCode; 
-                else
-                    var letra = caracter.which;
-                
-                if(letra < 47 || letra > 57) {
-                    document.getElementById(id).style="background: #f00;";
-                    return false; /*Cancela a ação da tecla*/
-                }  
-             }  
-            }
-        </script>
-
-    </head>
+   </head>
     
     <body>
         <!-- Cabeçalho do site-->
@@ -140,14 +108,16 @@
                                 <label for="txtNome">Nome:</label> <input type="text" class="txtDados" name="txtNome" id="txtNome" onkeypress="return validar(event, 'num', this.id);" required>*<br><br>
                                 <label for="txtEmail">E-mail:</label> <input type="email" class="txtDados" name="txtEmail" id="txtEmail" required>*<br><br>
                                 Sexo:*<br>
-                                <input type="radio" name="rdoSexo" class="rdoSexo" value="M">Masculino
+                                
+                                <input type="radio" name="rdoSexo" class="rdoSexo" value="M" required>Masculino
                                 <input type="radio" name="rdoSexo"
-                                value="F" >Feminino
+                                value="F" required>Feminino
                                 <br><br>
+                                
                                 <label for="txtProfissao">Profissão:</label> <input type="text" class="txtDados" name="txtProfissao" id="txtProfissao" required>*
                                 <br><br>
-                                <label for="txtTel">Telefone:<br></label> <input type="tel" class="txtDados shortxt" name="txtTel" id="txtTel" onkeypress="return validar(event, 'txt', this.id);" pattern="[0-9]4 [0-9]4" placeholder="Ex: #### ####"><br><br>
-                                <label for="txtCel">Celular:<br></label> <input type="text" class="txtDados shortxt" name="txtCel" id="txtCel" onkeypress="return validar(event, 'txt', this.id);" pattern="[0-9]4 [0-9]4" placeholder="Ex: 9#### ####" required>*
+                                <label for="txtTel">Telefone:<br></label> <input type="tel" class="txtDados shortxt" name="txtTel" id="txtTel" onkeypress="return validar(event, 'txt', this.id);" pattern="[0-9]{4}[0-9]{4}" placeholder="Ex: ########"><br><br>
+                                <label for="txtCel">Celular:<br></label> <input type="text" class="txtDados shortxt" name="txtCel" id="txtCel" onkeypress="return validar(event, 'txt', this.id);" pattern="(9[0-9]{4}[0-9]{4})" placeholder="Ex: 9########" required>*
                                 <br><br>
                                 <label for="txtHomePage">Sua Home Page:</label> <input type="text" class="txtDados" name="txtHomePage" id="txtHomePage" >
                                 <br><br>
@@ -167,13 +137,11 @@
                     
                      <!-- FIM CONTEÚDO -->
                      <!-- INICIO RODAPÉ -->
-                    <footer>
-
-                    </footer>
+                    <footer></footer>
                 <!-- FIM RODAPÉ -->
                 </div>
                 
                 </div>
-            
+             <script src="js/script.js"></script>
        </body>
 </html>
