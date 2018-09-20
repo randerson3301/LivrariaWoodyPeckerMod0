@@ -2,6 +2,17 @@
     box-sizing: border-box;
 }
 
+/*CMS ESTILIZAÇÃO*/
+#headerCMS {
+    width: 100%;
+    height: 100px;
+    background-color: darkblue;
+}
+
+
+
+
+
 /*slider*/
 .slider {
     width: 100%;
@@ -644,7 +655,7 @@ p {
     height: 100%;
     float: left;
     font-weight: 700;
-    color: #ad2424;
+    color: #0a2b60;
     font-size: 17px;
 }
 .caracteristicas {
