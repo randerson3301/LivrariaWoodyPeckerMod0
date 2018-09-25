@@ -1,15 +1,132 @@
 *{
     box-sizing: border-box;
 }
-
 /*CMS ESTILIZAÇÃO*/
 #headerCMS {
     width: 100%;
-    height: 100px;
-    background-color: darkblue;
+    height: 222px;
+    background-color: #0a2b60;
+    border-top-left-radius: 28px;
+    border-top-right-radius: 28px;
+    position: absolute;
+    color: #fff;
+    font-size: 38px;
+    font-family: sans-serif;
+}
+
+#containerHeaderCMS {
+    width: 1350px;
+    height: 150px;
+    
+    
+    
+}
+
+#containerHeaderCMS > #tituloCMS {
+   padding-top: 45px; 
+}
+
+#containerMenuCMS {
+    width: 1200px;
+    
+}
+
+.itemcms {
+    margin-right: 20px;
+    width: 18%;
+    height: 100%;
+    float: left;
+    text-align: center;
+    padding-top: 40px;
+    
+}
+
+.itemcms > figure > figcaption {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.itemcms:hover {
+    background-color: #eaf1fc;
+    transition: 0.2s;
+    
+}
+
+.itemcms:hover > figure > figcaption {
+    color: #0a2b60;
+    
 }
 
 
+
+
+.imgItens {
+    width: 79px;
+    height: 76px;
+    margin-top: -42px;
+}
+
+
+
+figure {
+    display: block;
+    width: 204px;
+    height: 100%;
+    float: left;
+    color: #f2641d;
+    
+}
+
+
+
+#containerHeaderCMS > figure > figcaption{
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+ #tituloCMS {
+   display: block;
+   margin-left: 25px;
+   float: left;
+   margin-right: 335px;
+   
+}
+
+#logocms {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 140px;
+    height: 120px;
+   
+    
+    
+}
+
+#menuCMS {
+    width: 100%;
+    height: 90px;
+    background-color: #f2641d;
+    
+    
+}
+
+#contentCMS {
+    width: 100%;
+    height: 600px;
+}
+
+
+/*rodapé do cms*/
+#footerCMS {
+    width: 100%;
+    height: 58px;
+    background-color: #0a2b60;
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+}
 
 
 
@@ -142,6 +259,7 @@ textarea:focus, input:focus{
     text-align: center;
     font-size: 24px;
     padding-top: 40px;
+    
 }
 
 
@@ -179,6 +297,8 @@ textarea:focus, input:focus{
     
     
 }
+
+
 
 
 .txtLogin {
@@ -328,7 +448,7 @@ textarea:focus, input:focus{
     width: 625px;
     height: 1200px;
     color: #0a2b60;
-    margin-bottom: 83px;
+    margin-bottom: 86px;
     margin-top: 135px;
     margin-left: auto;
     margin-right: auto;
