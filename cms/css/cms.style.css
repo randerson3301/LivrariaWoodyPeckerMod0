@@ -1,0 +1,200 @@
+*{
+    box-sizing: border-box;
+}
+
+#containerCMS {
+    width: 1600px;
+    height: 935px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 28px;
+    box-shadow: 1px 1px 10px #000;
+    
+}
+
+/*CMS ESTILIZAÇÃO*/
+#headerCMS {
+    width: 1600px;
+    height: 222px;
+    background-color: #0a2b60;
+    border-top-left-radius: 28px;
+    border-top-right-radius: 28px;
+    position: absolute;
+    color: #fff;
+    font-size: 38px;
+    font-family: sans-serif;
+    
+}
+
+
+#containerHeaderCMS {
+    width: 1600px;
+    height: 150px;
+}
+
+#containerHeaderCMS > #tituloCMS {
+   padding-top: 45px; 
+}
+
+#containerMenuCMS {
+    width: 1000px;
+    height: 100%;
+    float: left;
+}
+
+#containerBemVindo {
+    width: 600px;
+    height: 90px;
+    float: left;
+    font-size: 24px;
+    padding-top: 50px;
+}
+
+#logout {
+    color: #0a2b60;
+    font-size: 17px;
+    margin-left:  235px;
+}
+
+
+
+.itemcms {
+    margin-right: 20px;
+    width: 200px;
+    height: 100%;
+    float: left;
+    text-align: center;
+    padding-top: 40px;
+    
+}
+
+.itemcms > figure > figcaption {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.itemcms:hover {
+    background-color: #eaf1fc;
+    transition: 0.2s;
+    
+}
+
+.itemcms:hover > figure > figcaption {
+    color: #0a2b60;
+    
+}
+
+
+
+
+.imgItens {
+    width: 79px;
+    height: 76px;
+    margin-top: -42px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+
+#logo {
+    display: block;
+    width: 204px;
+    height: 100%;
+    float: left;
+    color: #f2641d;
+    
+}
+
+
+
+#containerHeaderCMS > figure > figcaption{
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+ #tituloCMS {
+   display: block;
+   margin-left: 25px;
+   float: left;
+   margin-right:540px;
+   
+}
+
+#logocms {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 140px;
+    height: 120px;
+   
+    
+    
+}
+
+#menuCMS {
+    width: 1600px;
+    height: 90px;
+    background-color: #f2641d;
+    
+    
+}
+
+#contentCMS {
+    width: 100%;
+    height: 850px;
+    border-top-left-radius: 28px;
+    border-top-right-radius: 28px;
+    padding-top: 250px;
+    text-align: center;
+    color: #0a2b60;
+    font-size: 27px;
+    font-family: sans-serif;
+}
+
+#containerCentral {
+    height: 600px;
+    text-align: center;
+    color: #0a2b60;
+    font-size: 27px;
+    font-family: sans-serif;
+}
+
+#imgGear {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    width: 350px;
+    height: 350px;
+   
+}
+
+/*rodapé do cms*/
+footer {
+    width: 1600px;
+    height: 85px;
+    background-color: #0a2b60;
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+    text-align: center;
+   
+}
+
+#textFooter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    width: 450px;
+    padding-top: 30px;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 24px;
+   
+}
+
+

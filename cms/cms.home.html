@@ -2,27 +2,27 @@
     <head>
         <title> CMS WW</title>
         <meta charset="utf-8">
-        <link href="../css/style.css" rel="stylesheet" type="text/css">
+        <link href="css/cms.style.css" rel="stylesheet" type="text/css">
         <link href="../css/reset.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <!-- cabeçalho do cms-->
-        <header id="headerCMS">
-            <div id="containerHeaderCMS">
+        <div id="containerCMS">
+             <header id="headerCMS">
+                  <div id="containerHeaderCMS">
                 <h1 id="tituloCMS">
                     <span >
                         CMS - Sistema de Gerenciamento Do Site
                     </span>
                 </h1> 
                 
-                <figure>
+                <figure id="logo">
                     <img src="../imagens/logocms.png" alt="LOGO" title="Woody Woodpecker" id= "logocms">
                     <figcaption>WOODY WOODPECKER S/A</figcaption>
                 </figure>
             </div>
              
-             <nav id="menuCMS">
-                 <div id="containerMenuCMS">
+            <nav id="menuCMS">
+                <div id="containerMenuCMS">
                 <ul id="menu-header">
                     <li class="itemcms">
                         <figure>
@@ -50,13 +50,29 @@
                     </li>
                 </ul>
                 </div>
-             </nav>
-        </header>
-        
-        <!-- área de conteúdo-->
-        <div id="contentCMS"></div>
-        
-        <!-- rodapé do site -->
-        <footer id="footerCMS"></footer>
+                <!-- Aqui conterá a mensagem de bem vindo, e a opção de logout-->
+                <div id="containerBemVindo">
+                    Bem Vindo *************
+                    
+                    <span id="logout"><a href="#">Logout</a></span>
+                </div>
+              </nav>
+            </header>  
+            
+            <div id="contentCMS">
+                <div id="containerCentral">
+                    Você está acessando o CMS da Woody Woodpecker
+                    <figure>
+                        <img src="../imagens/gears.png" alt="Gears" title="Operacional" id="imgGear">
+                    </figure>
+                </div>
+            </div>
+            <!-- rodapé do site-->
+            <footer>
+                <div id="textFooter">
+                    Desenvolvido por Randerson Mendes
+                </div>
+            </footer>
+        </div>
     </body>
 </html>
