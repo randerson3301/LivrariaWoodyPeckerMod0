@@ -27,6 +27,8 @@
 }
 
 
+
+
 #containerHeaderCMS {
     width: 1600px;
     height: 150px;
@@ -80,7 +82,7 @@
     
 }
 
-.itemcms:hover > figure > figcaption {
+.itemcms:hover  > .linkmenu {
     color: #0a2b60;
     
 }
@@ -161,6 +163,7 @@
     color: #0a2b60;
     font-size: 27px;
     font-family: sans-serif;
+    
 }
 
 #imgGear {
@@ -197,4 +200,126 @@ footer {
    
 }
 
+.linkmenu {
+        text-decoration: none;
+        color: inherit;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 700;
+}
 
+@media screen and (max-width:2000px) {
+    
+    #containerCMS {
+        width: 1200px;
+        height: 650px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 28px;
+        box-shadow: 1px 1px 10px #000;
+    
+    }
+    #headerCMS {
+        width: 1200px;
+        height: 222px;
+        background-color: #0a2b60;
+        border-top-left-radius: 28px;
+        border-top-right-radius: 28px;
+        position: absolute;
+        color: #fff;
+        font-size: 38px;
+        font-family: sans-serif;
+
+        }
+    #containerHeaderCMS {
+        width: 1200px;
+        height: 150px;
+    }
+    
+     #tituloCMS {
+         display: block;
+         margin-left: 25px;
+         float: left;
+         margin-right:240px;
+
+    }
+    
+    #menuCMS {
+        width: 100%;
+        height: 90px;
+        background-color: #f2641d;
+    }
+    
+    #containerMenuCMS {
+        width: 850px;
+        height: 100%;
+        float: left;
+        
+    }
+
+    #containerBemVindo {
+        width: 350px;
+        height: 90px;
+        float: left;
+        font-size: 24px;
+        padding-top: 40px;
+    }
+
+    #logout {
+        color: #0a2b60;
+        font-size: 17px;
+        margin-left:  235px;
+    }
+
+
+
+    .itemcms {
+        width: 190px;
+        height: 100%;
+        float: left;
+        text-align: center;
+        padding-top: 40px;
+
+    }
+    #containerCentral {
+        height: 407px;
+        text-align: center;
+        color: #0a2b60;
+        font-size: 27px;
+        font-family: sans-serif;
+        
+    }
+    
+    #imgGear {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        width: 200px;
+        height: 200px;
+   
+    }
+    
+    #contentCMS {
+        width: 100%;
+        height: 570px;
+        border-top-left-radius: 28px;
+        border-top-right-radius: 28px;
+        padding-top: 250px;
+        text-align: center;
+        color: #0a2b60;
+        font-size: 27px;
+        font-family: sans-serif;
+    }
+    
+    footer {
+        width: 100%;
+        height: 85px;
+        background-color: #0a2b60;
+        border-bottom-left-radius: 28px;
+        border-bottom-right-radius: 28px;
+        text-align: center;
+   
+    }
+    
+}
