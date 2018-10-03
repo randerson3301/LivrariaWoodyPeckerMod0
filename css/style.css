@@ -317,6 +317,17 @@ textarea:focus, input:focus{
     float: left;
 }
 
+.login {
+    width: 130px;
+    height: 40px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #e5e5e5;
+    font-size: 25px;
+    margin-top: 3px;
+    
+}
+
 .txtDados {
     width: 450px;
     height: 40px;

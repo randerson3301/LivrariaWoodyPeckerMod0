@@ -41,14 +41,14 @@
             /*
                 O elemento AJAX será utilizado para fazer a page modal.php aparecer dentro da div modal onde o usuário possa analisar os dados de cada registro do fale conosco.
             */
-        function modal(idItem) {
+        function modal() {
             $.ajax({
-               type: "POST", //tipo de envio
+               type: "get", //tipo de envio
                url: "modal.php", //page requisitada
                //caso o elemento obtenha sucesso ele irá carregar o html dentro da div modal
-               data: {idRegistro: idItem},
+               
                success: function(dados){
-                   $("#viewDados").html(dados);
+                   $("#modal").html(dados);
                } 
             })
         }
@@ -147,7 +147,7 @@
                     <?php
                         $sql = "select * from tbl_fale_conosco order by id";
                         //enviando para o banco
-                        $select = mysqli_query($conexao, $sql);
+                        $select = mysqli_query($conexao, $sql );
                     
                    //convertendo os registros em vetores
                     while($rsContatos=mysqli_fetch_array($select)) {
@@ -171,11 +171,11 @@
                         </div>
                          <div class="colAcao smallCol" >
                              <!-- LINK MODAL-->
-                             <a class="viewModal" href="#" onclick="modal(<?php echo($rsContatos['id'])?>)">
+                             <a class="viewModal" href="#" onclick="modal()">
                                 <figure class="acao">
                                     <img src="../imagens/view.png" title="Visualizar Dados" alt="ViewData">
                                 </figure>
-                                </a>
+                                 </a>
                              <a href="adm.fale.conosco.php?modo=excluir&id=<?php echo($rsContatos['id'])?>" onclick="modal()">
                                  <figure class="acao">
                                     <img src="../imagens/delete.png" title="Excluir Registro" alt="excluir">

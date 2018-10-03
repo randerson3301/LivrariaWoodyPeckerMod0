@@ -2,8 +2,8 @@
     /* Essas variaveis armazenam os dados necessários para a conexão com o banco*/
     $host = "localhost";
     $database = "db_woody_woodpecker";
-    $user = "randerson";
-    $password = "r@nd3rs0n";
+    $user = "root";
+    $password = "bcd127";
     
     if(!$conexao = mysqli_connect($host, $user, $password, $database)) {
         echo("<script>
@@ -71,10 +71,10 @@
                                 Senha
                             </div>
                             <div class="campo">
-                                <input type="text" name="txtUser" class="txtDados" maxlength="40">
+                                <input type="text" name="txtUser" class="login" maxlength="40">
                             </div>
                             <div class="campo">
-                                <input type="password" name="txtSenha" class="txtDados" maxlength="40">
+                                <input type="password" name="txtSenha" class=" login" maxlength="40">
                             </div>
                         
                             <div id="containerBtn">
