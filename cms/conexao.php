@@ -3,8 +3,8 @@ function conexaoBD() {
     /* Essas variaveis armazenam os dados necessários para a conexão com o banco*/
     $host = "localhost";
     $database = "db_woody_woodpecker";
-    $user = "root";
-    $password = "bcd127";
+    $user = "randerson";
+    $password = "r@nd3rs0n";
 
     session_start(); //iniciando variaveis de sessão
     

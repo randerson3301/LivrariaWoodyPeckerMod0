@@ -31,12 +31,17 @@
         <meta charset="utf-8">
         <link href="css/cms.style.css" rel="stylesheet" type="text/css">
         <link href="../css/reset.css" rel="stylesheet" type="text/css">
-        <link href="../css/style.css" rel="stylesheet" type="text/css"> 
+        <script src="../js/jquery.js"></script>
     </head>
     
     <body>
         <script>
-            
+            $(document).ready(function() {
+                $('.fecharModal').click(function() {
+                    $('#containerModal').fadeOut(400);
+                });
+            });
+           
         </script>
         
              <header id="smallHeader">
@@ -48,14 +53,13 @@
                 </h1> 
                 
                 <figure id="logoCMS">
-                    <a href="#" class="fechar">
-                        <img src="../imagens/logocms.png" alt="LOGO" title="Woody Woodpecker" id= "logocms">
-                    </a>
+                     <img src="../imagens/logocms.png" alt="LOGO" title="Woody Woodpecker" id= "logocms">
                 </figure>
-                      
-                <figure>
-                    <img src="../imagens/delete.png" alt="fechar" title="Fechar Janela">      
-                </figure>
+                <a href="#"  class="fecharModal">
+                    <figure>
+                        <img src="../imagens/delete.png"alt="fechar" title="Fechar Janela">      
+                    </figure>
+                </a>
             </div>
             </header>  
            <div id="containerConteudoModal">
@@ -79,7 +83,7 @@
                <div  class="divisorModal">
                     Home Page:<input type="text" class="txtDados spaceBetween" name="txtHomePage" id="txtHomePage" disabled value="<?php echo(@$homepage)?>">
                         <br>
-                Deixe seu link do face: <input type="text" class="txtDados spaceBetween" name="txtLinkFace" id="txtLinkFace" disabled value="<?php echo(@$linkface)?>">
+                Facebook: <input type="text" class="txtDados spaceBetween" name="txtLinkFace" id="txtLinkFace" disabled value="<?php echo(@$linkface)?>">
                         <br>
                          Crítica/Sugestão: <textarea name="txtSugCrit" id="txtSugCrit" disabled class="spaceBetween"> <?php echo(@$critica)?> </textarea>
                          <br>

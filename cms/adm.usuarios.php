@@ -70,11 +70,7 @@
             
             <div id="contentCMS">
                 <div id="containerCentral">
-                    Você está acessando o CMS da Woody Woodpecker
-                    <figure>
-                        <img src="../imagens/gears.png" alt="Gears" title="Operacional" id="imgGear">
-                    </figure>
-                </div>
+                </div>  
             </div>
             <!-- rodapé do site-->
             <footer>

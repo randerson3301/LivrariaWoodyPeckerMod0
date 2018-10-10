@@ -1,15 +1,7 @@
 <?php 
-    /* Essas variaveis armazenam os dados necessários para a conexão com o banco*/
-    $host = "localhost";
-    $database = "db_woody_woodpecker";
-    $user = "root";
-    $password = "bcd127";
+    require_once('cms/conexao.php');
     
-    if(!$conexao = mysqli_connect($host, $user, $password, $database)) {
-        echo("<script>
-                alert('Não foi possível realizar a conexão');
-        </script>");
-    }
+    $conexao = conexaoBD();
 
     if(isset($_GET["btnSubmit"])) {
         
@@ -27,9 +19,6 @@
         $infoProduto =  $_GET["txtInfoProduto"];
         
         $sql = "insert into tbl_fale_conosco(nomeContato, emailContato, sexoContato, profissao, telefone, celular, homePage, contaFacebook, critica_e_sugestao, infoProduto) values('".$nome."', '".$email."', '".$sexo."', '".$profissao."', '".$telefone."', '".$celular."', '".$homepage."', '".$contaface."', '".$critOuSug."', '".$infoProduto."')";
-        
-    //echo($sql);
-        
         mysqli_query($conexao, $sql);
         header('location:faleConosco.php');
     }

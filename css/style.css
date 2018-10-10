@@ -1,134 +1,6 @@
 *{
     box-sizing: border-box;
 }
-/*CMS ESTILIZAÇÃO*/
-#headerCMS {
-    width: 100%;
-    height: 222px;
-    background-color: #0a2b60;
-    border-top-left-radius: 28px;
-    border-top-right-radius: 28px;
-    position: absolute;
-    color: #fff;
-    font-size: 38px;
-    font-family: sans-serif;
-}
-
-#containerHeaderCMS {
-    width: 1350px;
-    height: 150px;
-    
-    
-    
-}
-
-#containerHeaderCMS > #tituloCMS {
-   padding-top: 45px; 
-}
-
-#containerMenuCMS {
-    width: 1200px;
-    
-}
-
-.itemcms {
-    margin-right: 20px;
-    width: 18%;
-    height: 100%;
-    float: left;
-    text-align: center;
-    padding-top: 40px;
-    
-}
-
-.itemcms > figure > figcaption {
-    color: #fff;
-    font-size: 16px;
-    font-weight: 700;
-}
-
-.itemcms:hover {
-    background-color: #eaf1fc;
-    transition: 0.2s;
-    
-}
-
-.itemcms:hover > figure > figcaption {
-    color: #0a2b60;
-    
-}
-
-
-
-
-.imgItens {
-    width: 79px;
-    height: 76px;
-    margin-top: -42px;
-}
-
-
-
-figure {
-    display: block;
-    width: 204px;
-    height: 100%;
-    float: left;
-    color: #f2641d;
-    
-}
-
-
-
-#containerHeaderCMS > figure > figcaption{
-  font-size: 15px;
-  font-weight: 700;
-}
-
-
- #tituloCMS {
-   display: block;
-   margin-left: 25px;
-   float: left;
-   margin-right: 335px;
-   
-}
-
-#logocms {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 140px;
-    height: 120px;
-   
-    
-    
-}
-
-#menuCMS {
-    width: 100%;
-    height: 90px;
-    background-color: #f2641d;
-    
-    
-}
-
-#contentCMS {
-    width: 100%;
-    height: 600px;
-}
-
-
-/*rodapé do cms*/
-#footerCMS {
-    width: 100%;
-    height: 58px;
-    background-color: #0a2b60;
-    border-bottom-left-radius: 28px;
-    border-bottom-right-radius: 28px;
-}
-
-
 
 /*slider*/
 .slider {
@@ -312,9 +184,10 @@ textarea:focus, input:focus{
 }
 
 .campo {
-    width: 40%;
+    width: 38%;
     height: 40px;
     float: left;
+    margin-right: 8px;
 }
 
 .login {
@@ -325,6 +198,7 @@ textarea:focus, input:focus{
     border-color: #e5e5e5;
     font-size: 25px;
     margin-top: 3px;
+   
     
 }
 
@@ -338,7 +212,7 @@ textarea:focus, input:focus{
     margin-top: 3px;
 }
 #containerBtn {
-    width: 20%;
+    width: 18%;
     height: 70px;
     float: left;
     margin-top: -35px;
@@ -432,6 +306,11 @@ textarea:focus, input:focus{
     width: 300px;
     height: 230px;
     float: left;
+    background-color: #000;
+}
+
+.bookStore > p {
+    margin-right: 15px;
 }
 
 #descSobre {
@@ -623,6 +502,7 @@ legend {
     width: 780px;
     float: left;
     margin-bottom: 8px;
+
 }
 
 .containerLoja > .tituloLaranja {
@@ -631,8 +511,12 @@ legend {
     height: 45px;
     font-size: 33px;
     margin-bottom: 8px;
+    
 }
 
+.containerLoja > p {
+    margin-right: -12px;
+}
 
 #bioAutor {
     width: 98.2%;
@@ -653,8 +537,8 @@ legend {
 
 p {
    text-indent: 60px; 
-    margin-left: 15px;
-     margin-right: 15px;
+   margin-left: 15px;
+   margin-right: 15px;
 }
 #painelRolagem {
     height: 100%;

@@ -2,6 +2,7 @@
     require_once('conexao.php');
     
     $conexao = conexaoBD();
+
     
     if(isset($_GET['modo'])) {
         $modo = $_GET['modo'];
@@ -38,9 +39,9 @@
             
             
         });
-            /*
-                O elemento AJAX será utilizado para fazer a page modal.php aparecer dentro da div modal onde o usuário possa analisar os dados de cada registro do fale conosco.
-            */
+        /*
+             O elemento AJAX será utilizado para fazer a page modal.php aparecer dentro da div modal onde o usuário possa analisar os dados de cada registro do fale conosco.
+        */
         function modal(idItem) {
             $.ajax({
                type: "POST", //tipo de envio
@@ -51,6 +52,8 @@
                    $("#viewDados").html(dados);
                } 
             })
+
+            
         }
     </script>
     <body>
@@ -68,7 +71,7 @@
                     </span>
                 </h1> 
                 
-                <figure id="logo">
+                <figure id="logoCMS">
                     <img src="../imagens/logocms.png" alt="LOGO" title="Woody Woodpecker" id= "logocms">
                     <figcaption>WOODY WOODPECKER S/A</figcaption>
                 </figure>

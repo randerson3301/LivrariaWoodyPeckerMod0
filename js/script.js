@@ -1,5 +1,7 @@
 //jquery para causar efeito de smooth scrolling
 $(document).ready(function(){
+    teste();
+        
         mudarImg(slideindex);
         //automatizando o slider
         setInterval(
@@ -102,3 +104,41 @@ function validar(caracter, blocktype, id) {
         }  
     } //fim elseif  
 }
+
+//verificação do AJAX para detecção de qual instância usar
+// nos navegadores
+function initAjax() {
+    var objAjax = false;
+    if(window.XMLHttpRequest) {
+        objAjax = new XMLHttpRequest();
+    } else if(window.ActiveXObject) {
+        objAjax = new ActiveXObject("Msxml2.XMLHTTP");
+        if(!objAjax) {
+            objAjax = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+    } else {
+        alert("Seu navegador não suporta a aplicação");
+    }
+
+    return objAjax;
+}
+
+/*Fazendo uma requisição ao servidor, onde o mesmo irá retornar um 
+status de comunicação, isso será possível através da ação disparadora
+onreadystatechange
+*/
+function teste(){
+    var request = initAjax();
+    if(request) {
+        request.onreadystatechange = function() {
+            if(request.readyState == 1) {
+                alert("Oi, eu sou o server");
+            }
+        };
+    }
+}
+
+
+
+
+
