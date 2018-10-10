@@ -5,8 +5,13 @@
         <meta charset="utf-8">
         <link href="css/cms.style.css" rel="stylesheet" type="text/css">
         <link href="../css/reset.css" rel="stylesheet" type="text/css">
+        <script src="../js/script.js"></script>
     </head>
     <body>
+         <!-- ESSAS SÃO AS DIVS DA MODAL-->
+        <div id="containerModal">
+            <div id="viewDados"></div>
+        </div>
         <div id="containerCMS">
              <header id="headerCMS">
                   <div id="containerHeaderCMS">
@@ -70,6 +75,14 @@
             
             <div id="contentCMS">
                 <div id="containerCentral">
+                    <div class="tab">
+                        <div class="tablink">Usuários</div>
+                        <div class="tablink">Níveis</div>
+                    </div>
+                    
+                    <div id="formNivel">
+                        <button class="btnAdd" onclick="alert('oi')">Adicionar Nível</button>
+                    </div>
                 </div>  
             </div>
             <!-- rodapé do site-->
