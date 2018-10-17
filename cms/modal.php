@@ -18,7 +18,7 @@
         $sexo = $rsConsulta['sexoContato'];
         $homepage = $rsConsulta['homePage'];
         $linkface = $rsConsulta['contaFacebook'];
-        $critica = $rsConsulta['critica_e_sugestao'];
+        $critica = $rsConsulta['critica_ou_sugestao'];
         $infoProduto = $rsConsulta['infoProduto'];
     }
         
@@ -35,14 +35,7 @@
     </head>
     
     <body>
-        <script>
-            $(document).ready(function() {
-                $('.fecharModal').click(function() {
-                    $('#containerModal').fadeOut(400);
-                });
-            });
-           
-        </script>
+        <script src="js/script.cms.js"> </script>
         
              <header id="smallHeader">
                   <div id="containerHeaderCMS">

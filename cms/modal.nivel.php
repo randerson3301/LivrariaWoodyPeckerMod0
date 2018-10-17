@@ -4,35 +4,24 @@
     $conexao = conexaoBD();
 
 
-    if(isset($_GET['btnEnviarNivel'])) { //verificando se o botão foi clicado
-        $nivel = $_GET['txtNivel'];
-        //comando de insert para popular no banco
-        $sql = "insert into tbl_nivel(nomeNivel) values('".$nivel."')";
+    if(isset($_POST['idRegistro'])) {
+        $_SESSION["cod"] = $_POST['idRegistro'];
         
-        mysqli_query($conexao, $sql);
+        $sqlSelect = "select * from tbl_nivel where idNivel=". $_SESSION["cod"];
         
+        $select = mysqli_query($conexao, $sqlSelect);
+        
+        $_SESSION['valueBtn'] = "Atualizar";
+        
+        $rsNivel = mysqli_fetch_array($select);
+        
+        
+    } else {
+            $_SESSION['valueBtn'] = "Cadastrar";
     }
+
     
-    /*
-    $codigo = $_POST['idRegistro'];
-
-    $sql = "select * from tbl_fale_conosco where id=".$codigo;
-
-    $select = mysqli_query($conexao, $sql);
-
-    if($rsConsulta=mysqli_fetch_array($select)) {
-        $nome = $rsConsulta['nomeContato'];
-        $email = $rsConsulta['emailContato'];
-        $profissao = $rsConsulta['profissao'];
-        $tel = $rsConsulta['telefone'];
-        $cel = $rsConsulta['celular'];
-        $sexo = $rsConsulta['sexoContato'];
-        $homepage = $rsConsulta['homePage'];
-        $linkface = $rsConsulta['contaFacebook'];
-        $critica = $rsConsulta['critica_e_sugestao'];
-        $infoProduto = $rsConsulta['infoProduto'];
-    }
-      */  
+    
 ?>
 
 <!DOCTYPE html>
@@ -43,44 +32,30 @@
         <link href="css/cms.style.css" rel="stylesheet" type="text/css">
         <link href="../css/reset.css" rel="stylesheet" type="text/css">
         <script src="../js/jquery.js"></script>
+        <script>
+            
+            $(document).ready(function() {
+                $('.fecharModal').click(function() {$('#containerModal').fadeOut(400);
+                });
+            });
+         </script>
     </head>
     
     <body>
-        <script>
-            $(document).ready(function() {
-                $('.fecharModal').click(function() {
-                    $('#containerModal').fadeOut(400);
-                });
-            });
-           
-        </script>
-        
-             <header id="smallHeader">
-                  <div id="containerHeaderCMS">
-                <h1 id="tituloCMSFooter">
-                    <span>
-                       Cadastrar Nível
-                    </span>
-                </h1> 
-                
-                <figure id="logoCMS">
-                     <img src="../imagens/logocms.png" alt="LOGO" title="Woody Woodpecker" id= "logocms">
-                </figure>
-                <a href="#"  class="fecharModal">
-                    <figure>
-                        <img src="../imagens/delete.png"alt="fechar" title="Fechar Janela">      
-                    </figure>
-                </a>
-            </div>
-            </header>  
-           <div id="containerConteudoModal">
-               <div class="divisorModal">
-                   <form action="#" method="get" name="FrmNiveis">
-                        Nome do Nível: <br><input type="text" class=" txtDados spaceBetween" name="txtNivel">
+        <a href="#"  class="fecharModal">
+            <figure>
+                <img src="../imagens/delete.png"alt="fechar" title="Fechar Janela" class="imgClose">      
+            </figure>
+         </a>
+       
+        <div class="divisorModal formatModal ">
+             <form action="adm.usuarios.php" method="post" name="FrmNiveis" id="FrmNiveis">
+                 Nome do Nível: <br><input type="text" class=" txtDados spaceBetween" name="txtNivel" value="<?php echo(@$rsNivel["nomeNivel"])?>">
+                    <br>
                        
-                        <input type="submit" value="Cadastrar" name="btnEnviarNivel"> 
-                   </form>
-               </div>
-          </div>
+                   <input type="submit" value="<?php echo($_SESSION['valueBtn'])?>" name="btnEnviar" class="btnEnviar"> 
+              </form>
+        </div>
+          
     </body>
 </html>

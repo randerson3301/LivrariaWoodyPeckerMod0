@@ -37,6 +37,9 @@
 }
 
 
+
+
+
 #containerHeaderCMS {
     width: 1600px;
     height: 150px;
@@ -122,6 +125,13 @@
     
 }
 
+#modalUsuario {
+    width: 1100px;
+    height: 600px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 
 
 #containerHeaderCMS > figure > figcaption{
@@ -142,7 +152,7 @@
    display: block;
    margin-left: 25px;
    float: left;
-   margin-right:560px;
+   margin-right:45%;
    
 }
 
@@ -207,9 +217,8 @@ footer {
    
 }
 
-#footerModal {
-    height: 85px;
-    
+.modalMenor {
+    height: 300px;
 }
 
 #containerConteudoModal{
@@ -230,8 +239,25 @@ footer {
     float: left;
 }
 
+.formatModal {
+    margin: 30px;
+}
+
 .spaceBetween {
     margin-bottom: 8px;
+}
+
+.btnEnviar {
+    width: 100px;
+    height: 40px;
+    margin-left: 18px;
+    margin-top: 26px;
+    background-color: #f2641d;
+    font-size: 20px;
+    border: 1px solid #39dd52;
+    border-radius: 6px;
+    border-style: none;
+    color: #fff;
 }
 
 #textFooter {
@@ -260,7 +286,6 @@ footer {
     width: 100%;
     height: 45px;
     
-    
 }
 
 .coluna {
@@ -275,6 +300,20 @@ footer {
     border-left-color: #fff;
     
 }
+
+.espacador {
+    margin-left: 200px;
+}
+
+
+
+.indexNivel {
+    margin-left: 120px;
+}
+
+.colMaior {
+    width: 350px;
+ }
 
 .colAcao {
    height: 100%;
@@ -357,7 +396,7 @@ textarea {
 
 }
 
-/*essa é a pagina branca da branca*/
+/*essa é a pagina branca da modal*/
 #viewDados {
     width: 1100px;
     height: 590px;
@@ -365,6 +404,16 @@ textarea {
     margin-right: auto;
     border-radius: 10px;
     
+}
+
+/*modal para adicionar niveis*/
+#addNivel {
+    width: 600px;
+    height: 220px;
+    background-color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
 }
 
 /*comandos para o view do fale conosco*/
@@ -406,19 +455,94 @@ fieldset {
 
 #formNivel {
     width: 1000px;
-    height: 550px;
     background-color: #efefef;
     margin-left: 2px;
+    min-height: 407px;
+    display: none;
 
 }
 
+#formUser {
+    width: 1000px;
+    background-color: #efefef;
+    margin-left: 2px;
+    min-height: 407px;
+}
+
+.imgClose {
+    margin-left: 550px;
+}
 .btnAdd {
     height: 35px;
     margin-left: 840px;
 }
 
+/*código para o switch*/
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
 /*adaptando o sistema para telas menores*/
-@media screen and (max-width:1900px) {
+@media screen and (max-width:1600px) {
     
     #containerCMS {
         width: 1200px;

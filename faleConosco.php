@@ -18,7 +18,7 @@
         $critOuSug =  $_GET["txtSugCrit"];
         $infoProduto =  $_GET["txtInfoProduto"];
         
-        $sql = "insert into tbl_fale_conosco(nomeContato, emailContato, sexoContato, profissao, telefone, celular, homePage, contaFacebook, critica_e_sugestao, infoProduto) values('".$nome."', '".$email."', '".$sexo."', '".$profissao."', '".$telefone."', '".$celular."', '".$homepage."', '".$contaface."', '".$critOuSug."', '".$infoProduto."')";
+        $sql = "insert into tbl_fale_conosco(nomeContato, sexoContato, profissao, celular, telefone, homePage, infoProduto, critica_ou_sugestao, emailContato, contaFacebook) values('".$nome."', '".$sexo."', '".$profissao."', '".$celular."',  '".$telefone."', '".$homepage."', '".$infoProduto."', '".$critOuSug."', '".$email."', '".$contaface."')";
         mysqli_query($conexao, $sql);
         header('location:faleConosco.php');
     }

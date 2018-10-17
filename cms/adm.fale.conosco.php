@@ -28,7 +28,9 @@
         <link href="../css/reset.css" rel="stylesheet" type="text/css">
         <script src="../js/jquery.js"></script>
     </head>
-    <script>
+    
+    <body>
+        <script>
         //Usando JQuery
         
         // ESSE É O JQUERY PARA FAZER A MODAL APARACER NA TELA-->
@@ -56,7 +58,6 @@
             
         }
     </script>
-    <body>
         <!-- ESSAS SÃO AS DIVS DA MODAL-->
         <div id="containerModal">
             <div id="viewDados"></div>
@@ -151,14 +152,16 @@
                         $sql = "select * from tbl_fale_conosco order by id";
                         //enviando para o banco
                         $select = mysqli_query($conexao, $sql);
+                        
+                        $index = 0;
                     
                    //convertendo os registros em vetores
                     while($rsContatos=mysqli_fetch_array($select)) {
-                    
+                        $index++;
                     ?>
                     <div class="containerColunas">
                         <div class="indexRegistro smallCol">
-                            <?php echo($rsContatos['id'])?>
+                            <?php echo($index)?>
                         </div>
                         <div class="coluna">
                             <?php echo($rsContatos['nomeContato'])?>

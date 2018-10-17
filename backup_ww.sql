@@ -1,4 +1,4 @@
--- MySQL Workbench Forward Engineering
+-- MySQL Workbench Forward Engineering--
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -21,7 +21,7 @@ USE `db_woody_woodpecker` ;
 -- Table `db_woody_woodpecker`.`tbl_autor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_woody_woodpecker`.`tbl_autor` (
-  `idAutor` INT(11) NOT NULL,
+  `idAutor` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(90) NOT NULL,
   `dtFalecimento` DATE NULL DEFAULT NULL,
   `dtNascimento` DATE NOT NULL,
@@ -79,7 +79,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `db_woody_woodpecker`.`tbl_autor_livros`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_woody_woodpecker`.`tbl_autor_livros` (
-  `id` INT(11) NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `isbn` VARCHAR(20) NOT NULL,
   `idAutor` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -103,7 +103,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `db_woody_woodpecker`.`tbl_lojas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_woody_woodpecker`.`tbl_lojas` (
-  `idLoja` INT(11) NOT NULL,
+  `idLoja` INT(11) NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(45) NOT NULL,
   `descricao` TEXT NOT NULL,
   `imgLoja` VARCHAR(45) NOT NULL,
@@ -117,7 +117,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `db_woody_woodpecker`.`tbl_endereco`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_woody_woodpecker`.`tbl_endereco` (
-  `id` INT(11) NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `logradouro` VARCHAR(25) NOT NULL,
   `bairro` VARCHAR(45) NOT NULL,
   `cidade` VARCHAR(95) NOT NULL,
@@ -147,7 +147,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `db_woody_woodpecker`.`tbl_fale_conosco`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_woody_woodpecker`.`tbl_fale_conosco` (
-  `id` INT(11) NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `nomeContato` VARCHAR(90) NOT NULL,
   `sexoContato` VARCHAR(2) NOT NULL,
   `profissao` VARCHAR(45) NOT NULL,
@@ -204,7 +204,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `db_woody_woodpecker`.`tbl_promocao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_woody_woodpecker`.`tbl_promocao` (
-  `id` INT(11) NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `percentualDesconto` DECIMAL(2,1) NOT NULL,
   `isbn` VARCHAR(14) NOT NULL,
   `isAtivado` TINYINT(4) NOT NULL,
@@ -223,11 +223,11 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `db_woody_woodpecker`.`tbl_sobre`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_woody_woodpecker`.`tbl_sobre` (
-  `id` INT(11) NOT NULL,
+  `idSobre` INT(11) NOT NULL AUTO_INCREMENT,
   `descricao` TEXT NOT NULL,
   `imgSobre` VARCHAR(45) NOT NULL,
   `isAtivado` TINYINT(4) NOT NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`idSobre`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -258,7 +258,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `db_woody_woodpecker`.`tbl_slider`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_woody_woodpecker`.`tbl_slider` (
-  `idSlider` INT NOT NULL,
+  `idSlider` INT NOT NULL AUTO_INCREMENT,
   `imgSlider` VARCHAR(100) NOT NULL,
   `isAtivado` TINYINT NOT NULL,
   PRIMARY KEY (`idSlider`))

@@ -44,10 +44,10 @@ var slideindex = 0; //controla a img do slider
 
 //funcao para abrir a modal
 //var url será o path da page 
- function abrirModalAdd(url) {
+ function abrirModalAdd(idItem) {
             $.ajax({
                type: "POST", //tipo de envio
-               url: url, //page requisitada
+               url: "modal.nivel.php", //page requisitada
                //caso o elemento obtenha sucesso ele irá carregar o html dentro da div modal
                success: function(dados){
                   // $("#viewDados").html(dados);
