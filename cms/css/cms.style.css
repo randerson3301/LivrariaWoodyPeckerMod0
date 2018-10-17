@@ -152,7 +152,7 @@
    display: block;
    margin-left: 25px;
    float: left;
-   margin-right:45%;
+   margin-right:34%;
    
 }
 
@@ -354,6 +354,10 @@ footer {
     width: 80px;
 }
 
+.smallColPlus{
+    width: 120px;
+}
+
 .acao {
     width: 39px;
     height: 100%;
@@ -458,7 +462,9 @@ fieldset {
     background-color: #efefef;
     margin-left: 2px;
     min-height: 407px;
-    display: none;
+     display: none;
+    
+   
 
 }
 
@@ -467,6 +473,9 @@ fieldset {
     background-color: #efefef;
     margin-left: 2px;
     min-height: 407px;
+    
+   
+    
 }
 
 .imgClose {
@@ -589,6 +598,13 @@ input:checked + .slider:before {
         height: 100%;
         float: left;
         
+    }
+    #tituloCMSFooter {
+       display: block;
+       margin-left: 25px;
+       float: left;
+       margin-right:45%;
+   
     }
 
     #containerBemVindo {

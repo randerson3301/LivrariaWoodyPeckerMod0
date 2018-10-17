@@ -42,7 +42,8 @@ CREATE TABLE IF NOT EXISTS `db_woody_woodpecker`.`tbl_editora` (
   `cnpjEditora` VARCHAR(14) NOT NULL,
   `razaoSocial` VARCHAR(50) NOT NULL,
   `nomeFantasia` VARCHAR(45) NOT NULL,
-  `email` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,tbl_nivel,
+
   PRIMARY KEY (`cnpjEditora`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
