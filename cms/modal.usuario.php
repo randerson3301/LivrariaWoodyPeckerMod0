@@ -1,9 +1,25 @@
 <?php
     require_once('conexao.php');
     
-    $_SESSION['valueBtn'] = "Cadastrar";
+    //$_SESSION['valueBtn'] = "Cadastrar";
     
     $conexao = conexaoBD();
+
+    if(isset($_POST['idRegistro'])) {
+        $_SESSION["cod"] = $_POST['idRegistro'];
+        
+        $sqlSelect = "select * from tbl_usuarios where matricula=". $_SESSION["cod"];
+        
+        $select = mysqli_query($conexao, $sqlSelect);
+        
+        $_SESSION['valueBtn'] = "Atualizar";
+        
+        $rsUser = mysqli_fetch_array($select);
+        
+        
+    } else {
+            $_SESSION['valueBtn'] = "Cadastrar";
+    }
 ?>
 <html>
     <head>
@@ -33,32 +49,28 @@
             <div id="containerConteudoModal">
                 <form name="frmUsuario" action="adm.usuarios.php" method="POST">
                <div class="divisorModal">
-                    Nome: <br><input name="txtNome" type="text" class=" txtDados spaceBetween" ><br>
-                    E-mail: <br><input type="text"  name="txtEmail" class=" txtDados spaceBetween"><br>
+                    Nome: <br><input name="txtNome" type="text" class=" txtDados spaceBetween" value="<?php echo(@$rsUser['nomeUsuario'])?>"><br>
+                    E-mail: <br><input type="text"  name="txtEmail" class=" txtDados spaceBetween" value="<?php echo(@$rsUser['emailUsuario'])?>"><br>
                    Sexo: <br>
                     <!-- 
                         Os radios terão o operador ternário para selecionar de acordo com o sexo do usuário
                     --> 
-                    <input type="radio" name="rdoSexo" class="rdoSexo">Masculino
+                    <input type="radio" name="rdoSexo" class="rdoSexo" value="M">Masculino
                    <input type="radio" class="rdoSexo" name="rdoSexo" value="F">Feminino
                                 <br><br>
-                   Matrícula: <br><input type="text" class=" txtDados spaceBetween"  name="txtMatricula"><br>
+                   Matrícula: <br><input type="number" class=" txtDados spaceBetween"  name="txtMatricula" value="<?php echo(@$rsUser['matricula'])?>"><br>
                
-                    Login: <br><input type="text" class=" txtDados shortxt spaceBetween"  name="txtLogin"><br>
+                    Login: <br><input type="text" class=" txtDados shortxt spaceBetween"  name="txtLogin"  value="<?php echo(@$rsUser['loginNome'])?>"><br>
                
-                    Senha: <br><input type="password" class=" txtDados  shortxt spaceBetween"  name="txtSenha">
+                    Senha: <br><input type="password" class=" txtDados  shortxt spaceBetween"  name="txtSenha"  value="<?php echo(@$rsUser['senha'])?>">
                </div>
                <div  class="divisorModal">
-                   <?php
-                        $sqlSelect = "select * from tbl_nivel";
                    
-                        $select = mysqli_query($conexao, $sqlSelect);
-                   ?>
                    Nivel de Usuário:<select class="txtDados spaceBetween" name="sltNivelUser"> 
                         <?php 
                             while($rsNiveis=mysqli_fetch_array($select)) {
                         ?>
-                            <option value="<?php echo($rsNiveis['idNivel'])?>"><?php echo($rsNiveis['nomeNivel'])?></option>
+                            <option value="<?php echo(@$rsUser['idNivel'])?>"><?php echo(@$rsUser['nomeNivel'])?></option>
                         <?php
                             }
                         ?>

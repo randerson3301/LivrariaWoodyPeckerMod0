@@ -1,5 +1,6 @@
 <?php
     require_once('conexao.php');
+    require_once('function.php');
     
     $conexao = conexaoBD();
 
@@ -149,9 +150,9 @@
                         Aqui aparecerão as consultas 
                     -->
                     <?php
-                        $sql = "select * from tbl_fale_conosco order by id";
+                       
                         //enviando para o banco
-                        $select = mysqli_query($conexao, $sql);
+                        $select = selecionar('tbl_fale_conosco', 'id');
                         
                         $index = 0;
                     

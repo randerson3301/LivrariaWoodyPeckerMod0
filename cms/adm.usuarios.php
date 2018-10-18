@@ -1,17 +1,20 @@
 <?php
 
-    require_once('conexao.php');
+    //require_once('conexao.php');
+    require_once('function.php');
     
     $atv;
     
-    $conexao = conexaoBD();
+    @$conexao = conexaoBD();
     
-    $sql = "select * from tbl_nivel order by idNivel";
+    
 
     $sqlUser = "select tlu.*, tn.nomeNivel from tbl_usuarios tlu inner join tbl_nivel tn on tlu.idNivel = tn.idNivel";
 
     //enviando para o servidor
-    $select = mysqli_query($conexao, $sql);
+    $select = selecionar('tbl_nivel', 'idNivel') ;
+
+    //var_dump($select);
     $selectUser = mysqli_query($conexao, $sqlUser);
 
   // echo($_SESSION['valueBtn']);
@@ -49,8 +52,6 @@
                     }
                     
                     $sqlInsert = "insert into tbl_usuarios(matricula, nomeUsuario, senha, emailUsuario, loginNome, isAtivado, idNivel) values('".$matricula."', '".$nome."', '".$senha."','".$email."', '".$loginname."', '".$atv."', '".$nivelUser."')";
-                    
-                    echo($sqlInsert);
 
                     mysqli_query($conexao, $sqlInsert);
                     
@@ -65,11 +66,15 @@
         //verificando se o botão foi clicado
         $nivel = $_POST['txtNivel'];
         //comando de insert para popular no banco
+        
+        
         $sqlUpdate = "update tbl_nivel set nomeNivel='".$nivel."' where idNivel=".$_SESSION["cod"];
     
         mysqli_query($conexao, $sqlUpdate);
-
-        header("location:adm.usuarios.php");
+            
+        /*
+        var_dump(update("tbl_nivel",  "nomeNivel='".$nivel."'" ,$idNivel, $_SESSION["cod"]));
+       */ header("location:adm.usuarios.php");
 
     }
         
@@ -78,10 +83,8 @@
         $codigo = $_GET['id'];
 
        if($modo == 'excluir') {
-           
-             $sqlDelete="delete from tbl_nivel where idNivel =".$codigo;
-            
-             mysqli_query($conexao, $sqlDelete);
+             //função de delete 
+             delete('tbl_nivel', 'idNivel', $codigo);
              header('location:adm.usuarios.php');
         }  
     }
@@ -261,7 +264,7 @@
                                  </div>
                                 <div class="colAcao smallCol" >
                                     <!-- LINK MODAL-->
-                                    <a href="#" onclick="openEditNivel(<?php echo($rsNiveis['idNivel'])?>)" class="editModal">
+                                    <a href="#" onclick="openEditNivel(<?php echo($rsNiveis['idNivel'])?>, 'modal.nivel.php', '#addNivel', '#modalUsuario')" class="editModal">
                                         <figure class="acao">
                                             <img src="../imagens/edit.png" title="Editar Dados" alt="ViewData" class="linkModal">
                                         </figure>
