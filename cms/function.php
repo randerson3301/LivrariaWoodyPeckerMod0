@@ -1,18 +1,12 @@
 <?php
-require_once('conexao.php');
 
 
 
     //function para selecionar itens sem inner join
     function selecionar($tablename, $primary_key) {
         $sql = "select * from ".$tablename." order by ".$primary_key;
-        $conexao = conexaoBD();
-        $select = mysqli_query($conexao, $sql);
-        if(!$select) {
-            printf(mysqli_error($conexao));
-        }
         
-        return $select;
+        return $sql;
     }
 /*
     //function para inserir itens
@@ -46,24 +40,12 @@ require_once('conexao.php');
 
 function delete($tablename, $primary_key, $idRegistro) {
      $sql = "delete from ".$tablename." where ".$primary_key. "=". $idRegistro;
-        $conexao = conexaoBD();
-        $delete = mysqli_query($conexao, $sql);
-        if(!$delete) {
-            printf(mysqli_error($conexao));
-        }
-        
-        return $delete;
+     
+     return $sql;
 }
 
 function update ($tablename, $setvalue, $primary_key, $idRegistro) {
-    $sql = "update ".$tablename." set   ".$setvalue." where ". $primary_key. "=". $idRegistro;
-        
-        $conexao = conexaoBD();
-        $update = mysqli_query($conexao, $sql);
-        if(!$update) {
-            printf(mysqli_error($conexao));
-        }
-        
-        return $update;
+    $sql = "update ".$tablename." set ". $setvalue." where ".$primary_key."=" .$idRegistro;
+    return $sql;
 }
 ?>

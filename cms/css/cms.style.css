@@ -462,7 +462,7 @@ fieldset {
     background-color: #efefef;
     margin-left: 2px;
     min-height: 407px;
-    
+    display: none;
    
 
 }
@@ -472,11 +472,6 @@ fieldset {
     background-color: #efefef;
     margin-left: 2px;
     min-height: 407px;
-         display: none;
-
-    
-   
-    
 }
 
 .imgClose {

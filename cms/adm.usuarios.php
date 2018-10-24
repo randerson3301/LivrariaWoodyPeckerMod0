@@ -1,18 +1,16 @@
 <?php
 
-    //require_once('conexao.php');
+    require_once('conexao.php');
     require_once('function.php');
     
     $atv;
     
-    @$conexao = conexaoBD();
-    
-    
+    @$conexao = conexaoBD();    
 
     $sqlUser = "select tlu.*, tn.nomeNivel from tbl_usuarios tlu inner join tbl_nivel tn on tlu.idNivel = tn.idNivel";
 
     //enviando para o servidor
-    $select = selecionar('tbl_nivel', 'idNivel') ;
+    $select = mysqli_query($conexao, selecionar('tbl_nivel', 'idNivel')) ;
 
     //var_dump($select);
     $selectUser = mysqli_query($conexao, $sqlUser);
@@ -21,6 +19,7 @@
 
     //utilizando os parametros da modal
     if(isset($_POST['btnEnviar']) && isset($_SESSION['valueBtn'])) {
+            //Verificando se o valor do botão é cadastrar
             if($_SESSION['valueBtn'] == 'Cadastrar') {
                                     //echo($sqlInsert);
 
@@ -60,23 +59,23 @@
 
             
             header("location:adm.usuarios.php");
+            } else if($_SESSION['valueBtn'] == "Atualizar") { 
+                echo('oi');
+                //verificando se o botão foi clicado
+                if(isset($_POST['txtNivel'])) {
+                $nivel = $_POST['txtNivel'];
+                //comando de insert para popular no banco
+
+                $sqlUpdate = update('tbl_nivel',"nomeNivel='".$nivel."'",'idNivel', $_SESSION["cod"]);
+
+                mysqli_query($conexao, $sqlUpdate);
+                
+                header("location:adm.usuarios.php");
+                }
             }
         
-    } else if(isset($_POST['btnEnviar']) && $_SESSION['valueBtn'] == "Atualizar") { 
-        //verificando se o botão foi clicado
-        $nivel = $_POST['txtNivel'];
-        //comando de insert para popular no banco
-        
-        
-        $sqlUpdate = "update tbl_nivel set nomeNivel='".$nivel."' where idNivel=".$_SESSION["cod"];
+    } 
     
-        mysqli_query($conexao, $sqlUpdate);
-            
-        /*
-        var_dump(update("tbl_nivel",  "nomeNivel='".$nivel."'" ,$idNivel, $_SESSION["cod"]));
-       */ header("location:adm.usuarios.php");
-
-    }
         
     if(isset($_GET['modo'])) {
         $modo = $_GET['modo'];
@@ -84,8 +83,10 @@
 
        if($modo == 'excluir') {
              //função de delete 
-             delete('tbl_nivel', 'idNivel', $codigo);
-             header('location:adm.usuarios.php');
+             $delete = delete('tbl_nivel', 'idNivel', $codigo);
+             
+           mysqli_query($conexao, $delete);
+           header('location:adm.usuarios.php');
         }  
     }
 

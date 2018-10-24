@@ -1,5 +1,6 @@
 <?php
     require_once('conexao.php');
+    require_once('function.php');
     
     //$_SESSION['valueBtn'] = "Cadastrar";
     
@@ -68,9 +69,11 @@
                    
                    Nivel de Usuário:<select class="txtDados spaceBetween" name="sltNivelUser"> 
                         <?php 
-                            while($rsNiveis=mysqli_fetch_array($select)) {
+    /*
+                            $selectNivel = mysql_query($conexao, selecionar('tbl_nivel', 'idNivel'));
+      */                      while($rsUser=mysqli_fetch_array($selectNivel)) {
                         ?>
-                            <option value="<?php echo(@$rsUser['idNivel'])?>"><?php echo(@$rsUser['nomeNivel'])?></option>
+                            <option value="<?php echo(@$rsUser['idNivel'])?>"><?php echo(@$rsUser['nomeNivel'])?></option><!--</option></option>-->
                         <?php
                             }
                         ?>
