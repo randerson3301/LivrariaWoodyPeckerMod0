@@ -3,8 +3,12 @@
 
 
     //function para selecionar itens sem inner join
-    function selecionar($tablename, $primary_key) {
-        $sql = "select * from ".$tablename." order by ".$primary_key;
+    function selecionar($tablename, $primary_key, $criterio=null) {
+        $sql = "select * from ".$tablename;
+        if($criterio != null ) 
+            $sql = $sql ." where ". $criterio;
+        
+        $sql = $sql ." order by ".$primary_key;
         
         return $sql;
     }

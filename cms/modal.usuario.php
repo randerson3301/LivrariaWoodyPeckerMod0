@@ -5,17 +5,24 @@
     //$_SESSION['valueBtn'] = "Cadastrar";
     
     $conexao = conexaoBD();
+    
+    $itemOption = "Selecione um item ...";
 
+    $valueOption = 0;
+    
     if(isset($_POST['idRegistro'])) {
         $_SESSION["cod"] = $_POST['idRegistro'];
         
-        $sqlSelect = "select * from tbl_usuarios where matricula=". $_SESSION["cod"];
+        $sqlSelect = "select tu.*, tn.nomeNivel from tbl_usuarios tu inner join tbl_nivel tn where tu.idNivel = tn.idNivel and matricula=". $_SESSION["cod"];
         
         $select = mysqli_query($conexao, $sqlSelect);
         
         $_SESSION['valueBtn'] = "Atualizar";
         
         $rsUser = mysqli_fetch_array($select);
+        
+        $itemOption = $rsUser["nomeNivel"];
+        $valueOption = $rsUser["idNivel"];
         
         
     } else {
@@ -56,8 +63,8 @@
                     <!-- 
                         Os radios terão o operador ternário para selecionar de acordo com o sexo do usuário
                     --> 
-                    <input type="radio" name="rdoSexo" class="rdoSexo" value="M">Masculino
-                   <input type="radio" class="rdoSexo" name="rdoSexo" value="F">Feminino
+                    <input type="radio" name="rdoSexo" class="rdoSexo" value="M" <?php echo(@$rsUser['sexoUsuario'] == "M") ? 'checked': null?>>Masculino
+                   <input type="radio" class="rdoSexo" name="rdoSexo" value="F" <?php echo(@$rsUser['sexoUsuario'] == "F") ? 'checked': null?>>Feminino
                                 <br><br>
                    Matrícula: <br><input type="number" class=" txtDados spaceBetween"  name="txtMatricula" value="<?php echo(@$rsUser['matricula'])?>"><br>
                
@@ -68,12 +75,25 @@
                <div  class="divisorModal">
                    
                    Nivel de Usuário:<select class="txtDados spaceBetween" name="sltNivelUser"> 
+                   
+                   
+                    <option value="<?php echo($valueOption)?>">
+                        <?php echo($itemOption)?>
+                    </option>
+                        
                         <?php 
     /*
-                            $selectNivel = mysql_query($conexao, selecionar('tbl_nivel', 'idNivel'));
-      */                      while($rsUser=mysqli_fetch_array($selectNivel)) {
+                            $sqlNivelJoin = "select tu.idNivel, tn.nomeNivel from tbl_usuarios tu inner join tbl_nivel tn on tu.idNivel = tn.idNivel";
+      */                      
+                            $sqlNivel = selecionar('tbl_nivel', 'idNivel', 'idNivel <> '. $valueOption);
+                            $selectNivel = mysqli_query($conexao, $sqlNivel);
+                            
+                            //$selectNivelJoin =  mysqli_query($conexao, $sqlNivelJoin);
+                            //$rsNivelUser = mysqli_fetch_array($selectNivelJoin);
+                            
+                           while($rsNivel=mysqli_fetch_array($selectNivel)) {
                         ?>
-                            <option value="<?php echo(@$rsUser['idNivel'])?>"><?php echo(@$rsUser['nomeNivel'])?></option><!--</option></option>-->
+                            <option value="<?php echo($rsNivel['idNivel'])?>"><?php echo($rsNivel['nomeNivel'])?></option>
                         <?php
                             }
                         ?>

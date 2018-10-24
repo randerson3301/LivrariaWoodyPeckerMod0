@@ -5,7 +5,7 @@
     
     $atv;
     
-    @$conexao = conexaoBD();    
+    $conexao = conexaoBD();    
 
     $sqlUser = "select tlu.*, tn.nomeNivel from tbl_usuarios tlu inner join tbl_nivel tn on tlu.idNivel = tn.idNivel";
 
@@ -50,7 +50,7 @@
                          $atv = 0;
                     }
                     
-                    $sqlInsert = "insert into tbl_usuarios(matricula, nomeUsuario, senha, emailUsuario, loginNome, isAtivado, idNivel) values('".$matricula."', '".$nome."', '".$senha."','".$email."', '".$loginname."', '".$atv."', '".$nivelUser."')";
+                    $sqlInsert = "insert into tbl_usuarios(matricula, nomeUsuario, senha, emailUsuario, loginNome, isAtivado, idNivel, sexoUsuario) values('".$matricula."', '".$nome."', '".$senha."','".$email."', '".$loginname."', '".$atv."', '".$nivelUser."', '".$sexo."')";
 
                     mysqli_query($conexao, $sqlInsert);
                     
@@ -60,7 +60,7 @@
             
             header("location:adm.usuarios.php");
             } else if($_SESSION['valueBtn'] == "Atualizar") { 
-                echo('oi');
+                //echo('oi');
                 //verificando se o botão foi clicado
                 if(isset($_POST['txtNivel'])) {
                 $nivel = $_POST['txtNivel'];
@@ -71,7 +71,30 @@
                 mysqli_query($conexao, $sqlUpdate);
                 
                 header("location:adm.usuarios.php");
-                }
+                } else {
+                    $nome = $_POST['txtNome'];
+                    $email = $_POST['txtEmail'];
+                    $sexo = $_POST['rdoSexo'];
+                    $matricula = $_POST['txtMatricula'];
+                    $loginname = $_POST['txtLogin'];
+                    $senha = $_POST['txtSenha'];
+                    $nivelUser = $_POST['sltNivelUser'];
+                    $atv = 0;
+                    if(isset($_POST['checkAtivacao'])) {
+                        $atv = 1;
+                    }
+                   
+                    //update tabela de usuarios
+                  /*
+                    echo( update('tbl_usuarios',"nomeUsuario='".$nome."', emailUsuario ='".$email."', sexoUsuario='".$sexo."', loginNome ='".$loginname."', senha ='".$senha. "', idNivel =".$nivelUser.", isAtivado=".$atv,'matricula', $matricula));
+                   */
+                    
+                    $sqlUpdate = update('tbl_usuarios',"nomeUsuario='".$nome."', emailUsuario ='".$email."', sexoUsuario='".$sexo."', loginNome ='".$loginname."', senha ='".$senha. "', idNivel =".$nivelUser.", isAtivado=".$atv,'matricula', $matricula);
+                    
+                    mysqli_query($conexao, $sqlUpdate);
+                    header("location:adm.usuarios.php");
+
+                 }
             }
         
     } 
