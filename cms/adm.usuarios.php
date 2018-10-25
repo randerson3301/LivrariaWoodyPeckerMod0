@@ -105,12 +105,21 @@
         $codigo = $_GET['id'];
 
        if($modo == 'excluir') {
+             
              //função de delete 
              $delete = delete('tbl_nivel', 'idNivel', $codigo);
+             mysqli_query($conexao, $delete);
+              
+        }
+        
+        //excluir usuario
+        else if($modo == "excluiruser") {
              
-           mysqli_query($conexao, $delete);
-           header('location:adm.usuarios.php');
-        }  
+             $delete = delete('tbl_usuarios', 'matricula', $codigo);
+             mysqli_query($conexao, $delete);
+        }
+        
+        header('location:adm.usuarios.php');
     }
 
     if(isset($_GET['ativado'])) {
@@ -145,48 +154,7 @@
 
     </head>
     <body>
-        <script>
-            $(document).ready(function() {
-                $('#btnNivel').click(function(){
-                  $("#containerModal").fadeIn(400);
-                });
-                
-                $('.editModal').click(function(){
-                  $("#containerModal").fadeIn(400);
-                });
-                
-                $('#btnUser').click(function() {
-                   $("#containerModal").fadeIn(400);
-                   $("#addNivel").hide();
-                })
-                
-            });
-            //o usuário irá definir através de parametros qual a url e o elemento onde ele deseja carregar o html
-            function openInsertModal(url, elet){
-                $.ajax({
-                    type:"post",
-                    url: url,
-                    processData: "false",
-                    dataType:"text",
-                    success: function(dados) {
-                        $(elet).html(dados)
-                    }
-                })
-            }
-            
-            function openEditNivel(idItem, url, container, hideEle){
-                $.ajax ({
-                    type:"post",
-                    url:url,
-                    data: {idRegistro: idItem},
-                    success: function(dados){
-                       $(container).html(dados);
-                        $(hideEle).hide();
-                    }
-                })
-            }
-            
-        </script>
+        
          <!-- ESSAS SÃO AS DIVS DA MODAL-->
         <div id="containerModal">
             <div id="addNivel"></div>
@@ -288,7 +256,7 @@
                                  </div>
                                 <div class="colAcao smallCol" >
                                     <!-- LINK MODAL-->
-                                    <a href="#" onclick="openEditNivel(<?php echo($rsNiveis['idNivel'])?>, 'modal.nivel.php', '#addNivel', '#modalUsuario')" class="editModal">
+                                    <a href="#" onclick="openEditNivel('post',<?php echo( $rsNiveis['idNivel'])?>, 'modal.nivel.php', '#addNivel', '#modalUsuario')" class="editModal">
                                         <figure class="acao">
                                             <img src="../imagens/edit.png" title="Editar Dados" alt="ViewData" class="linkModal">
                                         </figure>
@@ -356,14 +324,15 @@
                                         </figure>
                                     </a>
 
-                                     <a href="adm.usuarios.php?modo=excluir&id=<?php echo($rsNiveis['idNivel'])?>">
+                                     <a href="adm.usuarios.php?modo=excluiruser&id=<?php echo($rsUsuarios['matricula'])?>">
                                          <figure class="acao">
                                             <img src="../imagens/delete.png" title="Excluir Registro" alt="excluir">
                                         </figure>
                                      </a>
-                                    <a href="adm.usuarios.php?modo=view&id=<?php echo($rsUsuarios['matricula'])?>">
+                                    <a href="adm.usuarios.php?modo=view&id=<?php echo($rsUsuarios['matricula'])?>"  class="viewModal" onclick="openViewUser(<?php echo($rsUsuarios['matricula'])?>, 'modal.usuario.php', '#modalUsuario', '#addNivel')">
                                          <figure class="acao">
-                                            <img src="../imagens/view.png" title="Excluir Registro" alt="excluir">
+                                            <img src="../imagens/view.png" title="Visualizar Dados" alt="excluir"
+                                           >
                                         </figure>
                                      </a>
                                  </div>
@@ -393,5 +362,63 @@
                 </div>
             </footer>
         </div>
+        <script>
+            $(document).ready(function() {
+                $('#btnNivel').click(function(){
+                  $("#containerModal").fadeIn(400);
+                });
+                
+                $('.editModal').click(function(){
+                  $("#containerModal").fadeIn(400);
+                });
+                
+                $('.viewModal').click(function(){
+                  $("#containerModal").fadeIn(400);
+                });
+                
+                $('#btnUser').click(function() {
+                   $("#containerModal").fadeIn(400);
+                   $("#addNivel").hide();
+                })
+                
+            });
+            //o usuário irá definir através de parametros qual a url e o elemento onde ele deseja carregar o html
+            function openInsertModal(url, elet){
+                $.ajax({
+                    type:"post",
+                    url: url,
+                    processData: "false",
+                    dataType:"text",
+                    success: function(dados) {
+                        $(elet).html(dados)
+                    }
+                })
+            }
+            
+            function openEditNivel(idItem, url, container, hideEle){
+                $.ajax ({
+                    type:'POST',
+                    url:url,
+                    data: {idRegistro: idItem},
+                    success: function(dados){
+                       $(container).html(dados);
+                        $(hideEle).hide();
+                    }
+                })
+            }
+            
+            function openViewUser(idItem, url, container, hideEle){
+                $.ajax ({
+                    type:'get',
+                    url:url,
+                    data: {idRegistro: idItem},
+                    success: function(dados){
+                       $(container).html(dados);
+                        $(hideEle).hide();
+                    }
+                })
+            }
+            
+        </script>
     </body>
 </html>

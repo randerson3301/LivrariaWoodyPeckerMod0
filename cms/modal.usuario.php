@@ -7,17 +7,32 @@
     $conexao = conexaoBD();
     
     $itemOption = "Selecione um item ...";
-
+    $_SESSION['valueBtn'] = "Cadastrar";
     $valueOption = 0;
     
+    $hidden = '';
+    $disabled = '';
+    $modo = '';
+    //pegando o modo da url
+    if(isset($_GET['modo'])) {
+        $modo = $_GET['modo'];
+    }
+    echo($modo);
     if(isset($_POST['idRegistro'])) {
+        
+        if($modo == '') {
+            $_SESSION['valueBtn'] = "Atualizar";
+        }
+        else if($modo == 'view'){
+            echo("<script> alert('oi') </script>")
+            $hidden = 'hidden';
+            $disabled = 'disabled';
+        }
         $_SESSION["cod"] = $_POST['idRegistro'];
         
         $sqlSelect = "select tu.*, tn.nomeNivel from tbl_usuarios tu inner join tbl_nivel tn where tu.idNivel = tn.idNivel and matricula=". $_SESSION["cod"];
         
         $select = mysqli_query($conexao, $sqlSelect);
-        
-        $_SESSION['valueBtn'] = "Atualizar";
         
         $rsUser = mysqli_fetch_array($select);
         
@@ -25,10 +40,9 @@
         $valueOption = $rsUser["idNivel"];
         
         
-    } else {
-            $_SESSION['valueBtn'] = "Cadastrar";
     }
 ?>
+<!DOCTYPE>
 <html>
     <head>
         <meta charset="utf-8">
@@ -57,24 +71,24 @@
             <div id="containerConteudoModal">
                 <form name="frmUsuario" action="adm.usuarios.php" method="POST">
                <div class="divisorModal">
-                    Nome: <br><input name="txtNome" type="text" class=" txtDados spaceBetween" value="<?php echo(@$rsUser['nomeUsuario'])?>"><br>
-                    E-mail: <br><input type="text"  name="txtEmail" class=" txtDados spaceBetween" value="<?php echo(@$rsUser['emailUsuario'])?>"><br>
+                    Nome: <br><input name="txtNome" type="text" class=" txtDados spaceBetween" value="<?php echo(@$rsUser['nomeUsuario'])?>" <?php echo(@$disabled)?>><br>
+                    E-mail: <br><input type="text"  name="txtEmail" class=" txtDados spaceBetween" value="<?php echo(@$rsUser['emailUsuario'])?>" <?php echo(@$disabled)?>><br>
                    Sexo: <br>
                     <!-- 
                         Os radios terão o operador ternário para selecionar de acordo com o sexo do usuário
                     --> 
-                    <input type="radio" name="rdoSexo" class="rdoSexo" value="M" <?php echo(@$rsUser['sexoUsuario'] == "M") ? 'checked': null?>>Masculino
-                   <input type="radio" class="rdoSexo" name="rdoSexo" value="F" <?php echo(@$rsUser['sexoUsuario'] == "F") ? 'checked': null?>>Feminino
+                    <input type="radio" name="rdoSexo" class="rdoSexo" value="M" <?php echo(@$rsUser['sexoUsuario'] == "M") ? 'checked': null?> <?php echo(@$disabled)?>>Masculino
+                   <input type="radio" class="rdoSexo" name="rdoSexo" value="F" <?php echo(@$rsUser['sexoUsuario'] == "F") ? 'checked': null?> <?php echo(@$disabled)?>>Feminino
                                 <br><br>
-                   Matrícula: <br><input type="number" class=" txtDados spaceBetween"  name="txtMatricula" value="<?php echo(@$rsUser['matricula'])?>"><br>
+                   Matrícula: <br><input type="number" class=" txtDados spaceBetween"  name="txtMatricula" value="<?php echo(@$rsUser['matricula'])?>" <?php echo(@$disabled)?>><br>
                
-                    Login: <br><input type="text" class=" txtDados shortxt spaceBetween"  name="txtLogin"  value="<?php echo(@$rsUser['loginNome'])?>"><br>
+                    Login: <br><input type="text" class=" txtDados shortxt spaceBetween"  name="txtLogin"  value="<?php echo(@$rsUser['loginNome'])?>" <?php echo(@$disabled)?>><br>
                
-                    Senha: <br><input type="password" class=" txtDados  shortxt spaceBetween"  name="txtSenha"  value="<?php echo(@$rsUser['senha'])?>">
+                    Senha: <br><input type="password" class=" txtDados  shortxt spaceBetween"  name="txtSenha"  value="<?php echo(@$rsUser['senha'])?>" <?php echo(@$disabled)?>>
                </div>
                <div  class="divisorModal">
                    
-                   Nivel de Usuário:<select class="txtDados spaceBetween" name="sltNivelUser"> 
+                   Nivel de Usuário:<select class="txtDados spaceBetween" name="sltNivelUser" <?php echo(@$disabled)?>> 
                    
                    
                     <option value="<?php echo($valueOption)?>">
@@ -103,29 +117,17 @@
                     Ativação: <br>
                    <!-- switch Arredondado-->
                     <label class="switch">
-                      <input type="checkbox" name="checkAtivacao">
+                      <input type="checkbox" name="checkAtivacao" <?php echo(@$rsUser['isAtivado'] == 1) ? 'checked' : ''?> <?php echo(@$disabled)?>>
                       <span class="slider round"></span>
                         
                     </label> <br><br>
                    <!-- submit -->
-                    <input type="submit" name="btnEnviar" value="<?php echo($_SESSION['valueBtn'])?>" class="btnEnviar" >
+                    <input type="submit" name="btnEnviar" value="<?php echo($_SESSION['valueBtn'])?>" class="btnEnviar" <?php echo(@$hidden)?>>
                    
                    
                </div>
                     
                 </form>
            </div>
-        
-        <script>
-            /*
-            var toggle = document.getElementById('dataAtivado');
-          //  console.log(document.getElementById('data1').value);
-            if(toggle.value == 'off') {
-                toggle.onclick = toggle.value = 'off'
-            }
-            */
-            
-
-        </script>
     </body>
 </html>
