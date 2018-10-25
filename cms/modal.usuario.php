@@ -14,8 +14,9 @@
     $disabled = '';
     $modo = '';
     //pegando o modo da url
-    if(isset($_GET['modo'])) {
-        $modo = $_GET['modo'];
+    if(isset($_POST['modo'])) {
+        $modo = $_POST['modo'];
+
     }
     echo($modo);
     if(isset($_POST['idRegistro'])) {
@@ -24,7 +25,6 @@
             $_SESSION['valueBtn'] = "Atualizar";
         }
         else if($modo == 'view'){
-            echo("<script> alert('oi') </script>")
             $hidden = 'hidden';
             $disabled = 'disabled';
         }

@@ -158,7 +158,7 @@
         
          <!-- ESSAS SÃO AS DIVS DA MODAL-->
         <div id="containerModal">
-            <div id="addNivel"></div>
+            <div id="addSobre"></div>
              <div id="modalUsuario"></div>
         </div>
         <div id="containerCMS">
@@ -225,10 +225,34 @@
             <div id="contentCMS">
                 <div id="containerCentral">
                     <div class="tab">
-                        <button class="tablink" id="openByDefault" onclick=" openForm(event, 'formUser')">Usuários</button>
-                        <button class="tablink" onclick=" openForm(event, 'formNivel')">Níveis</button>
+                        <button class="tablink" id="openByDefault" onclick=" openForm(event, 'PRECISA MUDAR')">Autores</button>
+                        <button class="tablink" onclick=" openForm(event, 'formNivel')">Lojas</button>
+                         <button class="tablink" onclick=" openForm(event, 'formNivel')">Produto do Mês</button>
+                        <button class="tablink" onclick=" openForm(event, 'formNivel')">Promoções</button>
+                         <button class="tablink" onclick=" openForm(event, 'formSobre')">Sobre </button>
                     </div>
                     
+                    
+                    <div id="formSobre" class="tabcontent">
+                        <button class="btnAdd" id="btnNivel" onclick="openInsertModal('modal.sobre.php', '#addSobre')">Adicionar Sobre</button>
+                        <div class="containerColunas">
+                            <div class="coluna tituloColunas espacador mediumPlus" >
+                            Imagem
+                            </div>
+                            <div class="coluna tituloColunas colMaiorText">
+                            Descrição
+                            </div>
+                            <div class="coluna tituloColunas smallCol" >
+                            Ações
+                            </div>
+                            <div class="coluna tituloColunas smallCol" >
+                            Ativação
+                            </div>
+                    </div>
+                    
+                    
+                    
+                    <!-- ESTOU USANDO ESSE FORM PARA AUXILIO DOS DEMAIS-->
                     <div id="formNivel" class="tabcontent">
                         <button class="btnAdd" id="btnNivel" onclick="openInsertModal('modal.nivel.php', '#addNivel')">Adicionar Nível</button>
                         <div class="containerColunas">
@@ -353,7 +377,9 @@
                                 }
                             ?>
                        </div>
+                        
                      </div>
+    
                 </div>  
            
             <!-- rodapé do site-->
