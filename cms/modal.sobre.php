@@ -1,30 +1,19 @@
-<html> 
-    <head>
-        <script src="js/script.cms.js"> 
-            
-        </script>    
-    </head>
-    <body>
-          <header id="smallHeader" >
-                  <div id="containerHeaderCMS">
-                <h1 id="tituloCMSFooter">
-                    <span>
-                       Cadastro de Usuário
-                    </span>
-                </h1> 
-                
-                <figure id="logoCMS">
-                     <img src="../imagens/logocms.png" alt="LOGO" title="Woody Woodpecker" id= "logocms">
-                </figure>
-                <a href="#"  class="fecharModal">
-                    <figure>
-                        <img src="../imagens/delete.png"alt="fechar" title="Fechar Janela">      
-                    </figure>
-                </a>
+<?php 
+    require_once('head.html');
+    require_once('header.modal.html');
+?>
+        <div id="containerConteudoModal">
+            <form name="frmSobre" action="adm.conteudo.php" method="POST" enctype="multipart/form-data">
+            <!-- imagem e ativação-->
+            <div class="divisorModal"> 
+                Imagem:
+                <input type="file" name="fleFoto" id="foto">
+
             </div>
-            </header>
-        
-        
+             <!-- descrição -->
+            <div class="divisorModal"></div>
+        </form>
+        </div>
     </body>
     
 </html>

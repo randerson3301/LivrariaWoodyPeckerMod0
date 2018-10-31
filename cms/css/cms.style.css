@@ -5,6 +5,7 @@
 #containerCMS {
     width: 1600px;
     min-height: 935px;
+    height: 930px;
     margin-left: auto;
     margin-right: auto;
     border-radius: 28px;
@@ -12,22 +13,26 @@
     
 }
 
+
+
 /*CMS ESTILIZAÇÃO*/
 #headerCMS {
     width: 1600px;
     height: 222px;
+    margin-right: auto;
+    margin-left: auto;
     background-color: #0a2b60;
     border-top-left-radius: 28px;
     border-top-right-radius: 28px;
-    position: absolute;
     color: #fff;
     font-size: 38px;
     font-family: sans-serif;
+   
     
 }
 
 #smallHeader {
-    width: 1100px;
+    width: inherit;
     height: 110px;
     background-color: #0a2b60;
     position: absolute;
@@ -61,6 +66,7 @@
 #containerHeaderCMS {
     width: 1600px;
     height: 150px;
+    
 }
 
 #containerHeaderCMS > #tituloCMS {
@@ -138,24 +144,48 @@
     display: block;
     width: 204px;
     height: 100%;
-    float: left;
     color: #f2641d;
-    
+    float: right;
+    align-self: auto;
 }
 
-#modalUsuario {
+.fecharModal {
+    float: right;
+    margin-right: 100px;
+}
+
+#modalUsuario, #modalSobre {
     width: 1100px;
     height: 600px;
     margin-right: auto;
     margin-left: auto;
 }
 
-
-
+.frmConteudo {
+    margin-right: auto;
+    margin-left: auto;
+    width: 1100px;
+    height: 350px;
+    background-color: #d5e5ff;
+    border-radius: 20px;
+    padding: 15px;
+    font-size: 22px;
+}
+.contImg {
+    width: 380px;
+    height: 160px;
+   border: 1px solid #0a2b60;
+}
 #containerHeaderCMS > figure > figcaption{
   font-size: 15px;
   font-weight: 700;
 }
+/*retirando a borda azul que fica quando o input é clicado*/
+textarea:focus, input:focus{
+    outline: none;
+    
+}
+
 
 
  #tituloCMS {
@@ -169,8 +199,8 @@
  #tituloCMSFooter {
    display: block;
    margin-left: 25px;
-   float: left;
-   margin-right:34%;
+   float: right;
+  
    
 }
 
@@ -189,16 +219,13 @@
     width: 1600px;
     height: 90px;
     background-color: #f2641d;
-    
-    
 }
 
 #contentCMS {
     width: 100%;
-    min-height: 850px;
+    min-height: 650px;
     border-top-left-radius: 28px;
     border-top-right-radius: 28px;
-    padding-top: 250px;
     text-align: center;
     color: #0a2b60;
     font-size: 27px;
@@ -251,10 +278,19 @@ footer {
     border-bottom-right-radius: 20px;
 }
 
+
+
 .divisorModal {
     width: 50%;
     height: 100%;
     float: left;
+    
+}
+
+
+.alignLeft {
+    text-align: left;
+    line-height: 50px;
 }
 
 .formatModal {
@@ -303,8 +339,17 @@ footer {
 .containerColunas {
     width: 100%;
     height: 45px;
-    
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
 }
+
+.centerManual{
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+
 
 .coluna {
     height: 100%;
@@ -319,8 +364,16 @@ footer {
     
 }
 
+.colunaComFoto {
+    height: 190px;
+}
+
 .espacador {
     margin-left: 200px;
+}
+
+.espacadorReg {
+    margin-left: 20px;
 }
 
 
@@ -358,9 +411,11 @@ footer {
     border-right-color: #fff;
 }
 
-#primeiraColuna {
-    margin-left: 80px;
+.primeiraColuna {
+    margin-left: 100px;
 }
+
+
 
 .indexRegistro{
     height: 100%;
@@ -397,10 +452,30 @@ footer {
     height: 100%;
     background-color: rgba(0,0,0,0.5);
     z-index: 999;
-    display: none;
+    display: none; 
     position: fixed;
     font-family: sans-serif;
-    
+}
+
+#containerModalError {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 999;
+    position: fixed;
+    font-family: sans-serif;
+}
+
+
+
+#modalError {
+    width: 400px;
+    height: 280px;
+    background-color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    border-radius: 30px;
 }
 
 .txtDados {
@@ -426,6 +501,18 @@ textarea {
 
 }
 
+.txtareaConteudo{
+    height: 200px;
+    margin-bottom: 15px;
+}
+
+.fontsize {
+    font-size: 20px;
+}
+.img {
+    width: inherit;
+    height: inherit;
+}
 /*essa é a pagina branca da modal*/
 #viewDados {
     width: 1100px;
@@ -485,13 +572,15 @@ fieldset {
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-    background-color: #f2641d;
+    background-color: #eaf1fc;
+    color: #0a2b60;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
     background-color: #ccc;
 }
+
 
 /* Style the tab content */
 .tabcontent {
@@ -510,24 +599,26 @@ fieldset {
     width: 1000px;
     background-color: #fff;
     margin-left: 2px;
-    min-height: 407px;
-   
-
+    min-height: 600px;
+    height: 600px;
+    
 }
 
-#formUser {
-    width: 1000px;
+#formUser, #formSobre {
+    width: 1200px;
     background-color: #fff;
-    margin-left: 2px;
-    min-height: 407px;
+    min-height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    
 }
 
 .imgClose {
     margin-left: 550px;
 }
 .btnAdd {
-    height: 35px;
-    margin-left: 440px;
+    height: 45px;
+    /*margin-left: 750px;*/
     background-color: #f2641d;
     border: none;
     border-radius: 5px;
@@ -600,12 +691,18 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+html, body
+    {
+       height: 100%;
+       min-height: 100%;
+    }
+
 /*adaptando o sistema para telas menores*/
 @media screen and (max-width:1600px) {
     
     #containerCMS {
         width: 1200px;
-        min-height:650px;
+        min-height:800px;
         margin-left: auto;
         margin-right: auto;
         border-radius: 28px;
@@ -618,10 +715,12 @@ input:checked + .slider:before {
         background-color: #0a2b60;
         border-top-left-radius: 28px;
         border-top-right-radius: 28px;
-        position: absolute;
+       
         color: #fff;
         font-size: 38px;
         font-family: sans-serif;
+        margin-left: auto;
+        margin-right: auto;
 
         }
     #containerHeaderCMS {
@@ -653,7 +752,7 @@ input:checked + .slider:before {
        display: block;
        margin-left: 25px;
        float: left;
-       margin-right:45%;
+       /*margin-right:58%;*/
    
     }
 
@@ -671,7 +770,11 @@ input:checked + .slider:before {
         margin-left:  235px;
     }
 
-
+    html, body
+    {
+       height: 100%;
+       min-height: 100%;
+    }
 
     .itemcms {
         width: 190px;
@@ -682,7 +785,8 @@ input:checked + .slider:before {
 
     }
     #containerCentral {
-        min-height: 407px;
+        
+        min-height: 640px;
         text-align: center;
         color: #0a2b60;
         font-size: 27px;
@@ -702,10 +806,9 @@ input:checked + .slider:before {
     
     #contentCMS {
         width: 100%;
-        min-height: 570px;
+        min-height: 520px;
         border-top-left-radius: 28px;
         border-top-right-radius: 28px;
-        padding-top: 250px;
         text-align: center;
         color: #0a2b60;
         font-size: 27px;
@@ -714,7 +817,7 @@ input:checked + .slider:before {
     
     footer {
         width: 100%;
-        height: 85px;
+        min-height: 85px;
         background-color: #0a2b60;
         border-bottom-left-radius: 28px;
         border-bottom-right-radius: 28px;

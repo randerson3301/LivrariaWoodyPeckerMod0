@@ -12,6 +12,15 @@
         
         return $sql;
     }
+
+    function getAtivacao() {
+        if(isset($_POST['checkAtivacao'])) {
+            $atv = 1;
+        } else {
+             $atv = 0;
+        }
+        return $atv;
+    }
 /*
     //function para inserir itens
     function insert($tablename, $field, $value) {

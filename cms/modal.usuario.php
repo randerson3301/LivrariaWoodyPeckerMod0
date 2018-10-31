@@ -2,7 +2,6 @@
     require_once('conexao.php');
     require_once('function.php');
     
-    //$_SESSION['valueBtn'] = "Cadastrar";
     
     $conexao = conexaoBD();
     
@@ -42,32 +41,10 @@
         
     }
 ?>
-<!DOCTYPE>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <script src="js/script.cms.js"> </script>
-    </head>
-    <body>
-        
-            <header id="smallHeader" class="smallHeaderUser">
-                  <div id="containerHeaderCMS">
-                <h1 id="tituloCMSFooter">
-                    <span>
-                       Cadastro de Usuário
-                    </span>
-                </h1> 
-                
-                <figure id="logoCMS">
-                     <img src="../imagens/logocms.png" alt="LOGO" title="Woody Woodpecker" id= "logocms">
-                </figure>
-                <a href="#"  class="fecharModal">
-                    <figure>
-                        <img src="../imagens/delete.png"alt="fechar" title="Fechar Janela">      
-                    </figure>
-                </a>
-            </div>
-            </header>
+<?php 
+    require_once('head.html');
+    require_once('header.modal.html');
+?>
             <div id="containerConteudoModal">
                 <form name="frmUsuario" action="adm.usuarios.php" method="POST">
                <div class="divisorModal">
@@ -117,12 +94,12 @@
                     Ativação: <br>
                    <!-- switch Arredondado-->
                     <label class="switch">
-                      <input type="checkbox" name="checkAtivacao" <?php echo(@$rsUser['isAtivado'] == 1) ? 'checked' : ''?> <?php echo(@$disabled)?>>
+                      <input type="checkbox" <?php echo(@$rsUser['isAtivado'] == 1) ? 'checked' : ''?> name="checkAtivacao"  <?php echo(@$disabled)?> >
                       <span class="slider round"></span>
                         
                     </label> <br><br>
                    <!-- submit -->
-                    <input type="submit" name="btnEnviar" value="<?php echo($_SESSION['valueBtn'])?>" class="btnEnviar" <?php echo(@$hidden)?>>
+                    <input type="submit"  name="btnEnviar" value="<?php echo($_SESSION['valueBtn'])?>" class="btnEnviar" <?php echo(@$hidden)?>>
                    
                    
                </div>

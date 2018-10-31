@@ -3,6 +3,8 @@
     require_once('conexao.php');
     require_once('function.php');
     
+    //echo('oeeeeeeee');
+
     $atv;
     
     $conexao = conexaoBD();    
@@ -11,7 +13,7 @@
 
     //enviando para o servidor
     $select = mysqli_query($conexao, selecionar('tbl_nivel', 'idNivel')) ;
-
+    
     //var_dump($select);
     $selectUser = mysqli_query($conexao, $sqlUser);
 
@@ -20,7 +22,9 @@
     if(isset($_POST['btnEnviar']) && isset($_SESSION['valueBtn'])) {
             //Verificando se o valor do botão é cadastrar
             if($_SESSION['valueBtn'] == 'Cadastrar') {
-              
+                                    //echo($sqlInsert);
+
+                //echo('efefe');
                 //verificando se o botão foi clicado
                 if(isset($_POST['txtNivel'])) {
                     $nivel = $_POST['txtNivel'];
@@ -31,6 +35,7 @@
 
                      mysqli_query($conexao, $sqlInsert);
                 } else {
+                   // echo("<script> alert('auo');</script>");
                     
                     $nome = $_POST['txtNome'];
                     $email = $_POST['txtEmail'];
@@ -46,8 +51,7 @@
                          $atv = 0;
                     }
                     
-                    $sqlInsert = "insert into tbl_usuarios(matricula, nomeUsuario, senha, emailUsuario, loginNome,
-                     isAtivado, idNivel, sexoUsuario) values('".$matricula."', '".$nome."', '".$senha."','".$email."', '".$loginname."', '".$atv."', '".$nivelUser."', '".$sexo."')";
+                    $sqlInsert = "insert into tbl_usuarios(matricula, nomeUsuario, senha, emailUsuario, loginNome, isAtivado, idNivel, sexoUsuario) values('".$matricula."', '".$nome."', '".$senha."','".$email."', '".$loginname."', '".$atv."', '".$nivelUser."', '".$sexo."')";
 
                     mysqli_query($conexao, $sqlInsert);
                     
@@ -57,13 +61,13 @@
             
             header("location:adm.usuarios.php");
             } else if($_SESSION['valueBtn'] == "Atualizar") { 
+                //echo('oi');
                 //verificando se o botão foi clicado
                 if(isset($_POST['txtNivel'])) {
                 $nivel = $_POST['txtNivel'];
                 //comando de insert para popular no banco
 
-                $sqlUpdate = update('tbl_nivel',"nomeNivel='".$nivel."'",
-                'idNivel', $_SESSION["cod"]);
+                $sqlUpdate = update('tbl_nivel',"nomeNivel='".$nivel."'",'idNivel', $_SESSION["cod"]);
 
                 mysqli_query($conexao, $sqlUpdate);
                 
@@ -86,16 +90,12 @@
                     echo( update('tbl_usuarios',"nomeUsuario='".$nome."', emailUsuario ='".$email."', sexoUsuario='".$sexo."', loginNome ='".$loginname."', senha ='".$senha. "', idNivel =".$nivelUser.", isAtivado=".$atv,'matricula', $matricula));
                    */
                     
-                    $sqlUpdate = update('tbl_usuarios',"nomeUsuario='".$nome."',
-                     emailUsuario ='".$email."', sexoUsuario='".$sexo."', 
-                     loginNome ='".$loginname."', senha ='".$senha. "', 
-                     idNivel =".$nivelUser.", isAtivado=".$atv,'matricula', $matricula);
+                    $sqlUpdate = update('tbl_usuarios',"nomeUsuario='".$nome."', emailUsuario ='".$email."', sexoUsuario='".$sexo."', loginNome ='".$loginname."', senha ='".$senha. "', idNivel =".$nivelUser.", isAtivado=".$atv,'matricula', $matricula);
                     
                     mysqli_query($conexao, $sqlUpdate);
                     header("location:adm.usuarios.php");
 
                  }
-
             }
         
     } 
@@ -144,27 +144,58 @@
 
 ?>
 
-        <?php 
-            require_once('head.html');
-        ?>
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <title> CMS WW</title>
+        <meta charset="utf-8">
+        <link href="css/cms.style.css" rel="stylesheet" type="text/css">
+        <link href="../css/reset.css" rel="stylesheet" type="text/css">
+        <script src="../js/jquery.js"></script>
+        <script>
+            $(document).ready(function() {
+            $('#btnNivel').click(function(){
+            $("#containerModal").fadeIn(400);
+            });
+            
+            $('.editModal').click(function(){
+            $("#containerModal").fadeIn(400);
+            
+            });
+            
+            $('.viewModal').click(function(){
+            $("#containerModal").fadeIn(400);
+
+            });
+            
+            $('#btnUser').click(function() {
+            $("#containerModal").fadeIn(400);
+            $("#addNivel").hide();
+            })
+            
+        });
+        </script>
+        <script src="js/script.cms.js"></script>
+
+    </head>
+    <body>
         
-   
-         <!-- ESSAS SÃO AS DIVS DA MODAL-->
+        <!-- ESSAS SÃO AS DIVS DA MODAL DA PAGINA USUARIOS-->
         <div id="containerModal">
                 <div id="addNivel"></div>
-                <div id="modalUsuario"></div>
+                 <div id="modalUsuario"></div>
             </div>
-        <?php 
-            require_once('header.php');
-            require_once('containerCMS.php');
-        ?>
-                <div class="tab">
-                        <button class="tablink" id="openByDefault" onclick="openForm(event, 'formUser'); openByDefault(this.id)">
-                        Usuários</button>
-                        <button class="tablink"  id="openByDefaultNivel" onclick="openForm(event, 'formNivel'); openByDefault(this.id)">Níveis</button>
+            <div id="containerCMS">
+                <object data="header.html"> </object>    
+            
+                <div id="containerCentral">
+                    <div class="tab">
+                        <button class="tablink" id="openByDefault" onclick=" openForm(event, 'formUser')">Usuários</button>
+                        <button class="tablink" onclick=" openForm(event, 'formNivel')">Níveis</button>
                     </div>
                     
                     <div id="formNivel" class="tabcontent">
+                        <button class="btnAdd" id="btnNivel" onclick="openInsertModal('modal.nivel.php', '#addNivel')">Adicionar Nível</button>
                         <div class="containerColunas">
                             <div class="coluna tituloColunas espacador">
                             Nível
@@ -175,8 +206,6 @@
                             <div class="coluna tituloColunas smallCol" >
                             Ativação
                             </div>
-                            <button class="btnAdd" id="btnNivel" onclick="openInsertModal('modal.nivel.php', '#addNivel', '#modalUsuario')">Adicionar Nível</button>
-
                     </div>
                         
                         <?php 
@@ -193,7 +222,7 @@
                                  </div>
                                 <div class="colAcao smallCol" >
                                     <!-- LINK MODAL-->
-                                    <a href="#" onclick="openEditNivel(<?php echo( $rsNiveis['idNivel'])?>, 'modal.nivel.php', '#addNivel', '#modalUsuario')" class="editModal">
+                                    <a href="#" onclick="openEditNivel('post',<?php echo( $rsNiveis['idNivel'])?>, 'modal.nivel.php', '#addNivel', '#modalUsuario')" class="editModal">
                                         <figure class="acao">
                                             <img src="../imagens/edit.png" title="Editar Dados" alt="ViewData" class="linkModal">
                                         </figure>
@@ -210,7 +239,7 @@
                                        <?php
                                        ?>
                                     <figure>
-                                            <img src="<?php echo($rsNiveis['isAtivado'] == 0) ? '../imagens/desativo.png' : '../imagens/active.png' ?>" title="Clique para ativar/desativar" alt="excluir" class="imgAtivo" >
+                                            <img src="<?php echo($rsNiveis['isAtivado'] == 0) ? '../imagens/desativo.png' : '../imagens/active.png' ?>" title="Clique para ativar/desativar" alt="excluir" id="imgAtivo" >
                                     </figure>
                                     </a>
                                 </div>
@@ -220,6 +249,7 @@
                             ?>
                        </div>
                     <div id="formUser" class="tabcontent">
+                        <button class="btnAdd" id="btnUser" onclick="openInsertModal('modal.usuario.php', '#modalUsuario')">Adicionar Usuário</button>
                         <div class="containerColunas">
                             
                             <div class="coluna tituloColunas colMaior espacador">
@@ -235,8 +265,6 @@
                             <div class="coluna tituloColunas smallCol" >
                             Ativação
                             </div>
-                            <button class="btnAdd" id="btnUser" onclick="openInsertModal('modal.usuario.php', '#modalUsuario', '#addNivel')">Adicionar Usuário</button>
-
                     </div>
                         
                         <?php 
@@ -281,16 +309,18 @@
                                     <figure>
                                             <img src="<?php echo($rsUsuarios['isAtivado'] == 0) ? '../imagens/desativo.png' : '../imagens/active.png' ?>" 
                                                  
-                                            title="Clique para ativar/desativar" alt="excluir" class="imgAtivo" >
+                                            title="Clique para ativar/desativar" alt="excluir" id="imgAtivo" >
                                     </figure>
                                     </a>
                                 </div>
-                            </div>
-                        <?php
+                            <?php
                                 }
-                        ?>
-    <?php 
-        require_once('footer.php');
-    ?>
+                            ?>
+                       </div>
+                     </div>
+                </div>
+        </div>
+        <script src="js/script.cms.js"></script>
 
- 
+    </body>
+</html>

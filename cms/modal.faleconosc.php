@@ -24,38 +24,12 @@
         
 ?>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title> CMS WW</title>
-        <meta charset="utf-8">
-        <link href="css/cms.style.css" rel="stylesheet" type="text/css">
-        <link href="../css/reset.css" rel="stylesheet" type="text/css">
-        <script src="../js/jquery.js"></script>
-    </head>
-    
-    <body>
-        <script src="js/script.cms.js"> </script>
-        
-             <header id="smallHeader">
-                  <div id="containerHeaderCMS">
-                <h1 id="tituloCMSFooter">
-                    <span>
-                       Tela de Visualização
-                    </span>
-                </h1> 
-                
-                <figure id="logoCMS">
-                     <img src="../imagens/logocms.png" alt="LOGO" title="Woody Woodpecker" id= "logocms">
-                </figure>
-                <a href="#"  class="fecharModal">
-                    <figure>
-                        <img src="../imagens/delete.png"alt="fechar" title="Fechar Janela">      
-                    </figure>
-                </a>
-            </div>
-            </header>  
-           <div id="containerConteudoModal">
+<?php 
+    require_once('head.html');
+    require_once('header.modal.html');
+?>
+            
+            <div id="containerConteudoModal">
                <div class="divisorModal">
                     Nome: <br><input type="text" class=" txtDados spaceBetween" value="<?php echo(@$nome)?>" disabled><br>
                     E-mail: <br><input type="text" class=" txtDados spaceBetween" disabled value="<?php echo(@$email)?>"><br>
@@ -83,8 +57,6 @@
                          Informações de Produto:<textarea name="txtInfoProduto" id="txtInfoProduto" disabled class="spaceBetween"> <?php echo(@$infoProduto)?></textarea>
                                 
                </div>
-               
-                
-           </div>
+            </div>
     </body>
 </html>

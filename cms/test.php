@@ -9,19 +9,17 @@
 
     $selectSobre = mysqli_query($conexao, $sqlSelect);
 
-    $valueBtn = 'Cadastrar';
-
-    $btn = null;
-
-   // $_SESSION['id'] = $_GET['id'];
-
     if(isset($_POST['btnSalvarSobre'])) {
-        $btn = $_POST['btnSalvarSobre'];
-        
-        //pegando a descrição
-        $descrip = $_POST['txtDesc'];
-        //pegando o nome do atrquivo de foto
+
+       //pegando a descrição
+       $descrip = $_POST['txtDesc'];
+       //pegando o nome do atrquivo de foto
         $file = $_FILES['fleFoto']['name'];
+        //pegando o tamanho do arquivo
+        $filesize = $_FILES['fleFoto']['size'];
+
+        //tranforma de bytes para kbytes
+        $filesize = round($filesize / 1024);
 
         //nome do arquivo sem a extensão
         $filename = pathinfo($file, PATHINFO_FILENAME);
@@ -32,72 +30,39 @@
         //nome do diretório que armazenará os arquivos, já criptografados, inseridos pelo user
         $dir = "imgs_uploads/";
 
-        //armazenando o nome temporário do file
-        $arquivo_tmp = $_FILES['fleFoto']['tmp_name'];
-        
         //pegando a extensão do arquivo
         $extfile = strrchr($file, ".");
-        
-        //setando um padrão para armazenagem
-        $img = $dir . $filename . $extfile;
 
-        if($btn == 'Cadastrar') {
-            //pegando o tamanho do arquivo
-            $filesize = $_FILES['fleFoto']['size'];
+        //condicional para verificar o tamanho do arquivo permitido pelo servidor
+        if($filesize <= 2000) {
+            //armazenando o nome temporário do file
+            $arquivo_tmp = $_FILES['fleFoto']['tmp_name'];
+            //setando um padrão para armazenagem
+            $img = $dir . $filename . $extfile;
 
-            //tranforma de bytes para kbytes
-            $filesize = round($filesize / 1024);
-
-            //condicional para verificar o tamanho do arquivo permitido pelo servidor
-            if($filesize <= 2000) {
-                if(move_uploaded_file($arquivo_tmp, $img)) {
-                    $sql = "insert into tbl_sobre(descricao, imgSobre, isAtivado) 
-                    values('".$descrip."','".$img."','".getAtivacao()."')";
-
-                    mysqli_query($conexao, $sql);
-
-                    header("location:adm.conteudo.php");
-                }
-
-            }
-        } else if($btn == 'Editar') {
             if(move_uploaded_file($arquivo_tmp, $img)) {
+                $sql = "insert into tbl_sobre(descricao, imgSobre, isAtivado) 
+                values('".$descrip."','".$img."','".getAtivacao()."')";
 
-            $sqlUpdate = update("tbl_sobre", "descricao='".$descrip."', imgSobre='"
-            .$img."', isAtivado=".getAtivacao(), 'idSobre',  $_SESSION['codigo']);
-             echo($sqlUpdate);
-             mysqli_query($conexao, $sqlUpdate);
-             header("location:adm.conteudo.php");
+                mysqli_query($conexao, $sql);
             }
-         }  
-    }
 
+        }
+    }
+/*
     //condição pra deletar
     if(isset($_GET['modo'])) {
         $modo = $_GET['modo'];
-        $_SESSION['codigo'] = $_GET['id'];
+        $codigo = $_GET['id'];
 
         if($modo == 'excluir') {
             //função de delete 
-            $delete = delete('tbl_sobre', 'idSobre', $_SESSION['codigo']);
+            $delete = delete('tbl_sobre', 'idSobre', $codigo);
             mysqli_query($conexao, $delete);
-            header("location:adm.conteudo.php");
-        }
-
-        if($modo == 'editar') {
-            $selectSobreUp = mysqli_query($conexao, selecionar('tbl_sobre', 'idSobre'
-            , 'idSobre ='.$_SESSION['codigo']));
-
-            $valueBtn = 'Editar';
-
-            $rsSobreUp = mysqli_fetch_array($selectSobreUp);
-
-            
-
         }
     }
-
-   // header("location:adm.conteudo.php");
+*/
+    //header("location:adm.conteudo.php");
 ?>
 
     <?php
@@ -132,32 +97,29 @@
                                 Imagem:  <input type="file" name="fleFoto" id="foto" accept="image/*" 
                                 onchange="readURL(this)"> <br>
                                 <div class="contImg">
-                                    <img src= "<?php echo(@$rsSobreUp['imgSobre'])?>"
-                                     class="img" id="img" alt="selecione..." title="Imagem escolhida">
+                                    <img src="#" class="img" id="img" alt="selecione..." title="Imagem escolhida">
                                 </div>
                               Ativação:<br>
                                       <label class="switch"> 
-                                            <input type="checkbox" class="sliderBox" name="checkAtivacao"
-                                                <?php echo(@$rsSobreUp['isAtivado'] == 1) ? 'checked':''?>>
+                                            <input type="checkbox" class="sliderBox" name="checkAtivacao">
                                             <span class="slider round"></span> 
                                 
                             </div>
                             <div class="divisorModal">
-                                Descrição: <textarea class="txtareaConteudo" name="txtDesc"> <?php echo(
-                                    @$rsSobreUp['descricao'])?></textarea>
-                                <input type="submit" value="<?php echo($valueBtn)?>" name="btnSalvarSobre" class="btnAdd fontsize">
+                                Descrição: <textarea class="txtareaConteudo" name="txtDesc"></textarea>
+                                <input type="submit" value="Salvar" name="btnSalvarSobre" class="btnAdd fontsize">
                             </div>
                            
                         </form>
-                        <div class="containerColunas centerManual">
+                        <div class="containerColunas">
                         
-                            <div class="coluna tituloColunas  colMaior" >
+                            <div class="coluna tituloColunas espacador mediumPlus" >
                             Imagem
                             </div>
                             <div class="coluna tituloColunas colMaiorText">
                             Descrição
                             </div>
-                            <div class="coluna tituloColunas smallColPlus" >
+                            <div class="coluna tituloColunas smallCol" >
                             Ações
                             </div>
                             <div class="coluna tituloColunas smallCol" >
@@ -168,8 +130,8 @@
                         <?php 
                            while($rsSobre=mysqli_fetch_array($selectSobre)) {
                         ?>
-                                <div class="containerColunas centerManual colunaComFoto">
-                                   <div class="coluna  colMaior" >
+                                <div class="containerColunas">
+                                   <div class="coluna  espacador mediumPlus" >
                                        <figure>
                                             <img src="<?php echo($rsSobre['imgSobre'])?>" alt="Imagem Sobre"
                                             title="Imagem de Fundo">
@@ -179,23 +141,14 @@
                                     <div class="coluna  colMaiorText">
                                         <?php echo($rsSobre['descricao'])?>
                                     </div>
-                                    <div class="coluna  smallColPlus" >
-                                        <a href="adm.conteudo.php?modo=editar&id=<?php echo($rsSobre['idSobre'])?>">
+                                    <div class="coluna  smallCol" >
                                             <figure class="acao">
-                                                <img src="../imagens/edit.png" title="Editar Dados" alt="ViewData" class="linkModal"
-                                                >
+                                                <img src="../imagens/edit.png" title="Editar Dados" alt="ViewData" class="linkModal">
                                             </figure>
-                                        </a>
-                                        <a href="adm.conteudo.php?modo=excluir&id=<?php echo($rsSobre['idSobre'])?>">
+
+                                        <a href="#">
                                             <figure class="acao">
                                                 <img src="../imagens/delete.png" title="Excluir Registro" alt="excluir">
-                                            </figure>
-                                        </a>
-
-                                        <a href="#"  class="viewModal" onclick="openViewUser(<?php echo($rsUsuarios['matricula'])?>, 'view', 'modal.usuario.php', '#modalUsuario', '#addNivel')">
-                                            <figure class="acao">
-                                                <img src="../imagens/view.png" title="Visualizar Dados" alt="excluir"
-                                            >
                                             </figure>
                                         </a>
                                     </div>
