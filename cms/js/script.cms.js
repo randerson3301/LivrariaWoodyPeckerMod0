@@ -28,7 +28,7 @@ function modal(idItem, url, ele) {
 }
 
 //função para mostrar a imagem no momento em que o usuário inserir
-function readURL(input) {
+function readURL(input, id) {
     if(input.files && input.files[0]) {
         //instanciando um obj para leitura de arquivos
         var reader = new FileReader();
@@ -36,7 +36,7 @@ function readURL(input) {
         //quando o file carregar o procedure abaixo irá acionar
         reader.onload = function(e) {
             //setando a img no elemento escolhido pelo id
-            $('#img').attr('src', e.target.result).width(inherit).height(inherit);
+            $(id).attr('src', e.target.result).width(inherit).height(inherit);
         }
 
         reader.readAsDataURL(input.files[0]);

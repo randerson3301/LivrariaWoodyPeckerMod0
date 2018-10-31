@@ -1,7 +1,6 @@
 
 
 </div>
-</div>
 <!-- rodapé do site-->
         <footer>
             <div id="textFooter">
@@ -28,7 +27,7 @@
                $("#containerModal").fadeIn(400);
                //$("#addNivel").hide();
          });
-        document.getElementById('openByDefault').click();
+        //document.getElementById('openByDefault').click();
        
 </script>
 </body>
