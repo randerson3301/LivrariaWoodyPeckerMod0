@@ -275,15 +275,13 @@
                                      </a>
                                  </div>
                                 <div class="colAcao smallCol">
-                                   <a href="adm.usuarios.php?ativado=<?php echo($rsNiveis['isAtivado'])?>&id=<?php echo($rsNiveis['idNivel'])?>"> 
-                                       <?php
-                                       ?>
+                                  
                                     <figure>
                                             <img src="<?php echo($rsUsuarios['isAtivado'] == 0) ? '../imagens/desativo.png' : '../imagens/active.png' ?>" 
                                                  
                                             title="Clique para ativar/desativar" alt="excluir" class="imgAtivo" >
                                     </figure>
-                                    </a>
+                                    
                                 </div>
                             </div>
                         <?php

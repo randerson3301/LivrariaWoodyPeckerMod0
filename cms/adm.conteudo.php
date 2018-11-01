@@ -15,6 +15,11 @@
 
     $selectLoja = mysqli_query($conexao, $sqlLojas);
 
+    //select da loja
+    $sqlLivro = selecionar('tbl_livro', 'isbn');
+
+    $selectLivro = mysqli_query($conexao, $sqlLivro);
+
 //------------------------FIM DOS RESULTSETS--------------------------------
 
     $valueBtn = 'Cadastrar';
@@ -99,6 +104,8 @@
              header("location:adm.conteudo.php");
             }
          }  
+        
+        
     }
 
     //condição pra deletar
@@ -140,6 +147,26 @@
     }
 
    // header("location:adm.conteudo.php");
+
+        //Consulta do botão
+        if(isset($_GET['ativado'])) {
+            $atv = $_GET['ativado']; //guarda o status da ativação do registro
+            $isbn = $_GET['isbn'];
+
+            if($atv == 0) {
+
+                $atv = 1;
+
+            } else {
+                $atv = 0; 
+            }
+
+            $sqlUpdateAtv = "update tbl_livro set livroEmDestaque=".$atv." where isbn=".$isbn;
+            
+            echo($sqlUpdateAtv);
+            mysqli_query($conexao, $sqlUpdateAtv);
+            header('location:adm.usuarios.php');
+        }
 ?>
 
     <?php
@@ -159,9 +186,9 @@
                    <div class="tab">
                         <button class="tablink"  onclick=" openForm(event, 'PRECISA MUDAR')">Autores</button>
                         <button class="tablink" onclick=" openForm(event, 'formLojas')">Lojas</button>
-                         <button class="tablink" onclick=" openForm(event, 'formProduto')">Produto do Mês</button>
+                         <button class="tablink" onclick=" openForm(event, 'formProduto')"  id="openByDefault">Produto do Mês</button>
                         <button class="tablink" onclick=" openForm(event, 'formNivel')">Promoções</button>
-                         <button class="tablink" id="openByDefault" onclick=" openForm(event, 'formSobre')">Sobre </button>
+                         <button class="tablink" onclick=" openForm(event, 'formSobre')">Sobre </button>
                     </div>
                     
                   <!-- Form de Sobre -->    
@@ -180,6 +207,61 @@
 
                  <!-- Form de Produto do mês -->
                  <div id="formProduto" class="tabcontent">
+                     
+                        <div class="containerColunas centerManual">
+                        
+                            <div class="coluna tituloColunas " >
+                            Imagem
+                            </div>
+                            <div class="coluna tituloColunas colMaior">
+                            Titulo
+                            </div>
+                            <div class="coluna tituloColunas smallColPlus" >
+                            ISBN
+                            </div>
+                            <div class="coluna tituloColunas smallCol colunaSemFloat" >
+                            Ativação
+                            </div>
+                        </div>
+                          
+                         
+                    
+                        <?php 
+                           while($rsLivro=mysqli_fetch_array($selectLivro)) {
+                        ?>
+                                <div class="containerColunas centerManual colunaComFoto">
+                                   <div class="coluna " >
+                                       <figure>
+                                            <img src="<?php echo($rsLivro['imgLivro'])?>" alt="Imagem Sobre" class="imgLivro"
+                                            title="Imagem de Fundo">
+                                       </figure>
+                                       
+                                    </div>
+                                    <div class="coluna  colMaior">
+                                        <?php echo($rsLivro['titulo'])?>
+                                    </div>
+                                    <div class="coluna  smallColPlus" >
+                                         <?php echo($rsLivro['isbn'])?>
+                                    </div>
+                                    <div class="coluna  smallCol " >
+                                      
+                                        <a href="adm.conteudo.php?ativado=<?php echo($rsLivro['livroEmDestaque'])?>&isbn=<?php echo($rsLivro['isbn'])?>"> 
+                                               <?php
+                                               ?>
+                                            <figure>
+                                                    <img src="<?php echo($rsLivro['livroEmDestaque'] == 0) ? '../imagens/desativo.png' : '../imagens/active.png' ?>" 
+
+                                                    title="Clique para ativar/desativar" alt="excluir" class="imgAtivo" >
+                                            </figure>
+                                        </a>
+                                        
+                                     </div>
+                                </div>  
+                       
+                         
+                        <?php 
+                            }
+                        ?>
                  </div>
 
         

@@ -27,7 +27,7 @@
                $("#containerModal").fadeIn(400);
                //$("#addNivel").hide();
          });
-        //document.getElementById('openByDefault').click();
+        document.getElementById('openByDefault').click();
        
 </script>
 </body>
