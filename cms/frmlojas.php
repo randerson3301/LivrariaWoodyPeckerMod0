@@ -1,22 +1,25 @@
-                <form name="frmSobre" class="frmConteudo" action="adm.conteudo.php" method="POST" enctype="multipart/form-data">  
-                            <h2>Cadastro Sobre</h2>
+<form name="frmLojas" class="frmConteudo" action="adm.conteudo.php" method="POST" enctype="multipart/form-data">  
+                            <h2>Cadastro Lojas</h2>
                             <div class="divisorModal alignLeft">
                                 Imagem:  <input type="file" name="fleFoto" id="foto" accept="image/*" 
-                                onchange="readURL(this)"> <br>
+                                onchange="readURL(this, '#imgLoja')"> <br>
                                 <div class="contImg">
-                                    <img src= "<?php echo(@$rsSobreUp['imgSobre'])?>"
-                                     class="img" id="img" alt="selecione..." title="Imagem escolhida">
+                                    <img src= "<?php echo(
+                                    @$rsLojaUp['imgLoja'])?>"
+                                     class="img" id="imgLoja" alt="selecione..." title="Imagem escolhida">
                                 </div>
                               Ativação:<br>
                                 <label class="switch"> 
                                             <input type="checkbox" class="sliderBox" name="checkAtivacao"
-                                                <?php echo(@$rsSobreUp['isAtivado'] == 1) ? 'checked':''?>>
-                                    <span class="slider round"></span> </label>
+                                                <?php echo(@$rsLojaUp['isAtivado'] == 1) ? 'checked':''?>>
+                                <span class="slider round"></span> </label>
                                 
                             </div>
                             <div class="divisorModal">
-                                Descrição: <textarea class="txtareaConteudo" name="txtDesc"> <?php echo(
-                                    @$rsSobreUp['descricao'])?></textarea>
+                                Descrição: <textarea class="txtareaConteudo areaMenor" name="txtDesc"> <?php echo(
+                                    @$rsLojaUp['descricao'])?></textarea>
+                                
+                                E-mail:<br> <input type="text" name="txtEmailLoja" class=" txtDados spaceBetween" value="<?php echo(@$rsLojaUp['email'])?>">
                                 <input type="submit" value="<?php echo($valueBtn)?>" name="btnSalvarSobre" class="btnAdd fontsize">
                             </div>
                            
@@ -27,7 +30,7 @@
                             Imagem
                             </div>
                             <div class="coluna tituloColunas colMaiorText">
-                            Descrição
+                            E-mail
                             </div>
                             <div class="coluna tituloColunas smallCol" >
                             Ações
@@ -38,27 +41,27 @@
                         </div>
                     
                         <?php 
-                           while($rsSobre=mysqli_fetch_array($selectSobre)) {
+                           while($rsLoja=mysqli_fetch_array($selectLoja)) {
                         ?>
                                 <div class="containerColunas centerManual colunaComFoto">
                                    <div class="coluna  colMaior" >
                                        <figure>
-                                            <img src="<?php echo($rsSobre['imgSobre'])?>" alt="Imagem Sobre" class="imgRegistro"
+                                            <img src="<?php echo($rsLoja['imgLoja'])?>" alt="Imagem Sobre" class="imgRegistro"
                                             title="Imagem de Fundo">
                                        </figure>
                                        
                                     </div>
                                     <div class="coluna  colMaiorText">
-                                        <?php echo($rsSobre['descricao'])?>
+                                        <?php echo($rsLoja['email'])?>
                                     </div>
                                     <div class="coluna  smallCol" >
-                                        <a href="adm.conteudo.php?modo=editar&id=<?php echo($rsSobre['idSobre'])?>">
+                                        <a href="adm.conteudo.php?modo=editarloja&id=<?php echo($rsLoja['idLoja'])?>">
                                             <figure class="acao">
                                                 <img src="../imagens/edit.png" title="Editar Dados" alt="ViewData" class="linkModal"
                                                 >
                                             </figure>
                                         </a>
-                                        <a href="adm.conteudo.php?modo=excluir&id=<?php echo($rsSobre['idSobre'])?>">
+                                        <a href="adm.conteudo.php?modo=excluirloja&id=<?php echo($rsLoja['idLoja'])?>">
                                             <figure class="acao">
                                                 <img src="../imagens/delete.png" title="Excluir Registro" alt="excluir">
                                             </figure>
@@ -66,7 +69,7 @@
                                     </div>
                                     <div class="coluna  smallCol" >
                                         <figure>
-                                            <img src="<?php echo($rsSobre['isAtivado'] == 0) ? '../imagens/desativo.png' : '../imagens/active.png' ?>" 
+                                            <img src="<?php echo($rsLoja['isAtivado'] == 0) ? '../imagens/desativo.png' : '../imagens/active.png' ?>" 
                                             title="ativar/desativar" alt="excluir" class="imgAtivo" >
                                         </figure>
                                     
