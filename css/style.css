@@ -382,7 +382,9 @@ legend {
 }
 
 #containerMain {
-    height: 1420px;
+    min-height: 1420px;
+    overflow: hidden;
+    height: auto;
     width: 100%;
     
    

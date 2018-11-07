@@ -21,7 +21,7 @@
     $selectLivro = mysqli_query($conexao, $sqlLivro);
 
     //select das promocoes
-    $sqlPromo = 'select tl.*,  tp.id, tl.preco - (tl.preco *  (tp.percentualDesconto/ 100)), tp.percentualDesconto from tbl_livro tl inner join tbl_promocao tp 
+    $sqlPromo = 'select tl.*, tp.isAtivado, tp.id, tl.preco - (tl.preco *  (tp.percentualDesconto/ 100)), tp.percentualDesconto from tbl_livro tl inner join tbl_promocao tp 
     on tl.isbn = tp.isbn';
                             
     $selectPromo = mysqli_query($conexao, $sqlPromo);
@@ -42,6 +42,7 @@
        
         //inserindo promoçoes
         if(isset($_GET['btnSalvarSobre'])) {
+            echo("oi");
             $btn = $_GET['btnSalvarSobre'];
 
             $isbn = $_GET['sltProdutos'];
@@ -66,12 +67,12 @@
         @$dtFalecimento =  $_POST['txtDtFal'];
         @$cidadeNascimento =  $_POST['txtLocalNasc'];
 
-        //convertedo data para o padrão americano
+        //convertendo data para o padrão americano
         @$data = explode("/", $dtNascimento);
         @$dtNascimento = $data[2]. "-" .$data[1]. "-" .$data[0];
         
         @$dataFal = explode("/", $dtFalecimento);
-        @$dtNascimento = $data[2]. "-" .$data[1]. "-" .$data[0];
+        @$dtFalecimento = $dataFal[2]. "-" .$dataFal[1]. "-" .$dataFal[0];
         //dados da loja
         if(isset($_POST['txtEmailLoja'])) {
             $email = $_POST['txtEmailLoja'];
@@ -165,15 +166,17 @@
                             desabilitarTodos('tbl_autor', 'idAutor', $conexao);
                         }
                     }
-                      header('location:adm.conteudo.php');
+                     // header('location:adm.conteudo.php');
                    
                 } 
             
             //Já que o promoções não vai cadastrar imagens, deve ficar longe do procedimento para tratar files
-            if(isset($_GET['sltProdutos']))
+            if(isset($_GET['sltProdutos'])) {
                 @$sql = "insert into tbl_promocao(isbn, percentualDesconto, isAtivado) 
                 values('".$isbn."',".(float)$valPercent .",".$atv.")";
-                @mysqli_query($conexao, $sql);   
+                //$sqldesativa= "update tbl_promocao set isAtivado = 0 where 
+                //id<>". $_SESSION['codigo']. " and isbn=".$isbn;
+                mysqli_query($conexao, $sql);   
                 header('location:adm.conteudo.php');
                 //desativando todos caso no insert o user ative o registro
                if(getAtivacao() == 1) {
@@ -190,12 +193,13 @@
                 $sqlUpdate = update("tbl_sobre", "descricao='".$descrip."', isAtivado=".$atv, 'idSobre',  $_SESSION['codigo']);
                 $sqldesativa = setUnicoAtivado('tbl_sobre', 'idSobre', $_SESSION['codigo']);
                 //editando lojas
-                if(isset($_POST['txtEmailLoja'])) 
+                if(isset($_POST['txtEmailLoja'])) {
                     $sqlUpdate = update("tbl_lojas", "email = '".$email."', descricao='".$descrip."', isAtivado=".$atv, 'idLoja',  $_SESSION['codigo']);
+                    
                     $sqlUpdateEndereco = update("tbl_endereco", "logradouro = '".@$logradouro."', 
-                    bairro='".@$bairro."', cidade='".@$cidade."', uf='".@$uf."', cep='".@$cep."', telefone='".@$telefone."'", 'id',   $_SESSION['cod_endereco']);
-
+                    bairro='".@$bairro."', cidade='".@$cidade."', uf='".@$uf."', cep='".@$cep."', telefone='".@$telefone."'", 'id',   @$_SESSION['cod_endereco']);
                     mysqli_query($conexao, $sqlUpdateEndereco);
+                }
                 //editando autores
                 if(isset($_POST['txtNome'])) {
                     $sqlUpdate = update("tbl_autor", "nome = '".$nome."', dtFalecimento='".$dtFalecimento."', 
@@ -229,25 +233,37 @@
 
                     }
              
+            
+            
+           
+            }
+            
             //editar das promoções
             if(isset($_GET['sltProdutos'])) {
-                $sqlUpdate = update("tbl_promocao", "isbn = '".$isbn."', percentualDesconto=".
-                (float)$valPercent.", isAtivado=".$atv, 'id',  $_SESSION['codigo']);
+                 $atv = 0;
+                if(isset($_GET['checkAtivacao'])) {
+                    $atv = 1;
+                }
+                echo("<script>alert('to aqui')</script>");
+                
+                $sqlUpdate =  "update tbl_promocao set isbn = '".$isbn."', percentualDesconto='".(float)$valPercent."', isAtivado=".$atv." where id=". $_SESSION['codigo'];
+                
+                echo($sqlUpdate);
                 
                 //desativa promoçoes para um mesmo isbn automaticamente
                 $sqldesativa= "update tbl_promocao set isAtivado = 0 where 
                 id<>". $_SESSION['codigo']. " and isbn=".$isbn;
 
-                echo($sqlUpdate);
+                echo($sqldesativa);
                 
-                //mysqli_query($conexao, $sqldesativa);
+                  mysqli_query($conexao, $sqldesativa);
 
-                //mysqli_query($conexao, $sqlUpdate);
-               // header("location:adm.conteudo.php");
+            mysqli_query($conexao, $sqlUpdate);
+            header("location:adm.conteudo.php");
+                
+               
             }
-            
-           
-            }
+           // echo($sqlUpdate);
             mysqli_query($conexao, $sqldesativa);
 
             mysqli_query($conexao, $sqlUpdate);
@@ -256,6 +272,7 @@
          }  
         
         
+        }
     }
 
     //condição pra deletar e mostrar dados em editar
@@ -302,9 +319,12 @@
             $rsLojaUp = mysqli_fetch_array($selectLojaUp);
             
         } else if($modo == 'editarpromo') {
-             
-              $selectPromoUp = mysqli_query($conexao, selecionar('tbl_promocao', 'isbn'
-             , 'tbl_promocao.id ='.$_SESSION['codigo']));
+             echo("<script>alert('oi')</script>");
+             $sql = selecionar('tbl_promocao', 'isbn'
+             , 'id ='.$_SESSION['codigo']);
+              $selectPromoUp = mysqli_query($conexao, $sql);
+            
+             echo($sql);
  
              $valueBtn = 'Editar';
  

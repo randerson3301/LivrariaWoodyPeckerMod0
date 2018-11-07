@@ -72,9 +72,8 @@
                 </div>
                 
                      <div id="containerMain">
-                        <section class="containerLivraria promos superior" >
                             <?php 
-                                $sql = 'select tl.*, tp.percentualDesconto 
+                                $sql = 'select tl.*, tp.* 
                                 from tbl_livros tl inner join tbl_promocao tp
                                 on tl.isbn = tp.isbn and tp.isAtivado=1';
 
@@ -93,16 +92,16 @@
                                 <div class="containerLivroDados">
                                     <!-- titulo-->
                                     <div class="tituloLivro">
-                                        <h2><span class="textTitulo">Título:</span> O Código Da Vinci</h2>
+                                        <h2><span class="textTitulo">Título:</span><?php echo($rsPromo['titulo'])?></h2>
                                     </div>
                                     <!-- descrição do livro -->
                                     <div class="descLivro">
-                                        <span class="textTitulo">Descrição:</span> Um assassinato dentro do Museu do Louvre, em Paris, traz à tona uma sinistra conspiração para revelar um segredo que foi protegido por uma sociedade secreta desde os tempos de Jesus Cristo.
+                                        <span class="textTitulo">Descrição:</span> <?php echo($rsPromo['descricao'])?>
 
                                     </div>
                                     <!-- preço -->
                                     <div class="preco">
-                                        <span class="precoVelho">De: R$&nbsp;39,90</span>
+                                        <span class="precoVelho">De: R$&nbsp;<?php echo($rsPromo['preco'])?></span>
                                         
                                         <span class="precoNovo"><span class="textTitulo">Por:</span> R$&nbsp;25,90</span>
                                     </div>
@@ -116,7 +115,6 @@
                                 </div>
                             </div> 
                                 <?php } ?>
-                        </section>  
                             </div> 
                             
                         
