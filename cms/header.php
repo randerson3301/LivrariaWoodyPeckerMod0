@@ -1,4 +1,9 @@
 
+    <?php 
+        if($_SESSION['username'] == '') {
+            header("location:../index.php");
+        }
+    ?>
             <div id="containerCMS">
             <header id="headerCMS">
                 <div id="containerHeaderCMS">
@@ -34,12 +39,12 @@
                           </a>
                        </li>
                        <li class="itemcms">
-                           <a href="adm.produtos.html" class = "linkmenu">
+                           
                           <figure>
                               <img src="../imagens/prodadmin.png" class="imgItens">
                               <figcaption >Adm. Produtos</figcaption>
                           </figure>
-                          </a>
+                         
                        </li>
                       <li class="itemcms">
                            <a href="adm.usuarios.php" class = "linkmenu" onclick="oi('adm.usuarios.php')">
@@ -53,9 +58,9 @@
                   </div>
                   <!-- Aqui conterá a mensagem de bem vindo, e a opção de logout-->
                   <div id="containerBemVindo">
-                      Bem Vindo *************
+                      Bem Vindo, <?php echo($_SESSION['username'])?>
                       
-                      <span id="logout"><a href="#">Logout</a></span>
+                      <a href="#" id="logout" onclick="logout()">Logout</a>
                   </div>
                 </nav>
          </header>  

@@ -21,35 +21,7 @@
         }
         return $atv;
     }
-/*
-    //function para inserir itens
-    function insert($tablename, $field, $value) {
-        $sql = "insert into ".$tablename." order by ".$value;
-        $conexao = conexaoBD();
-        $select = mysqli_query($conexao, $sql);
-        
-        //caso a conexão venha a falhar uma mensagem de erro será mostrada.
-        if(!$select) {
-            printf(mysqli_error($conexao));
-        }
-        
-        return $select;
-    }
 
-
-    function getfieldsfrom($tablename) {
-        switch($tablename) {
-            case 'tbl_nivel':
-                return 'nomeNivel';
-                break;
-            case 'tbl_usuarios':
-                return 'nomeNivel';
-                break;
-            
-                    
-        }
-    }
-*/
 
 function delete($tablename, $primary_key, $idRegistro) {
      $sql = "delete from ".$tablename." where ".$primary_key. "=". $idRegistro;
@@ -60,5 +32,26 @@ function delete($tablename, $primary_key, $idRegistro) {
 function update ($tablename, $setvalue, $primary_key, $idRegistro) {
     $sql = "update ".$tablename." set ". $setvalue." where ".$primary_key."=" .$idRegistro;
     return $sql;
+}
+
+//essa function irá retornar o sql para desativar registros instantaneamente
+function setUnicoAtivado($tabname, $id, $idAtual=null) {
+    $sqldesativa= "update ".$tabname." set isAtivado = 0 where ". 
+    $id." <> ". $idAtual;
+
+    return $sqldesativa;
+}
+
+//desabilita todos os registros quando o último for inserido
+function desabilitarTodos($tabname, $id, $con) {
+ //retorna o ultimo registro
+  $sqlLastRegister = "select * from ".$tabname." order by ".$id." desc limit 1 ";
+  $selectLast = mysqli_query($con, 
+  $sqlLastRegister);
+  $rsLast = mysqli_fetch_array($selectLast);
+
+  $sqldesativa = setUnicoAtivado($tabname, $id, $rsLast[$id]);
+
+  return mysqli_query($con, $sqldesativa);
 }
 ?>

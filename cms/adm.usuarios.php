@@ -165,7 +165,7 @@
                     </div>
                     
                     <div id="formNivel" class="tabcontent">
-                        <div class="containerColunas">
+                        <div class="containerColunasAlt">
                             <div class="coluna tituloColunas espacador">
                             Nível
                             </div>
@@ -182,7 +182,7 @@
                         <?php 
                             while($rsNiveis = mysqli_fetch_array($select)) {
                         ?>
-                            <div class="containerColunas">
+                            <div class="containerColunasAlt">
                                 <div class="indexRegistro smallCol indexNivel">
                                     <?php
                                     echo($rsNiveis['idNivel'])
@@ -220,7 +220,7 @@
                             ?>
                        </div>
                     <div id="formUser" class="tabcontent">
-                        <div class="containerColunas">
+                        <div class="containerColunasAlt">
                             
                             <div class="coluna tituloColunas colMaior espacador">
                             Nome Completo
@@ -242,7 +242,7 @@
                         <?php 
                             while($rsUsuarios = mysqli_fetch_array($selectUser)) {
                         ?>
-                            <div class="containerColunas">
+                            <div class="containerColunasAlt">
                                 <div class="indexRegistro smallCol indexNivel">
                                     <?php
                                     echo($rsUsuarios['matricula'])

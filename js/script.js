@@ -117,7 +117,7 @@ function validar(caracter, blocktype, id) {
         else
             var letra = caracter.which;
                 
-        if(letra != 8 && letra < 47 || letra > 57) {
+        if(letra != 8 && letra != 46 && letra < 47 || letra > 57) {
             document.getElementById(id).style="background: #f00;";
             return false; /*Cancela a ação da tecla*/
         }  

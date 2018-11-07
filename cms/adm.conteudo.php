@@ -4,7 +4,7 @@
     require_once('function.php');
 
     $conexao = conexaoBD();
-    
+    $sqlUpdate = '';
 //------------------------PREPARAÇÃO DOS RESULTSETS--------------------------------
     $sqlSelect = selecionar('tbl_sobre', 'idSobre');
 
@@ -16,9 +16,20 @@
     $selectLoja = mysqli_query($conexao, $sqlLojas);
 
     //select da loja
-    $sqlLivro = selecionar('tbl_livro', 'isbn');
+    $sqlLivro = selecionar('tbl_livro', 'titulo');
 
     $selectLivro = mysqli_query($conexao, $sqlLivro);
+
+    //select das promocoes
+    $sqlPromo = 'select tl.*,  tp.id, tl.preco - (tl.preco *  (tp.percentualDesconto/ 100)), tp.percentualDesconto from tbl_livro tl inner join tbl_promocao tp 
+    on tl.isbn = tp.isbn';
+                            
+    $selectPromo = mysqli_query($conexao, $sqlPromo);
+
+     //select dos autores
+     $sqlAutor = selecionar('tbl_autor', 'idAutor');
+                            
+     $selectAutor = mysqli_query($conexao, $sqlAutor);
 
 //------------------------FIM DOS RESULTSETS--------------------------------
 
@@ -26,21 +37,54 @@
 
     $btn = null;
 
-   // $_SESSION['id'] = $_GET['id'];
+    if(isset($_POST['btnSalvarSobre']) || isset($_GET['btnSalvarSobre'])) {
+        @$btn = $_POST['btnSalvarSobre'];
+       
+        //inserindo promoçoes
+        if(isset($_GET['btnSalvarSobre'])) {
+            $btn = $_GET['btnSalvarSobre'];
 
-    if(isset($_POST['btnSalvarSobre'])) {
-        $btn = $_POST['btnSalvarSobre'];
+            $isbn = $_GET['sltProdutos'];
+            $valPercent = $_GET['txtPercent'];
+            //$desconto = settype( $valPercent, 'float'); //convertendo para float
+  
+            if(isset($_GET['checkAtivacao'])) {
+                      $atv = 1;
+                  } else {
+                      $atv = 0;
+                  }
+        }
+        
         
         //pegando a descrição
         
-        $descrip = $_POST['txtDesc'];
+        @$descrip = $_POST['txtDesc'];
+
+        //dados do autor
+        @$nome = $_POST['txtNome'];
+        @$dtNascimento =   $_POST['txtDtNasc'];
+        @$dtFalecimento =  $_POST['txtDtFal'];
+        @$cidadeNascimento =  $_POST['txtLocalNasc'];
+
+        //convertedo data para o padrão americano
+        @$data = explode("/", $dtNascimento);
+        @$dtNascimento = $data[2]. "-" .$data[1]. "-" .$data[0];
         
-        if(isset($_POST['txtEmailLoja'])) 
+        @$dataFal = explode("/", $dtFalecimento);
+        @$dtNascimento = $data[2]. "-" .$data[1]. "-" .$data[0];
+        //dados da loja
+        if(isset($_POST['txtEmailLoja'])) {
             $email = $_POST['txtEmailLoja'];
-            
-        
+            $logradouro =  $_POST['txtLogradouro'];
+            $bairro =  $_POST['txtBairro'];
+            $cidade =  $_POST['txtCidade'];
+            $uf =  $_POST['cbEstado'];
+            $cep =  $_POST['txtCep'];
+            $telefone = $_POST['txtTelefone'];
+        }
+      
         //pegando o nome do arquivo de foto
-        $file = $_FILES['fleFoto']['name'];
+        @$file = $_FILES['fleFoto']['name'];
 
         //nome do arquivo sem a extensão
         $filename = pathinfo($file, PATHINFO_FILENAME);
@@ -49,83 +93,198 @@
         $filename = md5(uniqid(time()).$filename);
 
         //nome do diretório que armazenará os arquivos, já criptografados, inseridos pelo user
-        $dir = "imgs_uploads/";
+         $dir = "imgs_uploads/";
 
         //armazenando o nome temporário do file
-        $arquivo_tmp = $_FILES['fleFoto']['tmp_name'];
-        
+        @$arquivo_tmp = $_FILES['fleFoto']['tmp_name'];
+            
         //pegando a extensão do arquivo
         $extfile = strrchr($file, ".");
-        
+            
         //setando um padrão para armazenagem
         $img = $dir . $filename . $extfile;
+         
+        //pegando o tamanho do arquivo
+        @$filesize = $_FILES['fleFoto']['size'];
+
+        //tranforma de bytes para kbytes
+        $filesize = round($filesize / 1024);
+
 
         if($btn == 'Cadastrar') {
-            //pegando o tamanho do arquivo
-            $filesize = $_FILES['fleFoto']['size'];
-
-            //tranforma de bytes para kbytes
-            $filesize = round($filesize / 1024);
-
+           
             //condicional para verificar o tamanho do arquivo permitido pelo servidor
             if($filesize <= 2000) {
-                if(move_uploaded_file($arquivo_tmp, $img)) {
+                
+                if(move_uploaded_file($arquivo_tmp, $img) && $descrip != null 
+                    ) {
                     $sql = "insert into tbl_sobre(descricao, imgSobre, isAtivado) 
                     values('".$descrip."','".$img."','".getAtivacao()."')";
-                    
-                    if(isset($_POST['txtEmailLoja']))
-                         $sql = "insert into tbl_lojas(email, descricao, imgLoja, isAtivado) 
-                    values('".$email."','".$descrip."','".$img."','".getAtivacao()."')";
+                    mysqli_query($conexao, $sql);   
                         
-                            
-                    mysqli_query($conexao, $sql);
-
-                    header("location:adm.conteudo.php");
-                }
-
+                    //desativando todos caso no insert o user ative o registro
+                    if(getAtivacao() == 1) {
+                       desabilitarTodos('tbl_sobre', 'idSobre', $conexao);
+                    }
+                    
+                    if(isset($_POST['txtEmailLoja'])) {
+                        
+                        //insert nos endereços
+                         $sqlEndereco = "insert into tbl_endereco(logradouro, bairro, cidade, uf, cep, telefone) 
+                    values('".$logradouro."','".$bairro."','".$cidade."','".$uf."','".$cep."','".$telefone."');";
+                        
+                        mysqli_query($conexao, $sqlEndereco); 
+                        //pegando o id do endereco para relacionar com a tab de lojas
+                        $sqlBuscarEndereco = "select * from tbl_endereco order by id desc limit 1 ";
+                        
+                        $selectEndereco = mysqli_query($conexao, $sqlBuscarEndereco);
+                        
+                        $rsEnd = mysqli_fetch_array($selectEndereco);
+                        
+                         
+                        $sql = "insert into tbl_lojas(email, descricao, imgLoja, isAtivado, idEndereco) 
+                    values('".$email."','".$descrip."','".$img."',".getAtivacao()."
+                    ,".$rsEnd['id'].")";
+                   
+                   
+                    mysqli_query($conexao, $sql); 
+                    //echo($sql);
+                        
+                    }
+                    if(isset($_POST['txtNome'])) {
+                         $sql = "insert into tbl_autor(nome, dtNascimento, dtFalecimento,  
+                         cidadeNascimento, breveBiografia, imgAutor, isAtivado) 
+                         values('".$nome."','".$dtNascimento."','".$dtFalecimento."',
+                         '".$cidadeNascimento."','".$descrip."','".$img."'
+                         ,".getAtivacao().")";
+                         
+                         mysqli_query($conexao, $sql);   
+                        
+                         //desativando todos caso no insert o user ative o registro
+                        if(getAtivacao() == 1) {
+                            desabilitarTodos('tbl_autor', 'idAutor', $conexao);
+                        }
+                    }
+                      header('location:adm.conteudo.php');
+                   
+                } 
+            
+            //Já que o promoções não vai cadastrar imagens, deve ficar longe do procedimento para tratar files
+            if(isset($_GET['sltProdutos']))
+                @$sql = "insert into tbl_promocao(isbn, percentualDesconto, isAtivado) 
+                values('".$isbn."',".(float)$valPercent .",".$atv.")";
+                @mysqli_query($conexao, $sql);   
+                header('location:adm.conteudo.php');
+                //desativando todos caso no insert o user ative o registro
+               if(getAtivacao() == 1) {
+                   desabilitarTodos('tbl_promocao', 'id', $conexao);
+               }
             }
         } else if($btn == 'Editar') {
-            if(move_uploaded_file($arquivo_tmp, $img)) {
+            //editar sem imagem, irá prevenir o upload repetido de imgs
+            if($filesize == 0) {
                 $atv = 0;
+                if(isset($_POST['checkAtivacao'])) {
+                    $atv = 1;
+                }
+                $sqlUpdate = update("tbl_sobre", "descricao='".$descrip."', isAtivado=".$atv, 'idSobre',  $_SESSION['codigo']);
+                $sqldesativa = setUnicoAtivado('tbl_sobre', 'idSobre', $_SESSION['codigo']);
+                //editando lojas
+                if(isset($_POST['txtEmailLoja'])) 
+                    $sqlUpdate = update("tbl_lojas", "email = '".$email."', descricao='".$descrip."', isAtivado=".$atv, 'idLoja',  $_SESSION['codigo']);
+                    $sqlUpdateEndereco = update("tbl_endereco", "logradouro = '".@$logradouro."', 
+                    bairro='".@$bairro."', cidade='".@$cidade."', uf='".@$uf."', cep='".@$cep."', telefone='".@$telefone."'", 'id',   $_SESSION['cod_endereco']);
+
+                    mysqli_query($conexao, $sqlUpdateEndereco);
+                //editando autores
+                if(isset($_POST['txtNome'])) {
+                    $sqlUpdate = update("tbl_autor", "nome = '".$nome."', dtFalecimento='".$dtFalecimento."', 
+                    dtNascimento='".$dtNascimento."', cidadeNascimento='".$cidadeNascimento."', 
+                    breveBiografia='".$descrip."', isAtivado=".$atv, 'idAutor',  $_SESSION['codigo']);
+                    $sqldesativa = setUnicoAtivado('tbl_autor', 'idAutor', $_SESSION['codigo']);
+
+                }
+            }
+            if(move_uploaded_file($arquivo_tmp, $img)) {
+                    $atv = 0;
                     if(isset($_POST['checkAtivacao'])) {
                         $atv = 1;
                     }
+                    $sqlUpdate = update("tbl_sobre", "descricao='".$descrip."', imgSobre='"
+                    .$img."', isAtivado=".$atv, 'idSobre',  $_SESSION['codigo']);
+                    $sqldesativa = setUnicoAtivado('tbl_sobre', 'idSobre', $_SESSION['codigo']);
 
-            $sqlUpdate = update("tbl_sobre", "descricao='".$descrip."', imgSobre='"
-            .$img."', isAtivado=".$atv, 'idSobre',  $_SESSION['codigo']);
-            
-                if(isset($_POST['txtEmailLoja'])) 
-                    $sqlUpdate = update("tbl_lojas", "email = '".$email."', descricao='".$descrip."', imgLoja='"
-                    .$img."', isAtivado=".$atv, 'idLoja',  $_SESSION['codigo']);
+                
+                    //editando lojas
+                    if(isset($_POST['txtEmailLoja'])) 
+                        $sqlUpdate = update("tbl_lojas", "email = '".$email."', descricao='".$descrip."', imgLoja='"
+                        .$img."', isAtivado=".$atv, 'idLoja',  $_SESSION['codigo']);
+                
+                    //editando autores
+                    if(isset($_POST['txtNome'])) {
+                        $sqlUpdate = update("tbl_autor", "nome = '".$nome."', dtFalecimento='".$dtFalecimento."', 
+                        dtNascimento='".$dtNascimento."', cidadeNascimento='".$cidadeNascimento."', 
+                        breveBiografia='".$descrip."', imgAutor='" .$img."', isAtivado=".$atv, 'idAutor',  $_SESSION['codigo']);
+                        $sqldesativa = setUnicoAtivado('tbl_autor', 'idAutor', $_SESSION['codigo']);
+
+                    }
              
+            //editar das promoções
+            if(isset($_GET['sltProdutos'])) {
+                $sqlUpdate = update("tbl_promocao", "isbn = '".$isbn."', percentualDesconto=".
+                (float)$valPercent.", isAtivado=".$atv, 'id',  $_SESSION['codigo']);
+                
+                //desativa promoçoes para um mesmo isbn automaticamente
+                $sqldesativa= "update tbl_promocao set isAtivado = 0 where 
+                id<>". $_SESSION['codigo']. " and isbn=".$isbn;
 
-             echo($sqlUpdate);
-             mysqli_query($conexao, $sqlUpdate);
-             header("location:adm.conteudo.php");
+                echo($sqlUpdate);
+                
+                //mysqli_query($conexao, $sqldesativa);
+
+                //mysqli_query($conexao, $sqlUpdate);
+               // header("location:adm.conteudo.php");
             }
+            
+           
+            }
+            mysqli_query($conexao, $sqldesativa);
+
+            mysqli_query($conexao, $sqlUpdate);
+            header("location:adm.conteudo.php");
+            
          }  
         
         
     }
 
-    //condição pra deletar
+    //condição pra deletar e mostrar dados em editar
     if(isset($_GET['modo'])) {
         $modo = $_GET['modo'];
         $_SESSION['codigo'] = $_GET['id'];
-
+      
         if($modo == 'excluir') {
-            //função de delete 
-            $delete = delete('tbl_sobre', 'idSobre', $_SESSION['codigo']);
-            mysqli_query($conexao, $delete);
-            
-        } else if ($modo == 'excluirloja') {
-            $delete = delete('tbl_lojas', 'idLoja', $_SESSION['codigo']);
-            mysqli_query($conexao, $delete);
-        }
-        
-       
+            $tab = $_GET['tab'];
 
-        if($modo == 'editar') {
+            //função de delete 
+            if($tab == 'promo')
+                $delete = delete('tbl_promocao', 'id', $_SESSION['codigo']);
+            
+            if($tab == 'autor')
+                $delete = delete('tbl_autor', 'idAutor', $_SESSION['codigo']);
+            
+            if($tab == 'loja')
+                $delete = delete('tbl_lojas', 'idLoja', $_SESSION['codigo']);
+            
+            if($tab == 'sobre')
+                $delete = delete('tbl_sobre', 'idSobre', $_SESSION['codigo']);
+            
+            mysqli_query($conexao, $delete);
+            header("location:adm.conteudo.php");
+            
+        } 
+      
+        else if($modo == 'editar') {
             $selectSobreUp = mysqli_query($conexao, selecionar('tbl_sobre', 'idSobre'
             , 'idSobre ='.$_SESSION['codigo']));
 
@@ -133,19 +292,39 @@
 
             $rsSobreUp = mysqli_fetch_array($selectSobreUp);
         } else if($modo == 'editarloja') {
-           // echo('ta bem aqui mano');
+            $_SESSION['cod_endereco'] = $_GET['idend'];
             
-             $selectLojaUp = mysqli_query($conexao, selecionar('tbl_lojas', 'idLoja'
+             $selectLojaUp = mysqli_query($conexao, selecionar('tbl_lojas_enderecos', 'idLoja'
             , 'idLoja ='.$_SESSION['codigo']));
 
             $valueBtn = 'Editar';
 
             $rsLojaUp = mysqli_fetch_array($selectLojaUp);
             
-        }
-         //header("location:adm.conteudo.php");
-    }
+        } else if($modo == 'editarpromo') {
+             
+              $selectPromoUp = mysqli_query($conexao, selecionar('tbl_promocao', 'isbn'
+             , 'tbl_promocao.id ='.$_SESSION['codigo']));
+ 
+             $valueBtn = 'Editar';
+ 
+             $rsPromoUp = mysqli_fetch_array($selectPromoUp);
 
+             $valorOption = $rsPromoUp['isbn'];
+             
+         } else if($modo == 'editarautor') {
+           
+             $selectAutorUp = mysqli_query($conexao, selecionar('tbl_autor', 'idAutor'
+            , 'idAutor ='.$_SESSION['codigo']));
+
+            $valueBtn = 'Editar';
+
+            $rsAutorUp = mysqli_fetch_array($selectAutorUp);
+            
+        }
+        
+    
+        }
    // header("location:adm.conteudo.php");
 
         //Consulta do botão
@@ -165,12 +344,13 @@
             
             echo($sqlUpdateAtv);
             mysqli_query($conexao, $sqlUpdateAtv);
-            header('location:adm.usuarios.php');
+            header('location:adm.conteudo.php');
         }
-?>
 
-    <?php
+        
+   
         require_once('head.html');
+       
     ?>
         
          <!-- ESSAS SÃO AS DIVS DA MODAL-->
@@ -184,11 +364,21 @@
 
             ?>
                    <div class="tab">
-                        <button class="tablink"  onclick=" openForm(event, 'PRECISA MUDAR')">Autores</button>
-                        <button class="tablink" onclick=" openForm(event, 'formLojas')">Lojas</button>
-                         <button class="tablink" onclick=" openForm(event, 'formProduto')"  id="openByDefault">Produto do Mês</button>
-                        <button class="tablink" onclick=" openForm(event, 'formNivel')">Promoções</button>
-                         <button class="tablink" onclick=" openForm(event, 'formSobre')">Sobre </button>
+                        <button class="tablink"  onclick=" openForm(event, 'formAutores')" id="openByDefault" onclick="getAbaPadrao(this.id)">
+                                Autores</button>
+                        
+                       
+                            <button class="tablink" onclick=" openForm(event, 'formLojas')"  id="tabLoja" onclick="getAbaPadrao(this.id)">Lojas</button>
+                        
+                       
+                        <button class="tablink" onclick=" openForm(event, 'formProduto')"  id="tabProdDestaque" onclick="getAbaPadrao(this.id)">Produto do Mês</button>
+                       
+                       
+                        <button class="tablink" onclick=" openForm(event, 'formPromo')"  id="tabPromo" onclick="getAbaPadrao(this.id)">Promoções</button>
+                        
+                        
+                        <button class="tablink" onclick=" openForm(event, 'formSobre')"  id="tabSobre" onclick="getAbaPadrao(this.id)">Sobre </button>
+                        
                     </div>
                     
                   <!-- Form de Sobre -->    
@@ -207,62 +397,24 @@
 
                  <!-- Form de Produto do mês -->
                  <div id="formProduto" class="tabcontent">
-                     
-                        <div class="containerColunas centerManual">
-                        
-                            <div class="coluna tituloColunas " >
-                            Imagem
-                            </div>
-                            <div class="coluna tituloColunas colMaior">
-                            Titulo
-                            </div>
-                            <div class="coluna tituloColunas smallColPlus" >
-                            ISBN
-                            </div>
-                            <div class="coluna tituloColunas smallCol colunaSemFloat" >
-                            Ativação
-                            </div>
-                        </div>
-                          
-                         
-                    
                         <?php 
-                           while($rsLivro=mysqli_fetch_array($selectLivro)) {
-                        ?>
-                                <div class="containerColunas centerManual colunaComFoto">
-                                   <div class="coluna " >
-                                       <figure>
-                                            <img src="<?php echo($rsLivro['imgLivro'])?>" alt="Imagem Sobre" class="imgLivro"
-                                            title="Imagem de Fundo">
-                                       </figure>
-                                       
-                                    </div>
-                                    <div class="coluna  colMaior">
-                                        <?php echo($rsLivro['titulo'])?>
-                                    </div>
-                                    <div class="coluna  smallColPlus" >
-                                         <?php echo($rsLivro['isbn'])?>
-                                    </div>
-                                    <div class="coluna  smallCol " >
-                                      
-                                        <a href="adm.conteudo.php?ativado=<?php echo($rsLivro['livroEmDestaque'])?>&isbn=<?php echo($rsLivro['isbn'])?>"> 
-                                               <?php
-                                               ?>
-                                            <figure>
-                                                    <img src="<?php echo($rsLivro['livroEmDestaque'] == 0) ? '../imagens/desativo.png' : '../imagens/active.png' ?>" 
-
-                                                    title="Clique para ativar/desativar" alt="excluir" class="imgAtivo" >
-                                            </figure>
-                                        </a>
-                                        
-                                     </div>
-                                </div>  
-                       
-                         
-                        <?php 
-                            }
-                        ?>
+                            require_once('frmlivrodestaque.php');
+                        ?> 
                  </div>
+
+                   <!-- Form de Promoções -->
+                   <div id="formPromo" class="tabcontent">
+                        <?php 
+                            require_once('frmpromocao.php');
+                        ?> 
+                  </div>
+
+                    <!-- Form de Autores -->
+                    <div id="formAutores" class="tabcontent">
+                        <?php 
+                            require_once('frmautor.php');
+                        ?> 
+                  </div>
 
         
                                   

@@ -6,12 +6,32 @@ $(document).ready(function() {
                  
         
                 // ESSE É O JQUERY PARA FAZER A MODAL APARACER NA TELA-->
-       
                 $(".viewModal").click(function() {
                     $("#containerModal").fadeIn(600); 
                 }); 
+
+                
           
         });
+
+function setOpenByDefault() {
+    $(this).click(function(){
+        $(this).prop('id', 'openByDefault');
+    });
+}
+
+        var tabAtiva;
+        $('a[data-toggle="tab"]').on('show.bs.tab', function(e){
+            localStorage.setItem('tabativa', $(e.target).attr('href'));
+        });
+
+        tabAtiva = localStorage.getItem('tabativa');
+
+        console.log(tabAtiva);
+
+        if(tabAtiva) {
+            $('a[href="' + tabAtiva +  '"]').tab('show');
+        }
   /*
                     O elemento AJAX será utilizado para fazer a page modal.php aparecer dentro da div modal onde o usuário possa analisar os dados de cada registro do fale conosco.
                 */
@@ -25,6 +45,11 @@ function modal(idItem, url, ele) {
              $(ele).html(dados);
         } 
     })
+}
+
+//função para mudar qual aba será fixa por padrão
+function getAbaPadrao(id){
+    document.getElementById(id).style.display='block';
 }
 
 //função para mostrar a imagem no momento em que o usuário inserir
@@ -43,6 +68,9 @@ function readURL(input, id) {
     }
 }
 
+function carregarValor(id){
+    $(id).submit();
+}
 
 
 //função responsável por gerenciar a aberturar dos forms especificados pela var formname
@@ -64,6 +92,8 @@ function openForm(event, formname) {
     document.getElementById(formname).style.display = "block";
     event.currentTarget.className += 'active';
 }
+
+
 
 
 
@@ -123,5 +153,17 @@ function openViewUser(idItem, modo, url, container, hideEle){
             $(hideEle).hide();
         }
     })
+}
+
+//função para logout do usuário
+function logout() {
+	var conf = confirm("Você deseja encerrar a sessão?");
+	var link = document.getElementById("logout")
+
+	if (conf) {
+		link.href = "../index.php"
+	} else {
+	    link.href = "#"
+	}
 }
 

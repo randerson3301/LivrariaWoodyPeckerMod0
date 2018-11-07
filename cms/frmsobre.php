@@ -15,7 +15,7 @@
                                 
                             </div>
                             <div class="divisorModal">
-                                Descrição: <textarea class="txtareaConteudo" name="txtDesc"> <?php echo(
+                                Descrição: <textarea class="txtareaConteudo" name="txtDesc" id="txtDesc" onkeypress="return validar(event, 'num', this.id);" required> <?php echo(
                                     @$rsSobreUp['descricao'])?></textarea>
                                 <input type="submit" value="<?php echo($valueBtn)?>" name="btnSalvarSobre" class="btnAdd fontsize">
                             </div>
@@ -58,7 +58,7 @@
                                                 >
                                             </figure>
                                         </a>
-                                        <a href="adm.conteudo.php?modo=excluir&id=<?php echo($rsSobre['idSobre'])?>">
+                                        <a href="adm.conteudo.php?modo=excluir&tab=sobre&id=<?php echo($rsSobre['idSobre'])?>">
                                             <figure class="acao">
                                                 <img src="../imagens/delete.png" title="Excluir Registro" alt="excluir">
                                             </figure>

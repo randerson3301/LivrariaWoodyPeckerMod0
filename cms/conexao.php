@@ -1,12 +1,13 @@
 <?php
+ session_start(); //iniciando variaveis de sessão
 function conexaoBD() {
-    session_start(); //iniciando variaveis de sessão
+   
 
     /* Essas variaveis armazenam os dados necessários para a conexão com o banco*/
     $host = "localhost";
     $database = "db_woody_woodpecker";
-    $user = "root";
-    $password = "bcd127";
+    $user = "randerson";
+    $password = "r@nd3rs0n";
 
     //Fazendo error aparecerem na tela
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
