@@ -386,6 +386,7 @@ legend {
     overflow: hidden;
     height: auto;
     width: 100%;
+    padding-top: 140px;
     
    
 }
@@ -586,7 +587,9 @@ p {
 
 .containerLivro {
     width: 278px;
-    height: 97.6%;
+    height: auto;
+    overflow: hidden;
+    min-height: 500px;
     float: left;
     margin-right: 15px;
     font-size: 17px;

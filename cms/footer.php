@@ -8,8 +8,11 @@
             </div>
         </footer>
 </div>
+<script src="js/jquery-ui.js"></script>
 <script src="js/script.cms.js"></script>
 <script src="../js/jquery.js"></script>
+
+
 <!-- <script src="../js/script.js"></script> -->
 <script>
  

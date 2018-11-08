@@ -21,8 +21,7 @@
     $selectLivro = mysqli_query($conexao, $sqlLivro);
 
     //select das promocoes
-    $sqlPromo = 'select tl.*, tp.isAtivado, tp.id, tl.preco - (tl.preco *  (tp.percentualDesconto/ 100)), tp.percentualDesconto from tbl_livro tl inner join tbl_promocao tp 
-    on tl.isbn = tp.isbn';
+    $sqlPromo = selecionar('tbl_promocao', 'id');
                             
     $selectPromo = mysqli_query($conexao, $sqlPromo);
 
@@ -37,26 +36,17 @@
 
     $btn = null;
 
-    if(isset($_POST['btnSalvarSobre']) || isset($_GET['btnSalvarSobre'])) {
+    $isbn = "";
+    $valPercent = "";
+
+    if(isset($_POST['btnSalvarSobre'])) {
         @$btn = $_POST['btnSalvarSobre'];
        
-        //inserindo promoçoes
-        if(isset($_GET['btnSalvarSobre'])) {
-            echo("oi");
-            $btn = $_GET['btnSalvarSobre'];
-
-            $isbn = $_GET['sltProdutos'];
-            $valPercent = $_GET['txtPercent'];
-            //$desconto = settype( $valPercent, 'float'); //convertendo para float
-  
-            if(isset($_GET['checkAtivacao'])) {
-                      $atv = 1;
-                  } else {
-                      $atv = 0;
-                  }
-        }
-        
-        
+        //echo("oi");
+        @$isbn = $_POST['sltProdutos'];
+           
+        @$valPercent = $_POST['txtPercent'];
+          
         //pegando a descrição
         
         @$descrip = $_POST['txtDesc'];
@@ -121,7 +111,7 @@
                     ) {
                     $sql = "insert into tbl_sobre(descricao, imgSobre, isAtivado) 
                     values('".$descrip."','".$img."','".getAtivacao()."')";
-                    mysqli_query($conexao, $sql);   
+                   
                         
                     //desativando todos caso no insert o user ative o registro
                     if(getAtivacao() == 1) {
@@ -148,7 +138,7 @@
                     ,".$rsEnd['id'].")";
                    
                    
-                    mysqli_query($conexao, $sql); 
+                    
                     //echo($sql);
                         
                     }
@@ -159,7 +149,7 @@
                          '".$cidadeNascimento."','".$descrip."','".$img."'
                          ,".getAtivacao().")";
                          
-                         mysqli_query($conexao, $sql);   
+                         
                         
                          //desativando todos caso no insert o user ative o registro
                         if(getAtivacao() == 1) {
@@ -171,18 +161,21 @@
                 } 
             
             //Já que o promoções não vai cadastrar imagens, deve ficar longe do procedimento para tratar files
-            if(isset($_GET['sltProdutos'])) {
+            if(isset($_POST['sltProdutos'])) {
                 @$sql = "insert into tbl_promocao(isbn, percentualDesconto, isAtivado) 
-                values('".$isbn."',".(float)$valPercent .",".$atv.")";
-                //$sqldesativa= "update tbl_promocao set isAtivado = 0 where 
-                //id<>". $_SESSION['codigo']. " and isbn=".$isbn;
-                mysqli_query($conexao, $sql);   
-                header('location:adm.conteudo.php');
-                //desativando todos caso no insert o user ative o registro
+                values('".$isbn."',".(float)$valPercent .",".getAtivacao().")";
+                $sqldesativa= "update tbl_promocao set isAtivado = 0 where 
+                id<>". $_SESSION['codigo']. " and isbn=".$isbn;
+                
                if(getAtivacao() == 1) {
                    desabilitarTodos('tbl_promocao', 'id', $conexao);
                }
             }
+        }
+            mysqli_query($conexao, $sqldesativa);
+
+            mysqli_query($conexao, $sql);
+            header("location:adm.conteudo.php");    
         } else if($btn == 'Editar') {
             //editar sem imagem, irá prevenir o upload repetido de imgs
             if($filesize == 0) {
@@ -208,6 +201,8 @@
                     $sqldesativa = setUnicoAtivado('tbl_autor', 'idAutor', $_SESSION['codigo']);
 
                 }
+
+                
             }
             if(move_uploaded_file($arquivo_tmp, $img)) {
                     $atv = 0;
@@ -232,46 +227,23 @@
                         $sqldesativa = setUnicoAtivado('tbl_autor', 'idAutor', $_SESSION['codigo']);
 
                     }
-             
-            
-            
-           
             }
-            
-            //editar das promoções
-            if(isset($_GET['sltProdutos'])) {
-                 $atv = 0;
-                if(isset($_GET['checkAtivacao'])) {
-                    $atv = 1;
-                }
-                echo("<script>alert('to aqui')</script>");
+
+            if(isset($_POST['sltProdutos'])) {
+               
+                $sqlUpdate = update('tbl_promocao', "isbn='".$isbn."', percentualDesconto='".
+                $valPercent."', isAtivado=".getAtivacao(), 'id',$_SESSION['codigo']);
                 
-                $sqlUpdate =  "update tbl_promocao set isbn = '".$isbn."', percentualDesconto='".(float)$valPercent."', isAtivado=".$atv." where id=". $_SESSION['codigo'];
-                
-                echo($sqlUpdate);
-                
-                //desativa promoçoes para um mesmo isbn automaticamente
+
                 $sqldesativa= "update tbl_promocao set isAtivado = 0 where 
                 id<>". $_SESSION['codigo']. " and isbn=".$isbn;
 
-                echo($sqldesativa);
-                
-                  mysqli_query($conexao, $sqldesativa);
-
-            mysqli_query($conexao, $sqlUpdate);
-            header("location:adm.conteudo.php");
-                
-               
             }
-           // echo($sqlUpdate);
             mysqli_query($conexao, $sqldesativa);
 
             mysqli_query($conexao, $sqlUpdate);
-            header("location:adm.conteudo.php");
-            
-         }  
-        
-        
+            header("location:adm.conteudo.php");    
+               
         }
     }
 
@@ -319,13 +291,11 @@
             $rsLojaUp = mysqli_fetch_array($selectLojaUp);
             
         } else if($modo == 'editarpromo') {
-             echo("<script>alert('oi')</script>");
+             //echo("<script>alert('oi')</script>");
              $sql = selecionar('tbl_promocao', 'isbn'
              , 'id ='.$_SESSION['codigo']);
               $selectPromoUp = mysqli_query($conexao, $sql);
-            
-             echo($sql);
- 
+             
              $valueBtn = 'Editar';
  
              $rsPromoUp = mysqli_fetch_array($selectPromoUp);
@@ -384,20 +354,21 @@
 
             ?>
                    <div class="tab">
-                        <button class="tablink"  onclick=" openForm(event, 'formAutores')" id="openByDefault" onclick="getAbaPadrao(this.id)">
+                       
+                        <button class="tablink"  onclick=" openForm(event, 'formAutores')" id="openByDefault" >
                                 Autores</button>
-                        
                        
-                            <button class="tablink" onclick=" openForm(event, 'formLojas')"  id="tabLoja" onclick="getAbaPadrao(this.id)">Lojas</button>
-                        
+                        <a id="lojas">
+                            <button class="tablink" onclick=" openForm(event, 'formLojas')"  id="tabLoja">Lojas</button>
+                        </a>
                        
-                        <button class="tablink" onclick=" openForm(event, 'formProduto')"  id="tabProdDestaque" onclick="getAbaPadrao(this.id)">Produto do Mês</button>
+                        <button class="tablink" onclick=" openForm(event, 'formProduto')"  id="tabProdDestaque">Produto do Mês</button>
                        
                        
-                        <button class="tablink" onclick=" openForm(event, 'formPromo')"  id="tabPromo" onclick="getAbaPadrao(this.id)">Promoções</button>
+                        <button class="tablink" onclick=" openForm(event, 'formPromo')"  id="tabPromo" >Promoções</button>
                         
                         
-                        <button class="tablink" onclick=" openForm(event, 'formSobre')"  id="tabSobre" onclick="getAbaPadrao(this.id)">Sobre </button>
+                        <button class="tablink" onclick=" openForm(event, 'formSobre')"  id="tabSobre">Sobre </button>
                         
                     </div>
                     

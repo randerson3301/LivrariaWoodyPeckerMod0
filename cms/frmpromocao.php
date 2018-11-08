@@ -1,4 +1,4 @@
-<form action="adm.conteudo.php" name="frmPromo" class="frmConteudo frmMenor"> 
+<form action="adm.conteudo.php" method="POST" name="frmPromo" class="frmConteudo frmMenor"> 
                             <h2>Gerenciador de  Promoções </h2><br>
                            
                                    <span class='spaceBeetween'> Selecione um produto </span> <br>
@@ -34,19 +34,15 @@
                         </form>
 
                         <!-- Registros retornados -->
-                        <div class="containerColunas"> 
-                                <div class="coluna tituloColunas centerManual smallColImg" >
-                                        Imagem
-                                </div>
+                        <div class="containerColunas centerManual"> 
+                               
                                 <div class="coluna tituloColunas smallColPlus">
                                         ISBN
                                  </div>
                                 <div class="coluna tituloColunas smallColPlus">
                                         (%)Desconto
                                  </div>
-                                 <div class="coluna tituloColunas smallColPlus">
-                                        Valor Final(R$)
-                                 </div>
+                                 
                                  <div class="coluna tituloColunas smallCol" >
                                         Ações
                                 </div>
@@ -61,19 +57,14 @@
                             while($rsPromos = mysqli_fetch_array($selectPromo)) {
                        ?>
                        <div class="containerColunas  centerManual colunaComFoto"> 
-                                <div class="coluna   smallColImg" >
-                                       <img src="<?php echo($rsPromos['imgLivro'])?>" 
-                                       alt="imgLivro" title="Imagem" class='img'>
-                                </div>
+                               
                                 <div class="coluna  smallColPlus">
                                         <?php echo($rsPromos['isbn'])?>
                                  </div>
                                 <div class="coluna  smallColPlus">
                                         <?php echo($rsPromos['percentualDesconto'])?>
                                  </div>
-                                 <div class="coluna  smallColPlus">
-                                        <?php echo($rsPromos['tl.preco - (tl.preco *  (tp.percentualDesconto/ 100))'])?>
-                                 </div>
+                                
                                  <div class="coluna  smallCol" >
                                  <a href="adm.conteudo.php?modo=editarpromo&id=<?php echo($rsPromos['id'])?>&isbn=<?php echo($rsPromos['isbn'])?>">
                                             <figure class="acao">

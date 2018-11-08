@@ -14,44 +14,9 @@
     
     <body>
         <!-- Cabeçalho do site-->
-        <header>
-            <div id="containerHeader">
-                <a href="home.html"><div id="logo"> </div></a>
-                <nav id="menu">
-                    <ul id="menu-header">
-                    <li class="item"><a class="link" href="autores.html">Autores</a></li>
-                    <li class="item"><a class="link" href="sobre.html">Sobre</a></li>
-                    <li class="item"><a class="link" href="promocoes.html">Promoções</a></li>
-                    <li class="item"><a class="link" href="nossas-lojas.html">Lojas</a></li>
-                    <li class="item"><a class="link" href="livro-do-mes.html">Livro do Mês</a></li>
-                    
-                    <li class="item"><a href="faleConosco.php">Contato</a></li>
-                 </ul>
-            </nav>
-                <div id="login">
-                    <div id="containerLogin">
-                        <form action="#" name="FrmLogin">
-                            <div class="txtLogin">
-                                Usuário
-                            </div>
-                            <div class="txtLogin">
-                                Senha
-                            </div>
-                            <div class="campo">
-                                <input type="text" name="txtUser" class="login" maxlength="40">
-                            </div>
-                            <div class="campo">
-                                <input type="password" name="txtSenha" class="login" maxlength="40">
-                            </div>
-                        
-                            <div id="containerBtn">
-                                <input type="submit" name="btnLogar" id="btnLogar" value="Ok">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </header>
+        <?php 
+            require_once('header.site.php');
+        ?>
         <!-- FIM DO Cabeçalho-->
         
         <!-- Conteúdo da page-->
@@ -73,8 +38,8 @@
                 
                      <div id="containerMain">
                             <?php 
-                                $sql = 'select tl.*, tp.* 
-                                from tbl_livros tl inner join tbl_promocao tp
+                                $sql = 'select tl.*, tp.*,  tl.preco - (tl.preco *  (tp.percentualDesconto/ 100))
+                                from tbl_livro tl inner join tbl_promocao tp
                                 on tl.isbn = tp.isbn and tp.isAtivado=1';
 
                                 $select = mysqli_query($con, $sql);
@@ -103,7 +68,10 @@
                                     <div class="preco">
                                         <span class="precoVelho">De: R$&nbsp;<?php echo($rsPromo['preco'])?></span>
                                         
-                                        <span class="precoNovo"><span class="textTitulo">Por:</span> R$&nbsp;25,90</span>
+                                        <span class="precoNovo"><span class="textTitulo">Por:</span> R$&nbsp;<?php
+                                        $valorfinal = number_format($rsPromo['tl.preco - (tl.preco *  (tp.percentualDesconto/ 100))'], 2, ".", ",");
+                                        
+                                        echo($valorfinal)?></span>
                                     </div>
                                     <!-- detalhes -->
                                     <div class="containerDetalhes">
@@ -116,10 +84,6 @@
                             </div> 
                                 <?php } ?>
                             </div> 
-                            
-                        
-                         
-                     </div>
                      <!-- FIM CONTEÚDO -->
                      <!-- INICIO RODAPÉ -->
                     <footer>

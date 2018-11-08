@@ -89,7 +89,7 @@ function openForm(event, formname) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     
-    document.getElementById(formname).style.display = "block";
+    document.getElementById(formname).style.display = "block";s
     event.currentTarget.className += 'active';
 }
 
@@ -155,13 +155,15 @@ function openViewUser(idItem, modo, url, container, hideEle){
     })
 }
 
+
 //função para logout do usuário
 function logout() {
 	var conf = confirm("Você deseja encerrar a sessão?");
-	var link = document.getElementById("logout")
+    var link = document.getElementById("logout");
 
 	if (conf) {
-		link.href = "../index.php"
+        link.href = "../index.php"
+        
 	} else {
 	    link.href = "#"
 	}

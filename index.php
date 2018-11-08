@@ -1,33 +1,4 @@
-<?php 
 
-    require_once('cms/conexao.php');
-
-    $con = conexaoBD();
-    if(isset($_POST["btnLogar"])) {
-       
-        @$loginame = $_POST["txtUser"];
-        $senha = $_POST["txtSenha"];
-        //echo("<script>alert('to funcionando".$loginame. $senha."')</script>");
-
-        //consulta a existência do usuário
-        $sql = "select * from tbl_usuarios where loginNome='".$loginame."' 
-        and senha='".$senha."' and isAtivado=1";
-        //echo("<script>alert(".$sql.")</script>");
-        //resultset
-        $selectUser = mysqli_query($con, $sql);
-        
-        if($rsUsuario=mysqli_fetch_array($selectUser)) {
-            echo("<script>alert('VocÊ está logadoo')</script>");
-            
-            $_SESSION['username'] = $rsUsuario['nomeUsuario'];
-
-            header("location:cms/cms.home.php");
-        } else {
-            echo("<script>alert('Login não realizado. Por favor, certifique-se de sua autorização')</script>");
-        }
-        
-    }
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -40,45 +11,9 @@
     </head>
     
     <body>
-        <!-- Cabeçalho do site-->
-        <header>
-           <div id="containerHeader">
-                <a href="home.html"><div id="logo"> </div></a>
-                <nav id="menu">
-                    <ul id="menu-header">
-                    <li class="item"><a class="link" href="autores.html">Autores</a></li>
-                    <li class="item"><a class="link" href="sobre.html">Sobre</a></li>
-                    <li class="item"><a class="link" href="promocoes.html">Promoções</a></li>
-                    <li class="item"><a class="link" href="nossas-lojas.html">Lojas</a></li>
-                    <li class="item"><a class="link" href="livro-do-mes.html">Livro do Mês</a></li>
-                    
-                    <li class="item"><a href="faleConosco.php">Contato</a></li>
-                 </ul>
-            </nav>
-                <div id="login">
-                    <div id="containerLogin">
-                        <form action="#" name="FrmLogin" method="POST">
-                            <div class="txtLogin">
-                                Usuário
-                            </div>
-                            <div class="txtLogin">
-                                Senha
-                            </div>
-                            <div class="campo">
-                                <input type="text" name="txtUser" class="login" maxlength="40">
-                            </div>
-                            <div class="campo">
-                                <input type="password" name="txtSenha" class="login" maxlength="40">
-                            </div>
-                        
-                            <div id="containerBtn">
-                                <input type="submit" name="btnLogar" id="btnLogar" value="Ok">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </header>
+        <?php 
+            require_once('header.site.php');
+        ?>
         <!-- FIM DO Cabeçalho-->
         
         <!-- Conteúdo da page-->
