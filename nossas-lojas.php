@@ -38,7 +38,7 @@
                 
                      <div id="containerMainMenor">
                        <?php 
-                            $sql=  "select tl.*, te.* from tbl_lojas tl inner join tbl_endereco te on te.id = tl.idEndereco;
+                            $sql=  "select tl.*, te.* from tbl_lojas tl inner join tbl_endereco te where te.id = tl.idEndereco and isAtivado=1
                             ";
                             $select = mysqli_query($con, $sql);
 

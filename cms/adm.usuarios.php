@@ -25,7 +25,7 @@
                 if(isset($_POST['txtNivel'])) {
                     $nivel = $_POST['txtNivel'];
                     //comando de insert para popular no banco
-                    $sqlInsert = "insert into tbl_nivel(nomeNivel) values('".$nivel."')";
+                    $sqlInsert = "insert into tbl_nivel(nomeNivel, isAtivado) values('".$nivel."','". 0 ."')";
                     
                     echo($sqlInsert);
 
@@ -182,7 +182,7 @@
                         <?php 
                             while($rsNiveis = mysqli_fetch_array($select)) {
                         ?>
-                            <div class="containerColunasAlt">
+                            <div class="containerColunasAlt ">
                                 <div class="indexRegistro smallCol indexNivel">
                                     <?php
                                     echo($rsNiveis['idNivel'])

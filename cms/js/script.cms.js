@@ -2,6 +2,9 @@ $(document).ready(function() {
                 $('.fecharModal').click(function() {
                     $('#containerModal').fadeOut(400);
                 });
+                 $('.fecharModalUser').click(function() {
+                    $('#containerModal').fadeOut(400);
+                });
 
                  
         
@@ -89,8 +92,8 @@ function openForm(event, formname) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     
-    document.getElementById(formname).style.display = "block";s
-    event.currentTarget.className += 'active';
+    document.getElementById(formname).style.display = "block";
+    event.currentTarget.className = 'tablink active';
 }
 
 
@@ -167,5 +170,15 @@ function logout() {
 	} else {
 	    link.href = "#"
 	}
+}
+
+//função para gerenciar abas
+function switchDefault(num) {
+    var tabs = document.getElementsByClassName("tablink");
+    
+    for(var i =0; i < tabs.length; i++) {
+        tabs[i].setAttribute("id", "");
+    }
+    tabs[num].setAttribute('id', 'openByDefault');
 }
 

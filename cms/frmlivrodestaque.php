@@ -2,7 +2,7 @@
                             <h2>Selecione o produto para destaca-lo </h2>
                         </div>
                      
-                        <div class="containerColunas centerManual">
+                        <div class="containerColunas centerManualPlus">
                         
                             <div class="coluna tituloColunas " >
                             Imagem
@@ -23,7 +23,7 @@
                         <?php 
                            while($rsLivro=mysqli_fetch_array($selectLivro)) {
                         ?>
-                                <div class="containerColunas centerManual colunaComFoto">
+                                <div class="containerColunas centerManualPlus colunaComFoto">
                                    <div class="coluna " >
                                        <figure>
                                             <img src="<?php echo($rsLivro['imgLivro'])?>" alt="Imagem Sobre" class="imgLivro"
@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="coluna  smallCol " >
                                       
-                                        <a href="adm.conteudo.php?ativado=<?php echo($rsLivro['livroEmDestaque'])?>&isbn=<?php echo($rsLivro['isbn'])?>"> 
+                                        <a href="adm.conteudo.php?ativado=<?php echo($rsLivro['livroEmDestaque'])?>&isbn=<?php echo($rsLivro['isbn'])?>&pag=2"> 
                                                <?php
                                                ?>
                                             <figure>

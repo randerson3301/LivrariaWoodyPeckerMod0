@@ -156,7 +156,7 @@
                             desabilitarTodos('tbl_autor', 'idAutor', $conexao);
                         }
                     }
-                     // header('location:adm.conteudo.php');
+                      header('location:adm.conteudo.php');
                    
                 } 
             
@@ -175,7 +175,7 @@
             mysqli_query($conexao, $sqldesativa);
 
             mysqli_query($conexao, $sql);
-            header("location:adm.conteudo.php");    
+           // header("location:adm.conteudo.php");    
         } else if($btn == 'Editar') {
             //editar sem imagem, irá prevenir o upload repetido de imgs
             if($filesize == 0) {
@@ -315,7 +315,7 @@
         
     
         }
-   // header("location:adm.conteudo.php");
+    //header("location:adm.conteudo.php");
 
         //Consulta do botão
         if(isset($_GET['ativado'])) {
@@ -328,11 +328,14 @@
 
             } else {
                 $atv = 0; 
+                
             }
-
-            $sqlUpdateAtv = "update tbl_livro set livroEmDestaque=".$atv." where isbn=".$isbn;
+            //desativa tudo primeiro e depois ativa
+           $sqldesativa = "update tbl_livro set livroEmDestaque=0";
+           $sqlUpdateAtv = "update tbl_livro set livroEmDestaque=".$atv." where isbn=".$isbn;
             
-            echo($sqlUpdateAtv);
+            
+             mysqli_query($conexao, $sqldesativa);
             mysqli_query($conexao, $sqlUpdateAtv);
             header('location:adm.conteudo.php');
         }
@@ -355,20 +358,20 @@
             ?>
                    <div class="tab">
                        
-                        <button class="tablink"  onclick=" openForm(event, 'formAutores')" id="openByDefault" >
+                        <button class="tablink" id="formAutor" onclick=" openForm(event, 'formAutores'), switchDefault(0)" >
                                 Autores</button>
                        
                         <a id="lojas">
-                            <button class="tablink" onclick=" openForm(event, 'formLojas')"  id="tabLoja">Lojas</button>
+                            <button class="tablink" onclick=" openForm(event, 'formLojas'), switchDefault(1)"  id="tabLoja">Lojas</button>
                         </a>
                        
-                        <button class="tablink" onclick=" openForm(event, 'formProduto')"  id="tabProdDestaque">Produto do Mês</button>
+                        <button class="tablink" onclick=" openForm(event, 'formProduto'), switchDefault(2)"  id="tabProdDestaque">Produto do Mês</button>
                        
                        
-                        <button class="tablink" onclick=" openForm(event, 'formPromo')"  id="tabPromo" >Promoções</button>
+                        <button class="tablink" onclick=" openForm(event, 'formPromo'), switchDefault(3)"  id="tabPromo" >Promoções</button>
                         
                         
-                        <button class="tablink" onclick=" openForm(event, 'formSobre')"  id="tabSobre">Sobre </button>
+                        <button class="tablink" onclick=" openForm(event, 'formSobre'), switchDefault(4)"  id="tabSobre">Sobre </button>
                         
                     </div>
                     

@@ -34,7 +34,7 @@
                         </form>
 
                         <!-- Registros retornados -->
-                        <div class="containerColunas centerManual"> 
+                        <div class="containerColunas centerManualPlus"> 
                                
                                 <div class="coluna tituloColunas smallColPlus">
                                         ISBN
@@ -56,7 +56,7 @@
                        <?php
                             while($rsPromos = mysqli_fetch_array($selectPromo)) {
                        ?>
-                       <div class="containerColunas  centerManual colunaComFoto"> 
+                       <div class="containerColunas  centerManualPlus colunaComFoto"> 
                                
                                 <div class="coluna  smallColPlus">
                                         <?php echo($rsPromos['isbn'])?>

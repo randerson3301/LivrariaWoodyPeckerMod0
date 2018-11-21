@@ -24,9 +24,9 @@
                             Local de Nascimento:  <br> <input name="txtLocalNasc" id="txtLocalNasc" type="text" 
                             class="txtDados "  value="<?php echo(@$rsAutorUp['cidadeNascimento'])?>" onkeypress="return validar(event, 'num', this.id);" required><br>
                             Data de Nascimento:  <br> <input name="txtDtNasc"  id="txtDtNasc" type="text" placeholder="dd/MM/yyyy"
-                            class="txtMenor" value="<?php echo(@$rsAutorUp['dtNascimento'])?>" onkeypress="return validar(event, 'txt', this.id);" required><br>
+                            class="txtMenor" value="<?php echo(@$dtnasc)?>" onkeypress="return validar(event, 'txt', this.id);" required><br>
                             Data de Falecimento: * <br> <input name="txtDtFal" type="text" id="txtDtFal" placeholder="dd/MM/yyyy"
-                            class="txtMenor" value="<?php echo(@$rsAutorUp['dtFalecimento'])?>" onkeypress="return validar(event, 'txt', this.id);"><br>
+                            class="txtMenor" value="<?php echo(@$dtfal)?>" onkeypress="return validar(event, 'txt', this.id);"><br>
 
                         </div>
                         <div class="divisorModal alignLeft">

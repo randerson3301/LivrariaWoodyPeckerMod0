@@ -153,6 +153,11 @@
 
 .fecharModal {
     float: right;
+    margin-right: 70px;
+}
+
+.fecharModalUser {
+    float: right;
     margin-right: 500px;
 }
 
@@ -266,8 +271,6 @@ textarea:focus, input:focus{
 #contentCMS {
     width: 100%;
     min-height: 650px;
-    border-top-left-radius: 28px;
-    border-top-right-radius: 28px;
     text-align: center;
     color: #0a2b60;
     font-size: 27px;
@@ -626,6 +629,8 @@ fieldset {
     overflow: hidden;
     border: 1px solid #ccc;
     background-color: #0a2b60;
+    border-radius: 0px;
+    
 }
 
 /* Style the buttons inside the tab */
@@ -649,7 +654,7 @@ fieldset {
 
 /* Create an active/current tablink class */
 .tab button.active {
-    background-color: #ccc;
+    background-color: #004d80;
 }
 
 
@@ -670,7 +675,7 @@ fieldset {
     width: 1000px;
     background-color: #fff;
     margin-left: 2px;
-    min-height: 600px;
+    min-height: 700px;
     overflow: hidden;
     height: auto;
     
@@ -710,7 +715,7 @@ fieldset {
 }
 
 .imgClose {
-    margin-left: 550px;
+    margin-right: -1450px;
 }
 .btnAdd {
     height: 45px;
@@ -724,7 +729,13 @@ fieldset {
     
 }
 
+.centerManualPlus {
+    margin-left: 400px;
+}
 
+.centerManualNivel {
+    margin-left: 370px;
+}
 
 /*código para o switch*/
 /* The switch - the box around the slider */
@@ -810,7 +821,7 @@ input:checked + .slider:before {
         min-height:800px;
         margin-left: auto;
         margin-right: auto;
-        border-radius: 28px;
+        border-radius: 0;
         box-shadow: 1px 1px 10px #000;
         overflow: hidden;
         height: auto;
@@ -912,8 +923,6 @@ input:checked + .slider:before {
     #contentCMS {
         width: 100%;
         min-height: 520px;
-        border-top-left-radius: 28px;
-        border-top-right-radius: 28px;
         text-align: center;
         color: #0a2b60;
         font-size: 27px;
