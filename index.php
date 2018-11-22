@@ -53,19 +53,21 @@
                                 <ul>
                                     <li class="itemRolagem "> Categoria 
                                        
+                                        <ul>
+                                        <li class="itemdd" > Item 1 </li>
+                                        <li class="itemdd" > Item 2 </li>
+                                        
+                                        </ul>
+                                       
                                     </li>
                                 </ul>
                             </nav>
+                            
                            
                         </div>
                         
                         <section class="containerLivraria" id="maisNovos">
-                                <nav class="navdd"> 
-                                    <ul >
-                                        <li class="itemRolagem" hidden> Item 1 </li>
-                                        <li class="itemRolagem" hidden> Item 2 </li>
-                                    </ul>
-                                </nav>
+                                
                             <div class="containerLivro">
                                 <!-- Container da foto -->
                                 <div class="containerLivroFoto">

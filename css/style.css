@@ -553,12 +553,6 @@ p {
     float: left;
 }
 
-.navdd {
-    z-index: 10;
-    position: absolute;
-   
-}
-
 .itemRolagem {
     width: 260px;
     height: 35px;
@@ -573,10 +567,40 @@ p {
     
 }
 
+.itemdd{
+    width: 260px;
+    height: 0px;
+    color: transparent;
+    font-family: sans-serif;
+    font-size: 19px;
+    text-align: center;
+    padding-top: 7px;
+    z-index: 999;
+    position: absolute;
+    margin-left: 220px;
+    margin-top: -12px;
+}
+
+
+/*hover do dropdown*/
+.itemRolagem:hover > ul > .itemdd {
+    height: 35px;
+    color: #fff;
+    background-color: #f2641d;
+    border: 2px solid #fff;
+    transition: 0.2s;
+}
+
+
+
+
 .containerLivraria {
     height: 470px;
     width: 930px;
     float: left;
+    z-index: 0;
+    position: relative;
+
 }
 
 .promos {
@@ -605,6 +629,9 @@ p {
     /*val1: esquerda val2: pra baixo val3: desfoque da cor val4: cor*/
     /*box-shadow: 1px 1px 40px #000;*/
     background-color: #fff;
+     z-index: 0;
+    position: relative;
+
    
 }
 
@@ -637,6 +664,8 @@ p {
     font-size: 0.9em;
     font-family: sans-serif;
     padding-left: 5px;
+    
+
     
 }
 
