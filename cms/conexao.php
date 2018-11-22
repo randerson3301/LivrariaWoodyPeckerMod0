@@ -4,10 +4,10 @@ function conexaoBD() {
    
 
     /* Essas variaveis armazenam os dados necessários para a conexão com o banco*/
-    $host = "192.168.0.2";
-    $database = "dbpc1120182";
-    $user = "pc11";
-    $password = "senai127";
+    $host = "localhost";
+    $database = "db_woody_woodpecker";
+    $user = "randerson";
+    $password = "r@nd3rs0n";
 
     //Fazendo error aparecerem na tela
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);

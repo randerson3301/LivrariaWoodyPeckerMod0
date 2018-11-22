@@ -156,7 +156,7 @@
                             desabilitarTodos('tbl_autor', 'idAutor', $conexao);
                         }
                     }
-                      header('location:adm.conteudo.php');
+                     // header('location:adm.conteudo.php');
                    
                 } 
             
@@ -242,7 +242,7 @@
             mysqli_query($conexao, $sqldesativa);
 
             mysqli_query($conexao, $sqlUpdate);
-            header("location:adm.conteudo.php");    
+           // header("location:adm.conteudo.php");    
                
         }
     }
@@ -269,7 +269,7 @@
                 $delete = delete('tbl_sobre', 'idSobre', $_SESSION['codigo']);
             
             mysqli_query($conexao, $delete);
-            header("location:adm.conteudo.php");
+           // header("location:adm.conteudo.php");
             
         } 
       

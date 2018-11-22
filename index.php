@@ -49,19 +49,23 @@
                     </div> 
                     <div id="containerContent">
                         <div id="painelRolagem">
-                            <a href="#maisNovos">
-                                <div class="itemRolagem">
-                                    + Novos
-                                </div>
-                            </a>
-                            <div class="itemRolagem">
-                                 <a href="#maisVisualizados">
-                                + Visualizados
-                                </a>
-                            </div>
+                            <nav > 
+                                <ul>
+                                    <li class="itemRolagem "> Categoria 
+                                       
+                                    </li>
+                                </ul>
+                            </nav>
+                           
                         </div>
                         
                         <section class="containerLivraria" id="maisNovos">
+                                <nav class="navdd"> 
+                                    <ul >
+                                        <li class="itemRolagem" hidden> Item 1 </li>
+                                        <li class="itemRolagem" hidden> Item 2 </li>
+                                    </ul>
+                                </nav>
                             <div class="containerLivro">
                                 <!-- Container da foto -->
                                 <div class="containerLivroFoto">

@@ -9,7 +9,17 @@
 
 
 ?>
-<form name="frmAutores" action="adm.conteudo.php" 
+<script>
+    $(document).ready(function(){
+        $("#frmAutores").submit(function(){
+            $('#frmAutores').load("adm.conteudo.php #frmAutores");
+           // alert("oi");
+        })
+    })
+   
+    
+</script>
+<form name="frmAutores" id="frmAutores" action="adm.conteudo.php" 
                       method="POST" enctype="multipart/form-data" class="formMaior frmConteudo "> 
                         <div class="divisorModal alignLeft">
                             Imagem:  <input type="file" name="fleFoto" id="foto" accept="image/*" 
