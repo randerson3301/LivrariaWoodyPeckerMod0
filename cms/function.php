@@ -13,12 +13,21 @@
         return $sql;
     }
 
-    function getAtivacao() {
+    function getAtivacao($httpverb=null) {
         if(isset($_POST['checkAtivacao'])) {
             $atv = 1;
         } else {
              $atv = 0;
         }
+        //caso o method do form seja get, basta setar o parametro $httpverb para get
+        if($httpverb == "get") {
+            if(isset($_GET['checkAtivacao'])) {
+                $atv = 1;
+            } else {
+                 $atv = 0;
+            }   
+        }
+        
         return $atv;
     }
 

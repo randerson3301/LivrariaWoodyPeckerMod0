@@ -566,6 +566,17 @@ p {
    
     
 }
+.list_dd {
+    width: 260px;
+    height: auto;
+    z-index: 10;
+    position: absolute;
+
+}
+
+.first_letter_up {
+    text-transform: capitalize;
+}
 
 .itemdd{
     width: 260px;
@@ -575,10 +586,9 @@ p {
     font-size: 19px;
     text-align: center;
     padding-top: 7px;
-    z-index: 999;
-    position: absolute;
     margin-left: 220px;
     margin-top: -12px;
+    margin-bottom: 8px;
 }
 
 

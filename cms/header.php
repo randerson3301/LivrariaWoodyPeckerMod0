@@ -39,12 +39,12 @@
                           </a>
                        </li>
                        <li class="itemcms">
-                           
+                       <a href="adm.produto.php" class = "linkmenu">
                           <figure>
-                              <img src="../imagens/prodadmin.png" class="imgItens">
+                            <img src="../imagens/prodadmin.png" class="imgItens">
                               <figcaption >Adm. Produtos</figcaption>
                           </figure>
-                         
+                      </a>
                        </li>
                       <li class="itemcms">
                            <a href="adm.usuarios.php" class = "linkmenu" onclick="oi('adm.usuarios.php')">

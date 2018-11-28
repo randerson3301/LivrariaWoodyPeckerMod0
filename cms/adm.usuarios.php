@@ -162,7 +162,7 @@
                         <button class="tablink" id="openByDefault" onclick="openForm(event, 'formUser'); openByDefault(this.id)">
                         Usuários</button>
                         <button class="tablink"  id="openByDefaultNivel" onclick="openForm(event, 'formNivel'); openByDefault(this.id)">Níveis</button>
-                    </div>
+                </div>
                     
                     <div id="formNivel" class="tabcontent">
                         <div class="containerColunasAlt">

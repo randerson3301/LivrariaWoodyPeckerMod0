@@ -50,6 +50,16 @@ function modal(idItem, url, ele) {
     })
 }
 
+function loadContent(ele, url) {
+    $.ajax({
+        type: "GET",
+        url: url,
+        success: function() {
+            $(ele).load("${url} ${ele}");
+        }      
+    })
+}
+
 //função para mudar qual aba será fixa por padrão
 function getAbaPadrao(id){
     document.getElementById(id).style.display='block';
@@ -181,4 +191,6 @@ function switchDefault(num) {
     }
     tabs[num].setAttribute('id', 'openByDefault');
 }
+
+
 

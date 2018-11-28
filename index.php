@@ -52,13 +52,9 @@
                             <nav > 
                                 <ul>
                                     <li class="itemRolagem "> Categoria 
-                                       
-                                        <ul>
-                                        <li class="itemdd" > Item 1 </li>
-                                        <li class="itemdd" > Item 2 </li>
-                                        
+                                        <ul class="list_dd">
+                                             <li class="itemdd" > Item 1 </li>
                                         </ul>
-                                       
                                     </li>
                                 </ul>
                             </nav>

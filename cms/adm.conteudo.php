@@ -183,6 +183,7 @@
                 if(isset($_POST['checkAtivacao'])) {
                     $atv = 1;
                 }
+                $frmfile = "frmsobre.php";
                 $sqlUpdate = update("tbl_sobre", "descricao='".$descrip."', isAtivado=".$atv, 'idSobre',  $_SESSION['codigo']);
                 $sqldesativa = setUnicoAtivado('tbl_sobre', 'idSobre', $_SESSION['codigo']);
                 //editando lojas
@@ -242,7 +243,7 @@
             mysqli_query($conexao, $sqldesativa);
 
             mysqli_query($conexao, $sqlUpdate);
-           // header("location:adm.conteudo.php");    
+            //header("location:adm.conteudo.php");    
                
         }
     }
@@ -276,6 +277,8 @@
         else if($modo == 'editar') {
             $selectSobreUp = mysqli_query($conexao, selecionar('tbl_sobre', 'idSobre'
             , 'idSobre ='.$_SESSION['codigo']));
+
+           
 
             $valueBtn = 'Editar';
 
@@ -337,7 +340,8 @@
             
              mysqli_query($conexao, $sqldesativa);
             mysqli_query($conexao, $sqlUpdateAtv);
-            header('location:adm.conteudo.php');
+            //header('location:adm.conteudo.php');
+            
         }
 
         
@@ -358,22 +362,25 @@
             ?>
                    <div class="tab">
                        
-                        <button class="tablink" id="formAutor" onclick=" openForm(event, 'formAutores'), switchDefault(0)" >
+                        <button class="tablink"  onclick=" openForm(event, 'formAutores'); switchDefault(0)" >
                                 Autores</button>
                        
                         <a id="lojas">
-                            <button class="tablink" onclick=" openForm(event, 'formLojas'), switchDefault(1)"  id="tabLoja">Lojas</button>
+                            <button class="tablink" onclick=" openForm(event, 'formLojas'); switchDefault(1)"  >Lojas</button>
                         </a>
                        
-                        <button class="tablink" onclick=" openForm(event, 'formProduto'), switchDefault(2)"  id="tabProdDestaque">Produto do Mês</button>
+                        <button class="tablink" onclick=" openForm(event, 'formProduto'); switchDefault(2)"  >Produto do Mês</button>
                        
                        
-                        <button class="tablink" onclick=" openForm(event, 'formPromo'), switchDefault(3)"  id="tabPromo" >Promoções</button>
+                        <button class="tablink" onclick=" openForm(event, 'formPromo'); switchDefault(3)"  >Promoções</button>
                         
                         
-                        <button class="tablink" onclick=" openForm(event, 'formSobre'), switchDefault(4)"  id="tabSobre">Sobre </button>
+                        <button class="tablink" onclick=" openForm(event, 'formSobre'); switchDefault(4)"  >Sobre </button>
                         
                     </div>
+                  <?php 
+                   echo(@$frmfile);
+                  ?>  
                     
                   <!-- Form de Sobre -->    
                     <div id="formSobre" class="tabcontent">
