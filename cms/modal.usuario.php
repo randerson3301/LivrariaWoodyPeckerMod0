@@ -73,9 +73,7 @@
                     </option>
                         
                         <?php 
-    /*
-                            $sqlNivelJoin = "select tu.idNivel, tn.nomeNivel from tbl_usuarios tu inner join tbl_nivel tn on tu.idNivel = tn.idNivel";
-      */                      
+                       
                             $sqlNivel = selecionar('tbl_nivel', 'idNivel', 'idNivel <> '. $valueOption);
                             $selectNivel = mysqli_query($conexao, $sqlNivel);
                             

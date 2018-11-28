@@ -639,7 +639,6 @@ p {
     /*val1: esquerda val2: pra baixo val3: desfoque da cor val4: cor*/
     /*box-shadow: 1px 1px 40px #000;*/
     background-color: #fff;
-     z-index: 0;
     position: relative;
 
    

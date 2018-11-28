@@ -14,12 +14,23 @@
                      //preparando comando update
                      $sql = update('tbl_categoria', " categoria='".$categoria."', 
                     ativacao=".getAtivacao("get"), "id_categoria", $_SESSION['codigo']);
+                    
+                    if(isset($_GET['txtSubCat'])) {
+                        $subcat = $_GET["txtSubCat"];
+                        $idcategoria = $_GET["sltCategorias"];
+
+                        $sql = update('tbl_sub_categoria', 
+                                      " sub_categoria='".$subcat."', id_categoria=".$idcategoria."
+                    ativacao=".getAtivacao("get"), "id_sub_categoria", $_SESSION['codigo']);
+                    }
 
                     //echo($sql);
                 } else {
                     //preparando comando insert
                     $sql = "insert into tbl_categoria(categoria, ativacao) 
                     values('".  $categoria."',".getAtivacao("get").")";
+                    
+                    echo($sql);
 
                     if(isset($_GET["txtSubCat"])) {
                         $subcat = $_GET["txtSubCat"];
@@ -33,7 +44,7 @@
                             echo("<script>alert('Por favor, selecione um item!')</script>");
                             exit("Volte, e tente novamente");
                         }
-                        echo($sql);
+                       
                        
                     }
                     
@@ -48,6 +59,7 @@
                     */
                     
                 }
+                 echo($sql);
                 mysqli_query($conexao, utf8_decode($sql));
                 header("location:adm.produto.php");
             }
@@ -59,19 +71,31 @@
                 $_SESSION['codigo'] = $_GET['id'];
                 
                // echo($modo." e ".$_SESSION['codigo']);
-               if($modo == 'editar') 
+               if($modo == 'editar') {
                     $selectCatUp = mysqli_query($conexao, selecionar('tbl_categoria', 'id_categoria'
                      , 'id_categoria ='.$_SESSION['codigo']));
-               
-                if($modo == "editarsub") {
-                    $sqlCatUp = "SELECT tsb.*, tc.categoria FROM tbl_sub_categoria tsb inner join tbl_categoria tc WHERE tc.id_categoria =". $_SESSION["codigo"];
-                    $selectCatUp = mysqli_query($conexao, $sqlCatUp);
-                    $rsSubCatUp = mysqli_fetch_array($selectCatUp);
-                    $itemOption = $rsSubCatUp['categoria'];
+                   
+                   $rsCategoriaUp = mysqli_fetch_array($selectCatUp);
+               }
+                if($modo == 'editarsub') {
+                    //echo("<script>alert('oeee')</script>");
+                    
+                    $sqlSubCat = "select tsb.*, tc.categoria, tc.id_categoria from tbl_sub_categoria tsb inner join tbl_categoria tc where tsb.id_categoria = tc.id_categoria and tsb.id_sub_categoria=". $_SESSION['codigo'];
+                    
+                    $selectCatUp2 = mysqli_query($conexao, $sqlSubCat);
+                    
+                    $rsSubCatUp = mysqli_fetch_array($selectCatUp2);
+                    
+                    $itemOption = $rsSubCatUp["categoria"];
+                    
+                    $valueOption = $rsSubCatUp["id_categoria"];
+
+                    
+                    
                 }
                 $valueBtn = 'Editar';
                 
-                $rsCategoriaUp = mysqli_fetch_array($selectCatUp);
+                
 
               if($modo == 'excluir') {
                     $tab = $_GET['tab'];
@@ -115,7 +139,8 @@
                       Digite uma Sub-Categoria <br>
                        <input type="text" name="txtSubCat"  id="txtSubCat" onkeypress="return validar(event, 'num', this.id);" 
                        class="txtDados "
-                         value="<?php echo(utf8_encode(@$rsSubCatUp['sub_categoria']))?>"><br>
+                         value="<?php echo(@$rsSubCatUp['sub_categoria'])?>"><br>
+                       
                          <span class="spaceBeetween">Selecione uma categoria: </span><br>
                          <select class="txtDados spaceBetween sltmenor" name="sltCategorias">
                                         <option value="<?php echo($valueOption)?>"> 
@@ -123,8 +148,8 @@
                                         </option>
                                        
                                        <?php 
-                                       $sqlCat = selecionar('tbl_categoria', 'id_categoria',  'id_categoria <> '. $valueOption
-                                       );
+                                        $sqlCat = selecionar('tbl_categoria', 'id_categoria',  'id_categoria <>'. $valueOption);
+                                       
                                         $selectCategoria = mysqli_query($conexao, $sqlCat);
                                        
                                        while( $rscateg=mysqli_fetch_array($selectCategoria)) { ?>
@@ -172,7 +197,7 @@
                         <div class="coluna  espacador colMaior">
                             <?php echo(utf8_encode($rsSubCategoria["sub_categoria"])) ?>
                         </div>
-                        <div class="coluna   colMaior">
+                        <div class="coluna  colMaior">
                              <?php echo(utf8_encode($rsSubCategoria["categoria"])) ?>
                         </div>
                         <div class="coluna  smallCol" >
