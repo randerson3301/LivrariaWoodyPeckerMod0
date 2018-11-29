@@ -1,4 +1,9 @@
+<?php
+    require_once("cms/function.php");
+    require_once("cms/conexao.php");
 
+    $con = conexaoBD();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -44,18 +49,44 @@
                         </div>
                         <div class="painelCentral"></div>
                         <div class="divisor">
-                            <button      class="btnSlider" onclick="mudarImg(proxImg())" id="setaDireita"></button>
+                            <button  class="btnSlider" onclick="mudarImg(proxImg())" id="setaDireita"></button>
                         </div>
                     </div> 
                     <div id="containerContent">
                         <div id="painelRolagem">
                             <nav > 
                                 <ul>
-                                    <li class="itemRolagem "> Categoria 
+                                  <?php
+                                    $sqlcateg = selecionar('tbl_categoria', 'id_categoria', 'ativacao = 1');
+                                    $sltcateg = mysqli_query($con, $sqlcateg);
+
+                                    //setando o resultset
+                                    while($rscateg = mysqli_fetch_array($sltcateg)) {
+
+                                  ?>
+                                    <li class="itemRolagem "> <?php echo(utf8_encode($rscateg['categoria']))?> 
+                                       
                                         <ul class="list_dd">
-                                             <li class="itemdd" > Item 1 </li>
+                                            <?php 
+                                                $sqlsubcat = "select tsb.sub_categoria from  
+                                                tbl_sub_categoria tsb inner join 
+                                                tbl_categoria tc where tsb.ativacao = 1 and tsb.id_categoria  = ".$rscateg["id_categoria"]."
+                                                and tc.id_categoria =".$rscateg["id_categoria"];
+
+                                                $sltsubcat =  mysqli_query($con, $sqlsubcat);
+
+                                                while($rssubcat = mysqli_fetch_array($sltsubcat)) {
+                                            ?>
+                                             <li class="itemdd" > <?php echo(utf8_encode($rssubcat['sub_categoria']))?> </li>
+                                             <?php 
+                                                }
+                                             ?>
                                         </ul>
+                                        
                                     </li>
+                                  <?php 
+                                    }
+                                  ?>
                                 </ul>
                             </nav>
                             

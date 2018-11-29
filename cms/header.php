@@ -3,6 +3,12 @@
         if($_SESSION['username'] == '') {
             header("location:../index.php");
         }
+
+        if($_SESSION['nivel'] == 28) {
+            $disable_to_catalog = "hidden";
+        } else if($_SESSION['nivel'] == 26) {
+            $disable_to_ob = "hidden";
+        } 
     ?>
             <div id="containerCMS">
             <header id="headerCMS">
@@ -22,15 +28,16 @@
               <nav id="menuCMS">
                   <div id="containerMenuCMS">
                   <ul id="menu-header">
-                      <li class="itemcms">
-                           <a href="adm.conteudo.php" class = "linkmenu">
+                      
+                      <li class="itemcms" <?php echo(@$disable_to_catalog)?>>
+                           <a href="adm.conteudo.php" class = "linkmenu" >
                           <figure>
                               <img src="../imagens/conadmin.png" class="imgItens">
                               <figcaption >Adm. Conteúdo</figcaption>
                           </figure>
                           </a>
                       </li>
-                       <li class="itemcms">
+                       <li class="itemcms" <?php echo(@$disable_to_catalog)?>>
                            <a href="adm.fale.conosco.php" class = "linkmenu">
                               <figure>
                                   <img src="../imagens/faleadmin.png" class="imgItens">
@@ -38,7 +45,7 @@
                               </figure>
                           </a>
                        </li>
-                       <li class="itemcms">
+                       <li class="itemcms"  <?php echo(@$disable_to_ob)?>>
                        <a href="adm.produto.php" class = "linkmenu">
                           <figure>
                             <img src="../imagens/prodadmin.png" class="imgItens">
@@ -46,7 +53,7 @@
                           </figure>
                       </a>
                        </li>
-                      <li class="itemcms">
+                      <li class="itemcms" <?php echo(@$disable_to_catalog)?>>
                            <a href="adm.usuarios.php" class = "linkmenu" onclick="oi('adm.usuarios.php')">
                            <figure>
                               <img src="../imagens/useradmin.png" class="imgItens">

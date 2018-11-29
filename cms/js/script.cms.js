@@ -182,6 +182,19 @@ function logout() {
 	}
 }
 
+//função para confirmar exclusão
+function confExcluir() {
+	var conf = confirm("Você deseja realmente excluir ?");
+    var link = document.getElementById("delete");
+
+	if (!conf) {
+        link.href = "#";
+    }
+    else{
+        link.href="";
+    }
+}
+
 //função para gerenciar abas
 function switchDefault(num) {
     var tabs = document.getElementsByClassName("tablink");

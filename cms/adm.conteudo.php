@@ -5,6 +5,9 @@
 
     $conexao = conexaoBD();
     $sqlUpdate = '';
+
+    if($_SESSION['nivel'] != 26 && $_SESSION['nivel'] != 27 )
+        header("location:cms.home.php");
 //------------------------PREPARAÇÃO DOS RESULTSETS--------------------------------
     $sqlSelect = selecionar('tbl_sobre', 'idSobre');
 

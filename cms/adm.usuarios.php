@@ -108,38 +108,53 @@
        if($modo == 'excluir') {
              
              //função de delete 
-             $delete = delete('tbl_nivel', 'idNivel', $codigo);
-             mysqli_query($conexao, $delete);
+             if( $_SESSION['nivel'] == $codigo) {
+                echo("<script>alert('Não é permitida a exclusão do seu nível')</script>");
+            } else {
+                $delete = delete('tbl_nivel', 'idNivel', $codigo);
+                mysqli_query($conexao, $delete);
+                header('location:adm.usuarios.php');
+             }
+            
               
         }
         
         //excluir usuario
         else if($modo == "excluiruser") {
-             
-             $delete = delete('tbl_usuarios', 'matricula', $codigo);
-             mysqli_query($conexao, $delete);
+
+            if( $_SESSION['matricula'] == $codigo) {
+                echo("<script>alert('Não é permitida a auto-exclusão')</script>");
+            } else {
+                $delete = delete('tbl_usuarios', 'matricula', $codigo);
+                mysqli_query($conexao, $delete);
+                header('location:adm.usuarios.php');
+            }
         }
         
-        header('location:adm.usuarios.php');
+       
     }
 
     if(isset($_GET['ativado'])) {
         $atv = $_GET['ativado']; //guarda o status da ativação do registro
         $idNivel = $_GET['id'];
         
-        if($atv == 0) {
-            echo("tem que mudar isso!". $idNivel);
-            
-            $atv = 1;
-            
+        if($_SESSION["nivel"] == $idNivel) {
+            echo("<script>alert('Operação não concluida. Nível em uso')</script>");
         } else {
-            $atv = 0; 
-        }
-        
-        $sqlUpdateAtv = "update tbl_nivel set isAtivado=".$atv." where idNivel=".$idNivel;
+            if($atv == 0) {
+                echo("tem que mudar isso!". $idNivel);
+                
+                $atv = 1;
+                
+            } else {
+                $atv = 0; 
+            }
             
-        mysqli_query($conexao, $sqlUpdateAtv);
-        header('location:adm.usuarios.php');
+            $sqlUpdateAtv = "update tbl_nivel set isAtivado=".$atv." where idNivel=".$idNivel;
+                
+            mysqli_query($conexao, $sqlUpdateAtv);
+            header('location:adm.usuarios.php');
+        }
     }
 
 ?>
