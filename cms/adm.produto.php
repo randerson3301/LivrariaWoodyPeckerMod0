@@ -173,9 +173,56 @@
                     Preço(em R$): <input type="number" name="txtPreco" id="txtPreco" 
                     class="spaceBetween txtMenor"> <br>
                     Descrição: <textarea  onkeypress="return validar(event, 'num', this.id);" class="txtareaConteudo areaMenor" name="txtDesc"  id="txtDesc" required></textarea>
-                    Editora: &nbsp; <select class="txtDados spaceBetween sltmenor" name="sltCategorias"></select><br>
-                    Autor: &nbsp;  &nbsp; <select class="txtDados spaceBetween sltmenor" name="sltAutores"></select><br>
-                    Categoria: <select class="txtDados spaceBetween sltmenor" name="sltCategoria"></select><br>
+                    
+                    Editora: &nbsp; <select class="txtDados spaceBetween sltmenor" name="sltCategorias">
+                           <option value="<?php echo($valueOption)?>"> 
+                                            <?php echo(utf8_encode($itemOption))?>
+                                        </option>                                                                            
+                        <?php
+                            $sqleditora = selecionar('tbl_editora', 'cnpjEditora',  'cnpjEditora <>'. $valueOption);
+                              
+                              
+                             // echo($sqlCat);
+                            $slteditora = mysqli_query($conexao, $sqleditora);
+                                       
+                            while($rseditora=mysqli_fetch_array($slteditora)) {     
+                                       ?>
+                                <option id="option" value="<?php echo($rseditora['cnpjEditora'])?>"> 
+                                    <?php echo(utf8_encode($rseditora['nomeFantasia'])) ?>
+                              </option>
+                        <?php } ?></select><br>
+                    Autor: &nbsp;  &nbsp; <select class="txtDados spaceBetween sltmenor" name="sltAutores"> <option value="<?php echo($valueOption)?>"> 
+                                            <?php echo(utf8_encode($itemOption))?>
+                                        </option>                                                                            
+                        <?php
+                            $sqlautor = selecionar('tbl_autor', 'idAutor',  'idAutor <>'. $valueOption);
+                              
+                              
+                             // echo($sqlCat);
+                            $sltautor = mysqli_query($conexao, $sqlautor);
+                                       
+                            while($rsautor=mysqli_fetch_array($sltautor)) {     
+                                       ?>
+                                <option id="option" value="<?php echo($rsautor['idAutor'])?>"> 
+                                    <?php echo(utf8_encode($rsautor['nome'])) ?>
+                              </option>
+                        <?php } ?></select><br>
+                    Categoria: <select class="txtDados spaceBetween sltmenor" name="sltCategoria"> <option value="<?php echo($valueOption)?>"> 
+                                            <?php echo(utf8_encode($itemOption))?>
+                                        </option>                                                                            
+                        <?php
+                            $sqlcateg = selecionar('tbl_categoria', 'id_categoria',  'id_categoria <>'. $valueOption);
+                              
+                              
+                             // echo($sqlCat);
+                            $sltcateg = mysqli_query($conexao, $sqlcateg);
+                                       
+                            while($rscateg=mysqli_fetch_array($sltcateg)) {     
+                                       ?>
+                                <option id="option" value="<?php echo($rscateg['id_categoria'])?>"> 
+                                    <?php echo(utf8_encode($rscateg['categoria'])) ?>
+                              </option>
+                        <?php } ?></select><br>
                     Sub-Categoria: <select class="txtDados spaceBetween sltmenor" name="sltSubCat"></select><br>
                    Ativação: 
                     <label class="switch"> 
