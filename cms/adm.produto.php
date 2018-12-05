@@ -127,28 +127,26 @@
                                     cnpjEditora,
                                     id_sub_categoria,
                                     isAtivado,
-                                   
+                                    livroEmDestaque
                                     )
                                     values('$isbn', '$title', '$img', $num_pag, $ano_pub, 
                                     $edicao, $volume, $preco, 
-                                    '$desc', '$editora', $subcateg, ".getAtivacao().")";
+                                    '$desc', '$editora', $subcateg, ".getAtivacao().", 0)";
 
                                     mysqli_query($conexao, $sqlLivro);
+                                    //echo($sqlLivro);
                                    
                                     //var_dump($autor);
+                                    
+                                    //echo($sqlLivro);
 
-                                    for($i = 0; $i < sizeof($autor); $i++) {
-                                        $sqlLivroAutor = "insert into tbl_autor_livros(isbn, idAutor)
-                                        values('$isbn', $autor[$i])";
-                                        mysqli_query($conexao, $sqlLivroAutor);
-                                    }
+                                   
                                    
                                 }
                             }
-                     } else {
-                             // echo($sql);
-                             mysqli_query($conexao, utf8_decode($sql));
-                     }
+                     } 
+                            
+                     
                     
                     /*
                         o comando utf8_decode converte uma string para o padrão 
@@ -162,8 +160,11 @@
                     
                 }
                 //querys do crud de livros
-               
-                header("location:adm.produto.php?$default_tab");
+                // echo($sql);
+                if(!isset($_POST['txtisbn'])) {
+                    mysqli_query($conexao, @$sql);
+                }
+               header("location:adm.produto.php?$default_tab");
             }
             
             
@@ -195,66 +196,17 @@
                     
                     
                 } 
-                //rs do livro a ser editado
-                if($modo == 'editarlivro'){
-                    //chamando procedure
-                  // $sqlLivroGeral = "call sp_dados_livro('".$_SESSION['codigo']."')";
-                  // $default_tab = "tab=livro";
-                    
-                  //usando OOP no php para herdar as funções da class mysqli
-                   $newconn = new mysqli('localhost', 'randerson', 
-                   'r@nd3rs0n', 'db_woody_woodpecker');
-
-                    //echo "\n--- primeira tentativa ---\n";
-                    $result = callprocedure($newconn, 'sp_dados_livro', $_SESSION['codigo']);
-                    if($result) {
-                        echo "Output: \n";
-                        foreach($result as $_rslivros) {
-                            echo " " . $_rslivros['idAutor'] . "\n";
-                            $idaut = $_rslivros['idAutor'];
-                            
-                            echo("<script src='../js/jquery.js'></script>");
-                            echo("<script>
-                               
-                                    
-                                function unchecked(){
-                                    var notcheck = [];
-                                    var li = [];
-                                    var idautor = $idaut;
-                                    $('input[type=checkbox]:not(:checked)').each(function (){
-                                        notcheck.push($(this).val());
-                                        
-                                    });
-                                    /*
-                                    $('li').each(function (){
-                                        li.push($(this));
-                                        
-                                    });
-                                   console.log(li);
-                                   */
-                                   
-                                   var i=0;
-                                    while( i < notcheck.length){
-                                        $('li').attr('id', ''+i);
-
-                                       // console.log(notcheck[i]);
-
-                                         i++;
-                                    }
-                                    
-                                }
-                                </script>");
-                        }
-                    }
+                
 
                    //$sltlivrogeral = mysqli_query($conexao, utf8_encode($sqlLivroGeral));
 
                   // $rsLivroUp = mysqli_fetch_array($sltlivrogeral);
 
                    //var_dump($rsLivroUp['nome']);
-                }
+                
                 $valueBtn = 'Editar';
-
+                
+                //**********tratando modos***********
               if($modo == 'excluir') {
                     $tab = $_GET['tab'];
         
@@ -287,6 +239,8 @@
 
         <button class="tablink"  onclick="openForm(event, 'formProduto');" <?php echo(@$openlivro)?>>
            Produto</button>
+        <button class="tablink"  onclick="openForm(event, 'formProduto');" <?php echo(@$openlivro)?>>
+           Livro e Autor</button>
     </div>
            <!-- Form de Categorias -->
            <div id="formCategoria" class="tabcontent">
@@ -353,27 +307,7 @@
                                     <?php echo(utf8_encode($rseditora['nomeFantasia'])) ?>
                               </option>
                         <?php } ?></select><br>
-                    Autor: &nbsp;  &nbsp; 
-                    <select class="txtDados spaceBetween sltmenor"  name="sltAutores[]" multiple id="sltAutores"> 
-                        <option value="<?php echo($valueOption)?>"> 
-                        <?php echo(utf8_encode($itemOption))?>
-                           </option>                                                                            
-                        <?php
-                            $sqlautor = selecionar('tbl_autor', 'idAutor',  'idAutor <>'. $valueOption);
-                              
-                              
-                             // echo($sqlCat);
-                            $sltautor = mysqli_query($conexao, $sqlautor);
-                                       
-                            while($rsautor=mysqli_fetch_array($sltautor)) { 
-                                 
-                                       ?>
-                                <option id="option" value="<?php echo($rsautor['idAutor'])?>" 
-                                <?php echo(@$checked)?>> 
-                                    <?php echo(utf8_encode($rsautor['nome'])) ?>
-                              </option>
-                        <?php } ?></select>
-                        <br>
+
                     Categoria: <select class="txtDados spaceBetween sltmenor" name="sltCategoria"  id="sltCategoria">
                     <option value="<?php echo(@$valueOption)?>"> 
                             <?php echo(@$itemOption)?>
@@ -494,11 +428,9 @@
         </div>
           <script>
         $(document).ready(function(){
-            unchecked();
             $("#sltCategoria").on('change', function(){
                     var idcat = $(this).val();
-
-                   // alert(idcat);
+                
                     
                    /*Se o value do objeto passado existir, ele fará uma requisição ajax
                    em busca das sub-categorias */
@@ -507,9 +439,11 @@
                             type:'POST',
                             url: 'getsubcategoria.php',
                             data: 'id_categoria='+idcat,
+                           
                             success:function(html){
                                 //o select de subcategorias será carregado com o html retornado
                                 $('#sltSubCat').html(html);
+                                //alert(html);
                             },
                             //tratando erros na requisição...
                             error:function(xmlHttpRequest, textStatus, errorThrown){
@@ -520,19 +454,14 @@
                         $('#sltSubCat').html("<option value= ''>Selecione uma categoria </option>")
                     }
                     
-                }); 
+                   
+
+                });
+            
+             
         });
 
-        //inicializando em js o multiselect
-        $('select[multiple]').multiselect({
-            columns:1,
-            search:true,
-            maxWidth:600,
-            texts: {
-                placeholder: 'Selecione os Autores'
-            },
-           
-        });
+        
 
         
     </script>

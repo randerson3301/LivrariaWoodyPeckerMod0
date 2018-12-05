@@ -12,7 +12,7 @@
 
 <!-- <script src="../js/script.js"></script> -->
 <script>
- 
+       
       
        $('#btnNivel').click(function(){
             $("#containerModal").fadeIn(400);
