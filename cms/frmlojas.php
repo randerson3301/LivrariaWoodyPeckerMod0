@@ -1,4 +1,4 @@
-<form name="frmLojas" class="frmConteudo formMaior" action="adm.conteudo.php" method="POST" enctype="multipart/form-data">  
+<form name="frmLojas" class="frmConteudo formMaior" action="adm.conteudo.php?tab=loja" method="POST" enctype="multipart/form-data">  
                             <h2>Cadastro Lojas</h2>
                             <div class="divisorModal alignLeft">
                                 Imagem:  <input type="file" name="fleFoto" id="foto" accept="image/*" 
@@ -97,7 +97,7 @@
                                         <?php echo($rsLoja['email'])?>
                                     </div>
                                     <div class="coluna  smallCol" >
-                                        <a href="adm.conteudo.php?modo=editarloja&id=<?php echo($rsLoja['idLoja'])?>&idend=<?php echo($rsLoja['idEndereco'])?>">
+                                        <a href="adm.conteudo.php?tab=loja&modo=editarloja&id=<?php echo($rsLoja['idLoja'])?>&idend=<?php echo($rsLoja['idEndereco'])?>">
                                             <figure class="acao">
                                                 <img src="../imagens/edit.png" title="Editar Dados" alt="ViewData" class="linkModal"
                                                 >

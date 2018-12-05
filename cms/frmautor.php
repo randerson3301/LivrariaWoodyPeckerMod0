@@ -1,16 +1,4 @@
-<?php
-    //padrão BR
-    $dtnasc = @$rsAutorUp['dtNascimento'];
-    $dtnasc = date('d/m/Y', strtotime($dtnasc)); 
-
-    //padrão BR
-    $dtfal = @$rsAutorUp['dtFalecimento'];
-    $dtfal = date('d/m/Y', strtotime($dtfal)); 
-
-
-?>
-
-<form name="frmAutores" id="frmAutores" action="adm.conteudo.php" 
+<form name="frmAutores" id="frmAutores" action="adm.conteudo.php?tab=autor" 
                       method="POST" enctype="multipart/form-data" class="formMaior frmConteudo "> 
                         <div class="divisorModal alignLeft">
                             Imagem:  <input type="file" name="fleFoto" id="foto" accept="image/*" 
@@ -88,7 +76,7 @@
                             <?php echo($rsAutor['cidadeNascimento'])?>
                          </div>
                          <div class="coluna  smallCol" >
-                         <a href="adm.conteudo.php?modo=editarautor&id=<?php echo($rsAutor['idAutor'])?>#autor">
+                         <a href="adm.conteudo.php?tab=autor&modo=editarautor&id=<?php echo($rsAutor['idAutor'])?>#autor">
                             <figure class="acao">
                                 <img src="../imagens/edit.png" title="Editar Dados" alt="ViewData" class="linkModal"
                                               >

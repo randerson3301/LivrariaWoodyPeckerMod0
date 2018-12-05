@@ -8,6 +8,8 @@
 
     if($_SESSION['nivel'] != 26 && $_SESSION['nivel'] != 27 )
         header("location:cms.home.php");
+
+    
 //------------------------PREPARAÇÃO DOS RESULTSETS--------------------------------
     $sqlSelect = selecionar('tbl_sobre', 'idSobre');
 
@@ -106,7 +108,7 @@
 
 
         if($btn == 'Cadastrar') {
-           
+            $default_tab = null;
             //condicional para verificar o tamanho do arquivo permitido pelo servidor
             if($filesize <= 2000) {
                 
@@ -114,7 +116,8 @@
                     ) {
                     $sql = "insert into tbl_sobre(descricao, imgSobre, isAtivado) 
                     values('".$descrip."','".$img."','".getAtivacao()."')";
-                   
+                    $default_tab = 'tab=sobre';
+
                         
                     //desativando todos caso no insert o user ative o registro
                     if(getAtivacao() == 1) {
@@ -139,7 +142,7 @@
                         $sql = "insert into tbl_lojas(email, descricao, imgLoja, isAtivado, idEndereco) 
                     values('".$email."','".$descrip."','".$img."',".getAtivacao()."
                     ,".$rsEnd['id'].")";
-                   
+                    $default_tab = 'tab=loja';
                    
                     
                     //echo($sql);
@@ -151,7 +154,8 @@
                          values('".$nome."','".$dtNascimento."','".$dtFalecimento."',
                          '".$cidadeNascimento."','".$descrip."','".$img."'
                          ,".getAtivacao().")";
-                         
+                         $default_tab = 'tab=autor';
+
                          
                         
                          //desativando todos caso no insert o user ative o registro
@@ -167,6 +171,8 @@
             if(isset($_POST['sltProdutos'])) {
                 @$sql = "insert into tbl_promocao(isbn, percentualDesconto, isAtivado) 
                 values('".$isbn."',".(float)$valPercent .",".getAtivacao().")";
+                $default_tab = 'tab=promo';
+
                 $sqldesativa= "update tbl_promocao set isAtivado = 0 where 
                 id<>". $_SESSION['codigo']. " and isbn=".$isbn;
                 
@@ -178,8 +184,10 @@
             mysqli_query($conexao, $sqldesativa);
 
             mysqli_query($conexao, $sql);
-           // header("location:adm.conteudo.php");    
+            header("location:adm.conteudo.php?$default_tab");    
         } else if($btn == 'Editar') {
+            $default_tab = null;
+            
             //editar sem imagem, irá prevenir o upload repetido de imgs
             if($filesize == 0) {
                 $atv = 0;
@@ -189,10 +197,13 @@
                 $frmfile = "frmsobre.php";
                 $sqlUpdate = update("tbl_sobre", "descricao='".$descrip."', isAtivado=".$atv, 'idSobre',  $_SESSION['codigo']);
                 $sqldesativa = setUnicoAtivado('tbl_sobre', 'idSobre', $_SESSION['codigo']);
+                $default_tab = "tab=sobre";
+
+
                 //editando lojas
                 if(isset($_POST['txtEmailLoja'])) {
                     $sqlUpdate = update("tbl_lojas", "email = '".$email."', descricao='".$descrip."', isAtivado=".$atv, 'idLoja',  $_SESSION['codigo']);
-                    
+                    $default_tab = "tab=loja";
                     $sqlUpdateEndereco = update("tbl_endereco", "logradouro = '".@$logradouro."', 
                     bairro='".@$bairro."', cidade='".@$cidade."', uf='".@$uf."', cep='".@$cep."', telefone='".@$telefone."'", 'id',   @$_SESSION['cod_endereco']);
                     mysqli_query($conexao, $sqlUpdateEndereco);
@@ -203,11 +214,13 @@
                     dtNascimento='".$dtNascimento."', cidadeNascimento='".$cidadeNascimento."', 
                     breveBiografia='".$descrip."', isAtivado=".$atv, 'idAutor',  $_SESSION['codigo']);
                     $sqldesativa = setUnicoAtivado('tbl_autor', 'idAutor', $_SESSION['codigo']);
+                    $default_tab = "tab=autor";
 
                 }
 
                 
             }
+            //se o usuário inserir uma imagem na edição...
             if(move_uploaded_file($arquivo_tmp, $img)) {
                     $atv = 0;
                     if(isset($_POST['checkAtivacao'])) {
@@ -216,19 +229,23 @@
                     $sqlUpdate = update("tbl_sobre", "descricao='".$descrip."', imgSobre='"
                     .$img."', isAtivado=".$atv, 'idSobre',  $_SESSION['codigo']);
                     $sqldesativa = setUnicoAtivado('tbl_sobre', 'idSobre', $_SESSION['codigo']);
+                    $default_tab = "tab=sobre";
 
                 
                     //editando lojas
-                    if(isset($_POST['txtEmailLoja'])) 
+                    if(isset($_POST['txtEmailLoja'])) {
                         $sqlUpdate = update("tbl_lojas", "email = '".$email."', descricao='".$descrip."', imgLoja='"
                         .$img."', isAtivado=".$atv, 'idLoja',  $_SESSION['codigo']);
-                
+                        $default_tab = "tab=loja";
+
+                    }
                     //editando autores
                     if(isset($_POST['txtNome'])) {
                         $sqlUpdate = update("tbl_autor", "nome = '".$nome."', dtFalecimento='".$dtFalecimento."', 
                         dtNascimento='".$dtNascimento."', cidadeNascimento='".$cidadeNascimento."', 
                         breveBiografia='".$descrip."', imgAutor='" .$img."', isAtivado=".$atv, 'idAutor',  $_SESSION['codigo']);
                         $sqldesativa = setUnicoAtivado('tbl_autor', 'idAutor', $_SESSION['codigo']);
+                        $default_tab = "tab=autor";
 
                     }
             }
@@ -241,12 +258,13 @@
 
                 $sqldesativa= "update tbl_promocao set isAtivado = 0 where 
                 id<>". $_SESSION['codigo']. " and isbn=".$isbn;
+                $default_tab = "tab=promo";
 
             }
             mysqli_query($conexao, $sqldesativa);
 
             mysqli_query($conexao, $sqlUpdate);
-            //header("location:adm.conteudo.php");    
+            header("location:adm.conteudo.php?$default_tab");    
                
         }
     }
@@ -260,20 +278,25 @@
             $tab = $_GET['tab'];
 
             //função de delete 
-            if($tab == 'promo')
+            if($tab == 'promo'){
                 $delete = delete('tbl_promocao', 'id', $_SESSION['codigo']);
-            
-            if($tab == 'autor')
+                $default_tab = "tab=promo";
+            }
+            if($tab == 'autor'){
                 $delete = delete('tbl_autor', 'idAutor', $_SESSION['codigo']);
-            
-            if($tab == 'loja')
+                $default_tab = "tab=autor";
+            }
+            if($tab == 'loja'){
                 $delete = delete('tbl_lojas', 'idLoja', $_SESSION['codigo']);
-            
-            if($tab == 'sobre')
+                $default_tab = "tab=loja";
+
+            }
+            if($tab == 'sobre'){
                 $delete = delete('tbl_sobre', 'idSobre', $_SESSION['codigo']);
-            
+                $default_tab = "tab=sobre";
+             }
             mysqli_query($conexao, $delete);
-           // header("location:adm.conteudo.php");
+            header("location:adm.conteudo.php?$default_tab");
             
         } 
       
@@ -316,6 +339,14 @@
             $valueBtn = 'Editar';
 
             $rsAutorUp = mysqli_fetch_array($selectAutorUp);
+
+            //padrão BR
+            $dtnasc = @$rsAutorUp['dtNascimento'];
+            $dtnasc = date('d/m/Y', strtotime($dtnasc)); 
+
+            //padrão BR
+            $dtfal = @$rsAutorUp['dtFalecimento'];
+            $dtfal = date('d/m/Y', strtotime($dtfal)); 
             
         }
         
@@ -327,6 +358,7 @@
         if(isset($_GET['ativado'])) {
             $atv = $_GET['ativado']; //guarda o status da ativação do registro
             $isbn = $_GET['isbn'];
+            $tab = "tab=destaque";
 
             if($atv == 0) {
 
@@ -341,11 +373,27 @@
            $sqlUpdateAtv = "update tbl_livro set livroEmDestaque=".$atv." where isbn=".$isbn;
             
             
-             mysqli_query($conexao, $sqldesativa);
+            mysqli_query($conexao, $sqldesativa);
             mysqli_query($conexao, $sqlUpdateAtv);
-            //header('location:adm.conteudo.php');
+            header("location:adm.conteudo.php?$tab");
             
         }
+        //definindo abas que serão carregadas no submit
+    if(isset($_GET['tab'])){
+        $tab = $_GET['tab'];
+
+        if($tab == 'autor')
+            //echo("boa noite");
+            $openautor = "id='openByDefault'";
+        if($tab == 'loja')
+            $openloja = "id='openByDefault'";
+        if($tab == 'promo')
+            $openpromo = "id='openByDefault'";
+        if($tab == 'sobre')
+            $opensobre = "id='openByDefault'";
+        if($tab == 'destaque')
+            $opendestaque = "id='openByDefault'";
+    }
 
         
    
@@ -365,20 +413,19 @@
             ?>
                    <div class="tab">
                        
-                        <button class="tablink"  onclick=" openForm(event, 'formAutores'); switchDefault(0)" >
+                        <button class="tablink"  onclick=" openForm(event, 'formAutores');" <?php echo(@$openautor)?>>
                                 Autores</button>
-                       
-                        <a id="lojas">
-                            <button class="tablink" onclick=" openForm(event, 'formLojas'); switchDefault(1)"  >Lojas</button>
+                        <a href="adm.conteudo.php?tab=loja">
+                        <button class="tablink" onclick=" openForm(event, 'formLojas');" <?php echo(@$openloja)?> >Lojas</button>
                         </a>
                        
-                        <button class="tablink" onclick=" openForm(event, 'formProduto'); switchDefault(2)"  >Produto do Mês</button>
+                        <button class="tablink" onclick=" openForm(event, 'formProduto');"  <?php echo(@$opendestaque)?>>Produto do Mês</button>
                        
-                       
-                        <button class="tablink" onclick=" openForm(event, 'formPromo'); switchDefault(3)"  >Promoções</button>
                         
+                        <button class="tablink" onclick=" openForm(event, 'formPromo');"  <?php echo(@$openpromo)?>>Promoções</button>
+                    
                         
-                        <button class="tablink" onclick=" openForm(event, 'formSobre'); switchDefault(4)"  >Sobre </button>
+                        <button class="tablink" onclick=" openForm(event, 'formSobre');" <?php echo(@$opensobre)?> >Sobre </button>
                         
                     </div>
                   <?php 

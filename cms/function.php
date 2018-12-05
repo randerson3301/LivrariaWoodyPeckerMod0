@@ -19,6 +19,9 @@
         } else {
              $atv = 0;
         }
+
+        
+
         //caso o method do form seja get, basta setar o parametro $httpverb para get
         if($httpverb == "get") {
             if(isset($_GET['checkAtivacao'])) {
@@ -28,6 +31,16 @@
             }   
         }
         
+        return $atv;
+    }
+
+    function getDestaque(){
+        //verificando o livro em destaque do form de livros
+        if(isset($_POST['checkAtivacaoDestaque'])) {
+            $atv = 1;
+        } else {
+             $atv = 0;
+        }
         return $atv;
     }
 
@@ -62,5 +75,63 @@ function desabilitarTodos($tabname, $id, $con) {
   $sqldesativa = setUnicoAtivado($tabname, $id, $rsLast[$id]);
 
   return mysqli_query($con, $sqldesativa);
+}
+
+
+
+
+function callprocedure(mysqli $con, $procedure, $params="")
+{
+    if(!$con) {
+        throw new Exception("Conexão inválida");
+    }
+    else
+    {
+       
+        $sql = "CALL {$procedure}({$params});"; //chama o procedure
+        $sqlSuccess = $con->multi_query($sql); //prepara para retorna mais de um registro
+        
+        //se a a conexão for bem sucedida...
+        if($sqlSuccess)
+        {
+            //se tiver mais de um resultado..
+            if($con->more_results())
+            {
+                //pega o primeiro registro retornado
+                $result = $con->use_result();
+                
+                $retorno = array(); //array para armazenar os registros retornados
+                
+                // insere os registros no array
+                while($registro = $result->fetch_assoc())
+                {
+                    $retorno[] = $registro;
+                }
+                
+                // libera a primeira linha retornada
+                
+                $result->free();
+                
+                // libera outros registros
+                while($con->more_results() && $con->next_result())
+                {
+                    $extraResult = $con->use_result();
+                    if($extraResult instanceof mysqli_result){
+                        $extraResult->free();
+                    }
+                }
+                return $retorno;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        //caso a chamada não ocorra como esperado...
+        else
+        {
+            throw new Exception("The call failed: " . $con->error);
+        }
+    }
 }
 ?>

@@ -1,4 +1,4 @@
-<form action="adm.conteudo.php" method="POST" name="frmPromo" class="frmConteudo frmMenor"> 
+<form action="adm.conteudo.php?tab=promo" method="POST" name="frmPromo" class="frmConteudo frmMenor"> 
                             <h2>Gerenciador de  Promoções </h2><br>
                            
                                    <span class='spaceBeetween'> Selecione um produto </span> <br>
@@ -66,7 +66,7 @@
                                  </div>
                                 
                                  <div class="coluna  smallCol" >
-                                 <a href="adm.conteudo.php?modo=editarpromo&id=<?php echo($rsPromos['id'])?>&isbn=<?php echo($rsPromos['isbn'])?>">
+                                 <a href="adm.conteudo.php?tab=promo&modo=editarpromo&id=<?php echo($rsPromos['id'])?>&isbn=<?php echo($rsPromos['isbn'])?>">
                                             <figure class="acao">
                                                 <img src="../imagens/edit.png" title="Editar Dados" alt="ViewData" class="linkModal"
                                               >

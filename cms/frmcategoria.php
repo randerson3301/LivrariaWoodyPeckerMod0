@@ -1,5 +1,5 @@
 
-           <form action="adm.produto.php" method="GET" name="frmCategoria" class="frmConteudo frmMenor"> 
+           <form action="adm.produto.php?tab=cat" method="POST" name="frmCategoria" class="frmConteudo frmMenor"> 
                   <h2>Gerenciador de  Categorias </h2><br>
                            
                       Digite uma Categoria <br>
@@ -13,6 +13,7 @@
                              <span class="slider round"></span>
                             </label> <br>
                            <input type="submit" name="btnSalvarSobre" value="<?php echo($valueBtn)?>" class="spaceBeetween btnEnviar">
+                           <input type="reset" name="btnSalvarSobre" value="Limpar" class="  spaceBeetween btnReset btnEnviar">
                              
             </form>
 
@@ -43,7 +44,7 @@
                             <?php echo(utf8_encode($rsCategoria["categoria"])) ?>
                         </div>
                         <div class="coluna  smallCol" >
-                        <a href="adm.produto.php?modo=editar&id=<?php echo($rsCategoria['id_categoria'])?>">
+                        <a href="adm.produto.php?tab=cat&modo=editar&id=<?php echo($rsCategoria['id_categoria'])?>">
                                 <figure class="acao">
                                         <img src="../imagens/edit.png" title="Editar Dados" alt="ViewData" class="linkModal"
                                                 >

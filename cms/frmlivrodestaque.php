@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="coluna  smallCol " >
                                       
-                                        <a href="adm.conteudo.php?ativado=<?php echo($rsLivro['livroEmDestaque'])?>&isbn=<?php echo($rsLivro['isbn'])?>&pag=2"> 
+                                        <a href="adm.conteudo.php?tab=destaque&ativado=<?php echo($rsLivro['livroEmDestaque'])?>&isbn=<?php echo($rsLivro['isbn'])?>"> 
                                                <?php
                                                ?>
                                             <figure>

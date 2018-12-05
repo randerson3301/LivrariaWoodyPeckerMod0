@@ -6,8 +6,7 @@ $(document).ready(function() {
                     $('#containerModal').fadeOut(400);
                 });
 
-                 
-        
+               
                 // ESSE É O JQUERY PARA FAZER A MODAL APARACER NA TELA-->
                 $(".viewModal").click(function() {
                     $("#containerModal").fadeIn(600); 

@@ -1,4 +1,4 @@
-<form action="adm.produto.php" method="GET" name="frmCategoria" class="frmConteudo frmMenor"> 
+<form action="adm.produto.php?tab=subcat" method="POST" name="frmCategoria" class="frmConteudo frmMenor"> 
                   <h2>Gerenciador de  Sub-categorias </h2><br>
                            
                       Digite uma Sub-Categoria <br>
@@ -30,7 +30,8 @@
                              <span class="slider round"></span>
                             </label> <br>
                            <input type="submit" name="btnSalvarSobre" value="<?php echo($valueBtn)?>" class="spaceBeetween btnEnviar">
-                             
+                           <input type="reset" name="btnSalvarSobre" value="Limpar" class="spaceBeetween btnEnviar btnReset">
+
             </form>
 
             <div  class="containerColunas centerManual">
@@ -66,7 +67,7 @@
                              <?php echo(utf8_encode($rsSubCategoria["categoria"])) ?>
                         </div>
                         <div class="coluna  smallCol" >
-                        <a href="adm.produto.php?modo=editarsub&id=<?php echo($rsSubCategoria['id_sub_categoria'])?>">
+                        <a href="adm.produto.php?tab=subcat&modo=editarsub&id=<?php echo($rsSubCategoria['id_sub_categoria'])?>">
                                 <figure class="acao">
                                         <img src="../imagens/edit.png" title="Editar Dados" alt="ViewData" class="linkModal"
                                                 >

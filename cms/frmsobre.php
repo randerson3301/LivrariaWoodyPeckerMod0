@@ -1,4 +1,4 @@
-                <form name="frmSobre" class="frmConteudo" action="adm.conteudo.php" method="POST" enctype="multipart/form-data">  
+                <form name="frmSobre" class="frmConteudo" action="adm.conteudo.php?tab=sobre" method="POST" enctype="multipart/form-data">  
                             <h2>Cadastro Sobre</h2>
                             <div class="divisorModal alignLeft">
                                 Imagem:  <input type="file" name="fleFoto" id="foto" accept="image/*" 
@@ -52,7 +52,7 @@
                                         <?php echo($rsSobre['descricao'])?>
                                     </div>
                                     <div class="coluna  smallCol" >
-                                        <a href="adm.conteudo.php?modo=editar&id=<?php echo($rsSobre['idSobre'])?>">
+                                        <a href="adm.conteudo.php?tab=sobre&modo=editar&id=<?php echo($rsSobre['idSobre'])?>">
                                             <figure class="acao">
                                                 <img src="../imagens/edit.png" title="Editar Dados" alt="ViewData" class="linkModal"
                                                 >
