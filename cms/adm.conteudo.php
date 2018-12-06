@@ -47,7 +47,7 @@
     if(isset($_POST['btnSalvarSobre'])) {
         @$btn = $_POST['btnSalvarSobre'];
        
-        //echo("oi");
+        
         @$isbn = $_POST['sltProdutos'];
            
         @$valPercent = $_POST['txtPercent'];
@@ -194,7 +194,7 @@
                 if(isset($_POST['checkAtivacao'])) {
                     $atv = 1;
                 }
-                $frmfile = "frmsobre.php";
+               
                 $sqlUpdate = update("tbl_sobre", "descricao='".$descrip."', isAtivado=".$atv, 'idSobre',  $_SESSION['codigo']);
                 $sqldesativa = setUnicoAtivado('tbl_sobre', 'idSobre', $_SESSION['codigo']);
                 $default_tab = "tab=sobre";

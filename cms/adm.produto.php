@@ -1,12 +1,28 @@
 <?php
     
     
-    $valueBtn = "Salvar";
-    $itemOption = "Selecione um item ...";
+    
     $sql = null;
+   
+    //default
     $valueOption = 0;
-            require_once('conexao.php');
-            require_once('function.php');
+    $itemOption = "Selecione...";
+    $valueBtn = "Salvar";
+    
+    // variaveis para o select de editora
+    $valueOptEditora = 0;
+    $itemOptEditora = "Selecione um item ...";
+
+     // variaveis para o select de categoria
+     $valueOptCat = 0;
+     $itemOptCat= "Selecione um item ...";
+            
+     // variaveis para o select de sub-categoria
+     $valueOptSub = 0;
+     $itemOptSub= "Selecione um item ...";
+     
+     require_once('conexao.php');
+     require_once('function.php');
 
             if(isset($_GET['tab'])){
                 $tab = $_GET['tab'];
@@ -25,6 +41,22 @@
 
             $conexao = conexaoBD();
             if(isset($_POST['btnSalvarSobre'])) {
+                //dados da tbl_livro
+                //recolhendo dados
+                @$isbn = $_POST["txtisbn"];
+                @$title = $_POST["txttitle"];
+                @$num_pag = $_POST["txtNumPage"];
+                @$ano_pub = $_POST["txtAno"]; //ano de publicação do livro
+                @$edicao =  $_POST["txtEdicao"];
+                @$volume = $_POST["txtVol"];
+                @$preco =  $_POST["txtPreco"];
+                @$desc = $_POST["txtDesc"];
+                @$editora =  $_POST["slteditora"];
+                @$autor = $_POST["sltAutores"];
+                @$default_tab = "tab=livro";
+                @$subcateg = $_POST['sltSubCat'];
+
+
                 $btn = $_POST['btnSalvarSobre'];
                 @$categoria = $_POST["txtCategoria"];
                 $default_tab = null;
@@ -42,6 +74,39 @@
                         $sql = update('tbl_sub_categoria', 
                                       " sub_categoria='".$subcat."', id_categoria=".$idcategoria.",
                     ativacao=".getAtivacao(), "id_sub_categoria", $_SESSION['codigo']);
+                    }
+
+                    if(isset($_POST['txtisbn'])) {
+                        $default_tab = 'tab=livro';
+                        require_once('uploadimg.php');  
+
+                        if($filesize == 0) {
+                           $sqlUpdateLivro =  update('tbl_livro', "isbn = '$isbn', titulo = '$title', 
+                            numeroPaginas = $num_pag,
+                            anoPublicacao = $ano_pub,
+                            edicao = $edicao,
+                            volume = $volume,
+                            preco = $preco,
+                            descricao = '$desc',
+                            cnpjEditora = $editora,
+                            id_sub_categoria = $subcateg,
+                            isAtivado=".getAtivacao(), "isbn", $_SESSION['codigo']);
+                        } else if(move_uploaded_file($arquivo_tmp, $img)) {
+                            $sqlUpdateLivro =  update('tbl_livro', "isbn = '$isbn', titulo = '$title', 
+                            imgLivro = '$img',
+                            numeroPaginas = $num_pag,
+                            anoPublicacao = $ano_pub,
+                            edicao = $edicao,
+                            volume = $volume,
+                            preco = $preco,
+                            descricao = '$desc',
+                            cnpjEditora = $editora,
+                            id_sub_categoria = $subcateg,
+                            isAtivado=".getAtivacao(), "isbn", $_SESSION['codigo']);
+                        }
+
+                        mysqli_query($conexao, utf8_decode($sqlUpdateLivro));
+                       
                     }
 
                     //echo($sql);
@@ -69,49 +134,9 @@
                         }
                      } 
                     if(isset($_POST["txtisbn"])) {
-                            //recolhendo dados
-                            $isbn = $_POST["txtisbn"];
-                            $title = $_POST["txttitle"];
-                            $num_pag = $_POST["txtNumPage"];
-                            $ano_pub = $_POST["txtAno"]; //ano de publicação do livro
-                            $edicao =  $_POST["txtEdicao"];
-                            $volume = $_POST["txtVol"];
-                            $preco =  $_POST["txtPreco"];
-                            $desc = $_POST["txtDesc"];
-                            $editora =  $_POST["slteditora"];
-                            $autor = $_POST["sltAutores"];
-                            $default_tab = "tab=livro";
-                            $subcateg = $_POST['sltSubCat'];
-
-                            
-                            //upload de imagem
-                            $file = $_FILES["fleFoto"]["name"];
-
-                            //nome do arquivo sem a extensão
-                            $filename = pathinfo($file, PATHINFO_FILENAME);
-
-                            //criptografando o nome do arquivo, sem permitir repetições nos padrões
-                            $filename = md5(uniqid(time()).$filename);
-
-                            //nome do diretório que armazenará os arquivos, já criptografados, inseridos pelo user
-                            $dir = "imgs_uploads/";
-
-                            //armazenando o nome temporário do file
-                            @$arquivo_tmp = $_FILES['fleFoto']['tmp_name'];
-                                
-                            //pegando a extensão do arquivo
-                            $extfile = strrchr($file, ".");
-                                
-                            //setando um padrão para armazenagem
-                            $img = $dir . $filename . $extfile;
-                            
-                            //pegando o tamanho do arquivo
-                            @$filesize = $_FILES['fleFoto']['size'];
-
-                            //tranforma de bytes para kbytes
-                            $filesize = round($filesize / 1024);
-
-                            //se a imagem for carregada...
+                            $default_tab = 'tab=livro';
+                            require_once('uploadimg.php');  
+                          //se a imagem for carregada...
                             if($filesize <= 2000) {
                                 if(move_uploaded_file($arquivo_tmp, $img)) {
                                     $sqlLivro = "insert into tbl_livro
@@ -160,11 +185,13 @@
                     
                 }
                 //querys do crud de livros
-                // echo($sql);
+                 echo($sql);
+                 
                 if(!isset($_POST['txtisbn'])) {
-                    mysqli_query($conexao, @$sql);
+                    mysqli_query($conexao, utf8_decode(@$sql));
                 }
                header("location:adm.produto.php?$default_tab");
+               
             }
             
             
@@ -192,18 +219,57 @@
                     $itemOption = $rsSubCatUp["categoria"];
                     
                     $valueOption = $rsSubCatUp["id_categoria"];
-
-                    
-                    
                 } 
-                
 
-                   //$sltlivrogeral = mysqli_query($conexao, utf8_encode($sqlLivroGeral));
+                if($modo == 'editarlivro'){
+                    $isbn_sessao = $_SESSION['codigo'];
+                    //$sqlLivroUp = "call sp_consulta_livro('$isbn_sessao')";
 
-                  // $rsLivroUp = mysqli_fetch_array($sltlivrogeral);
+                    //echo($sqlLivroUp);
 
-                   //var_dump($rsLivroUp['nome']);
-                
+                    
+
+                    $retorno = callprocedure($conexao, 'sp_consulta_livro', $isbn_sessao);
+                   
+                    if($retorno) {
+                       //para cada retorno como rslivro
+                        foreach($retorno as $rslivro) {
+                            //recolhendo dados...
+                            $isbn = $rslivro['isbn'];
+                            $title = $rslivro['titulo'];
+                            $img = $rslivro['imgLivro'];
+                            $num_pag = $rslivro['numeroPaginas'];
+                            $ano_pub = $rslivro['anoPublicacao'];
+                            $edicao =$rslivro['edicao'];
+                            $volume=$rslivro['volume'];
+                            $preco = $rslivro['preco'];
+                            $desc = $rslivro['descricao'];
+                            
+                            //valores para o select de editora
+                            $valueOptEditora = $rslivro['cnpjEditora'];
+                            $itemOptEditora = $rslivro['nomeFantasia'];
+                            
+                            //valores para o select de categoria
+                            $valueOptCat = $rslivro['id_categoria'];
+                            $itemOptCat = $rslivro['categoria'];
+                            
+                            //valores para o select de categoria
+                            $valueOptSub = $rslivro['id_sub_categoria'];
+                            $itemOptSub = $rslivro['sub_categoria'];
+                            
+                            $ativacao = $rslivro['isAtivado'];
+
+                        }                          
+                    //}
+                    /*
+                    $sltlivro=mysqli_query($conexao, $sqlLivroUp);
+
+                    $rslivro=mysqli_fetch_array($sltlivro);
+
+                    $isbn = $rslivro['isbn'];
+                    */
+                }
+            }
                 $valueBtn = 'Editar';
                 
                 //**********tratando modos***********
@@ -218,6 +284,10 @@
                     if($tab == 'subcat'){
                         $delete = delete('tbl_sub_categoria', 'id_sub_categoria', $_SESSION['codigo']);
                         $default_tab = "tab=subcat";
+                    }
+                    if($tab == 'livro'){
+                        $delete = delete('tbl_livro', 'isbn', $_SESSION['codigo']);
+                        $default_tab = "tab=livro";
                     }
                     mysqli_query($conexao, $delete);
                    
@@ -264,35 +334,38 @@
                 <h2>Gerenciador de Produtos</h2> <br>
                 
                 <div class="divisorModal alignLeft">
-                    ISBN: <input type="number" name="txtisbn" id="txtisbn" 
+                    ISBN: <input type="number" name="txtisbn" value="<?php echo(@$isbn)?>" id="txtisbn" 
                     class="txtDados spaceBetween">
                     Título: <input type="text" name="txttitle" id="txttitle" 
-                    class="txtDados spaceBetween">
+                    class="txtDados spaceBetween" value="<?php echo(@$title)?>">
                     Imagem:  <input type="file" name="fleFoto" id="foto" accept="image/*" 
                     onchange="readURL(this, '#imgBook')"> <br>
                     <div class="contImg contImgAutor spaceBetween">
                             <img src= "<?php echo(
-                                    @$rsLojaUp['imgLoja'])?>"
+                                    @$img)?>"
                                      class="img" id="imgBook" alt="selecione..." title="Imagem escolhida">
                     </div>
                     N° de páginas: <input type="number" name="txtNumPage" id="txtNumPage" 
-                    class="spaceBetween txtMenor"> <br>
+                    class="spaceBetween txtMenor" value="<?php echo(@$num_pag)?>"> <br>
                     Ano de Publicação: <input type="number" name="txtAno" id="txtAno" 
-                    class="spaceBetween txtMenor"> <br>
+                    class="spaceBetween txtMenor" value="<?php echo(@$ano_pub)?>"> <br>
                     Edição: <input type="number" name="txtEdicao" id="txtEdicao" 
-                    class="spaceBetween txtMenor"><br>
+                    class="spaceBetween txtMenor" value="<?php echo(@$edicao)?>"><br>
                     Volume: <input type="number" name="txtVol" id="txtVol" 
-                    class="spaceBetween txtMenor">
+                    class="spaceBetween txtMenor" value="<?php echo(@$volume)?>">
 
                 </div>
                 <div class="divisorModal">
-                    Preço(em R$): <input type="number" name="txtPreco" id="txtPreco" 
-                    class="spaceBetween txtMenor"> <br>
-                    Descrição: <textarea  onkeypress="return validar(event, 'num', this.id);" class="txtareaConteudo areaMenor" name="txtDesc"  id="txtDesc" required></textarea>
+                    Preço(em R$): <input type="text" name="txtPreco" id="txtPreco" 
+                    class="spaceBetween txtMenor" value="<?php echo(@$preco)?>"> <br>
+                    Descrição: 
+                    <textarea  onkeypress="return validar(event, 'num', this.id);" 
+                    class="txtareaConteudo areaMenor" name="txtDesc" id="txtDesc" required><?php echo(utf8_encode(@$desc))?>
+                    </textarea>
                     
-                    Editora: &nbsp; <select class="txtDados spaceBetween sltmenor" name="slteditora">
-                           <option value="<?php echo($valueOption)?>"> 
-                                            <?php echo(utf8_encode($itemOption))?>
+                    Editora: &nbsp; <select class="txtDados spaceBetween sltmenor"  name="slteditora">
+                           <option value="<?php echo($valueOptEditora)?>"> 
+                                            <?php echo(utf8_encode($itemOptEditora))?>
                                         </option>                                                                            
                         <?php
                             $sqleditora = selecionar('tbl_editora', 'cnpjEditora',  'cnpjEditora <>'. $valueOption);
@@ -309,8 +382,8 @@
                         <?php } ?></select><br>
 
                     Categoria: <select class="txtDados spaceBetween sltmenor" name="sltCategoria"  id="sltCategoria">
-                    <option value="<?php echo(@$valueOption)?>"> 
-                            <?php echo(@$itemOption)?>
+                    <option value="<?php echo(@$valueOptCat)?>"> 
+                            <?php echo(@$itemOptCat)?>
                         </option>
                                                                         
                         <?php
@@ -331,19 +404,20 @@
                         <?php } ?></select><br>
                     Sub-Categoria: 
                     <select class="txtDados spaceBetween sltmenor" name="sltSubCat" id="sltSubCat">
-                        <option value="<?php echo(@$valueOption)?>"> 
-                            <?php echo(@$itemOption)?>
+                        <option value="<?php echo(@$valueOptSub)?>"> 
+                            <?php echo(utf8_encode(@$itemOptSub))?>
                         </option>
                     </select><br>
                    Ativação: 
                     <label class="switch"> 
-                        <input type="checkbox" class="sliderBox" name="checkAtivacao">
+                        <input type="checkbox" class="sliderBox" name="checkAtivacao"
+                        <?php echo(@$ativacao == 1)?'checked' : ''?>>
                         <span class="slider round"></span>
                      </label> 
                   
                       <input type="reset" name="btnSalvarSobre" value="Limpar" class="btnReset spaceBetween btnEnviar">
 
-                      <input type="submit" name="btnSalvarSobre" value="Salvar" class="btnAdd spaceBetween btnEnviar">
+                      <input type="submit" name="btnSalvarSobre" value="<?php echo($valueBtn)?>" class="btnAdd spaceBetween btnEnviar">
 
                 </div>
             </form>
@@ -412,7 +486,7 @@
                                                         >
                                           </figure>
                                           </a>
-                                           <a href="adm.produto.php?modo=excluir&tab=cat&id=<?php echo($rsCategoria['id_categoria'])?>">
+                                           <a href="adm.produto.php?modo=excluir&tab=livro&id=<?php echo($rsLivro['isbn'])?>">
                                               <figure class="acao">
                                                     <img src="../imagens/delete.png" title="Excluir Registro" alt="excluir">
                                                </figure>
