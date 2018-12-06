@@ -8,7 +8,7 @@
         if($criterio != null ) 
             $sql = $sql ." where ". $criterio;
         
-        $sql = $sql ." order by ".$primary_key;
+        //$sql = $sql ." order by ".$primary_key;
         
         return $sql;
     }

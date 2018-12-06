@@ -4,6 +4,8 @@
 
     $con = conexaoBD();
 
+    $sqlLivro = 'select * from tbl_livro order by RAND()';
+
     if(isset($_GET['sc'])) {
         //echo("epaa");
         
@@ -13,7 +15,6 @@
         and tl.id_sub_categoria = tsc.id_sub_categoria order by RAND()";
 
         
-        $sltlivro = mysqli_query($con, $sqlLivro);
         }
     if(isset($_GET['cat'])) {
             //echo("epaa");
@@ -24,8 +25,9 @@
             tsc.id_categoria = $cat and tl.id_sub_categoria = tsc.id_sub_categoria order by RAND()";
     
             
-            $sltlivro = mysqli_query($con, $sqlLivro);
+          
     }
+    $sltlivro = mysqli_query($con, $sqlLivro);
 
    
 ?>
