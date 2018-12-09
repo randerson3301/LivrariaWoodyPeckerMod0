@@ -34,13 +34,19 @@
                     $opensubcateg = "id='openByDefault'";
                 if($tab == 'livro')
                     $openlivro = "id='openByDefault'";
+                if($tab == 'liv')
+                    $openlivautor = "id='openByDefault'";
+                
             }
 
-            if($_SESSION['nivel'] != 28 && $_SESSION['nivel'] != 27 )
-        header("location:cms.home.php");    
-
+            if($_SESSION['nivel'] != 28 && $_SESSION['nivel'] != 27 ){
+                 header("location:cms.home.php");    
+            }
             $conexao = conexaoBD();
             if(isset($_POST['btnSalvarSobre'])) {
+               
+                
+               
                 //dados da tbl_livro
                 //recolhendo dados
                 @$isbn = $_POST["txtisbn"];
@@ -56,16 +62,20 @@
                 @$default_tab = "tab=livro";
                 @$subcateg = $_POST['sltSubCat'];
 
+                
 
                 $btn = $_POST['btnSalvarSobre'];
-                @$categoria = $_POST["txtCategoria"];
+              
                 $default_tab = null;
                 if($btn == "Editar") {
-                //preparando comando update
+                    if($_POST['txtCategoria']) {
+                    @$categoria = $_POST["txtCategoria"];
+                    
+                    //preparando comando update
                      $sql = update('tbl_categoria', " categoria='".$categoria."', 
                     ativacao=".getAtivacao(), "id_categoria", $_SESSION['codigo']);
                     $default_tab = "tab=cat";
-                    
+                    }
                     if(isset($_POST['txtSubCat'])) {
                         $subcat = $_POST["txtSubCat"];
                         $idcategoria = $_POST["sltCategorias"];
@@ -111,11 +121,23 @@
 
                     //echo($sql);
                 } else {
+                    if(isset($_POST['sltLivros'])) {
+                        $liv = $_POST['sltLivros'];
+                        $aut = $_POST['sltLivAutor'];
+                        echo($liv);
+                        $sql = "INSERT INTO tbl_autor_livros(isbn, idAutor)
+                        VALUES('$liv', '$aut')";
+                        $default_tab="tab=liv";
+                    }
+                   
+
                     //preparando comando insert
-                    $sql = "insert into tbl_categoria(categoria, ativacao) 
-                    values('".  $categoria."',".getAtivacao().")";
-                    $default_tab = "tab=cat";  
-                  
+                    if(isset($_POST['txtCategoria'])) {
+                        $categoria = $_POST['txtCategoria'];
+                        $sql = "insert into tbl_categoria(categoria, ativacao) 
+                        values('".  $categoria."',".getAtivacao().")";
+                        $default_tab = "tab=cat";  
+                    }
                     
                     //insert da subcategoria
                     if(isset($_POST["txtSubCat"])) {
@@ -187,13 +209,16 @@
                 //querys do crud de livros
                  echo($sql);
                  
-                if(!isset($_POST['txtisbn'])) {
+                if(!isset($_POST['txtisbn']) && $sql != null) {
                     mysqli_query($conexao, utf8_decode(@$sql));
                 }
-               header("location:adm.produto.php?$default_tab");
-               
+              
+                header("location:adm.produto.php?$default_tab");
             }
             
+           
+
+           
             
             //trabalhando com modos na URL
             if(isset($_GET['modo'])) {
@@ -309,7 +334,7 @@
 
         <button class="tablink"  onclick="openForm(event, 'formProduto');" <?php echo(@$openlivro)?>>
            Produto</button>
-        <button class="tablink"  onclick="openForm(event, 'formProduto');" <?php echo(@$openlivro)?>>
+        <button class="tablink"  onclick="openForm(event, 'formLivroAutor');" <?php echo(@$openlivautor)?>>
            Livro e Autor</button>
     </div>
            <!-- Form de Categorias -->
@@ -328,178 +353,121 @@
 
           <!-- Form de Produtos -->
           <div id="formProduto" class="tabcontent">
-                <form name="frmProduto" id="frmProduto" method="POST" action="adm.produto.php?tab=livro"
-                class="formMaior frmConteudo" enctype="multipart/form-data"
-                >
-                <h2>Gerenciador de Produtos</h2> <br>
-                
-                <div class="divisorModal alignLeft">
-                    ISBN: <input type="number" name="txtisbn" value="<?php echo(@$isbn)?>" id="txtisbn" 
-                    class="txtDados spaceBetween">
-                    Título: <input type="text" name="txttitle" id="txttitle" 
-                    class="txtDados spaceBetween" value="<?php echo(@$title)?>">
-                    Imagem:  <input type="file" name="fleFoto" id="foto" accept="image/*" 
-                    onchange="readURL(this, '#imgBook')"> <br>
-                    <div class="contImg contImgAutor spaceBetween">
-                            <img src= "<?php echo(
-                                    @$img)?>"
-                                     class="img" id="imgBook" alt="selecione..." title="Imagem escolhida">
-                    </div>
-                    N° de páginas: <input type="number" name="txtNumPage" id="txtNumPage" 
-                    class="spaceBetween txtMenor" value="<?php echo(@$num_pag)?>"> <br>
-                    Ano de Publicação: <input type="number" name="txtAno" id="txtAno" 
-                    class="spaceBetween txtMenor" value="<?php echo(@$ano_pub)?>"> <br>
-                    Edição: <input type="number" name="txtEdicao" id="txtEdicao" 
-                    class="spaceBetween txtMenor" value="<?php echo(@$edicao)?>"><br>
-                    Volume: <input type="number" name="txtVol" id="txtVol" 
-                    class="spaceBetween txtMenor" value="<?php echo(@$volume)?>">
-
-                </div>
+                <?php 
+                    require_once("frmproduto.php");
+                ?>
+           </div>
+            <!-- Form de Livros/Autor -->
+          <div id="formLivroAutor" class="tabcontent">
+            <form action="adm.produto.php?tab=liv" method="POST" name="frmLivroAutor"  id="frmLivroAutor" class="frmConteudo frmMenor"> 
+                <h2>Gerenciador de  Relacionamento(Livro/Autor) </h2><br>
+                     
                 <div class="divisorModal">
-                    Preço(em R$): <input type="text" name="txtPreco" id="txtPreco" 
-                    class="spaceBetween txtMenor" value="<?php echo(@$preco)?>"> <br>
-                    Descrição: 
-                    <textarea  onkeypress="return validar(event, 'num', this.id);" 
-                    class="txtareaConteudo areaMenor" name="txtDesc" id="txtDesc" required><?php echo(utf8_encode(@$desc))?>
-                    </textarea>
-                    
-                    Editora: &nbsp; <select class="txtDados spaceBetween sltmenor"  name="slteditora">
-                           <option value="<?php echo($valueOptEditora)?>"> 
-                                            <?php echo(utf8_encode($itemOptEditora))?>
-                                        </option>                                                                            
-                        <?php
-                            $sqleditora = selecionar('tbl_editora', 'cnpjEditora',  'cnpjEditora <>'. $valueOption);
-                              
-                              
-                             // echo($sqlCat);
-                            $slteditora = mysqli_query($conexao, $sqleditora);
-                                       
-                            while($rseditora=mysqli_fetch_array($slteditora)) {     
-                                       ?>
-                                <option id="option" value="<?php echo($rseditora['cnpjEditora'])?>"> 
-                                    <?php echo(utf8_encode($rseditora['nomeFantasia'])) ?>
-                              </option>
-                        <?php } ?></select><br>
-
-                    Categoria: <select class="txtDados spaceBetween sltmenor" name="sltCategoria"  id="sltCategoria">
-                    <option value="<?php echo(@$valueOptCat)?>"> 
-                            <?php echo(@$itemOptCat)?>
+                    Selecione Um Livro  <br>
+                    <select name="sltLivros" class="txtDados my-select">
+                        <option value="<?php echo($valueOption)?>"> 
+                            <?php echo(utf8_encode($itemOption))?>
                         </option>
-                                                                        
-                        <?php
-                            $sqlcateg = selecionar('tbl_categoria', 'id_categoria',  "ativacao = 1 and id_categoria <>".$valueOption);
-                              
-                              
-                             // echo($sqlCat);
-                            $sltcateg = mysqli_query($conexao, $sqlcateg);
-                            $id_categoria = null; 
-                            $rscateg = null;
-                            while($rscateg=mysqli_fetch_array($sltcateg)) { 
-                                  
-                                       ?>
-                                
-                                <option value="<?php echo($rscateg['id_categoria'])?>"> 
-                                    <?php echo(utf8_encode($rscateg['categoria'])) ?>
-                              </option>
-                        <?php } ?></select><br>
-                    Sub-Categoria: 
-                    <select class="txtDados spaceBetween sltmenor" name="sltSubCat" id="sltSubCat">
-                        <option value="<?php echo(@$valueOptSub)?>"> 
-                            <?php echo(utf8_encode(@$itemOptSub))?>
-                        </option>
+                        <?php 
+                        $sqlLivro = selecionar('tbl_livro', 'isbn',  'isbn <>'. $valueOption);
+                       
+                        $selectLivro = mysqli_query($conexao, $sqlLivro);
+                       
+                       while( $rslivro_autor=mysqli_fetch_array($selectLivro)) { ?>
+                            <option id="option"  data-img-src="<?php echo($rslivro_autor['imgLivro']) ?>" value="<?php echo($rslivro_autor['isbn'])?> "> 
+                                 <?php echo(utf8_encode($rslivro_autor['isbn'])) ?>
+                            </option>
+                       <?php } ?>
                     </select><br>
-                   Ativação: 
-                    <label class="switch"> 
-                        <input type="checkbox" class="sliderBox" name="checkAtivacao"
-                        <?php echo(@$ativacao == 1)?'checked' : ''?>>
-                        <span class="slider round"></span>
-                     </label> 
-                  
-                      <input type="reset" name="btnSalvarSobre" value="Limpar" class="btnReset spaceBetween btnEnviar">
-
-                      <input type="submit" name="btnSalvarSobre" value="<?php echo($valueBtn)?>" class="btnAdd spaceBetween btnEnviar">
-
-                </div>
-            </form>
-          </div>
-          <div class="containerQuery">
-          <!--
-           resultados da consulta aparecerão aqui -->
-          <div class="containerColunas ">
-            
-                <div class="coluna tituloColunas " >
-                Imagem
-                </div>
-                <div class="coluna tituloColunas colMaior">
-                Titulo
-                </div>
-                <div class="coluna tituloColunas smallColPlus" >
-                ISBN
-                </div>
-                <div class="coluna tituloColunas smallCol colunaSemFloat" >
-                Ativação
-                </div>
-                <div class="coluna tituloColunas smallCol" >
-                     Ações
-                </div>
-                            
+                     
+                       <span class="spaceBeetween">Selecione um Autor: </span><br>
+                       <select class="txtDados spaceBetween sltmenor my-select" name="sltLivAutor" id="sltLivAutor">
+                                      <option value="<?php echo($valueOption)?>"> 
+                                          <?php echo(utf8_encode($itemOption))?>
+                                      </option>
+                                     
+                                     <?php 
+                                      $sqlAutor = selecionar('tbl_autor', 'idAutor',  'idAutor <>'. $valueOption);
+                                     
+                                      $selectAutor= mysqli_query($conexao, $sqlAutor);
+                                     
+                                     while( $rsautor=mysqli_fetch_array($selectAutor)) { ?>
+                                          <option data-img-src="<?php echo($rsautor['imgAutor']) ?>" id="option" value="<?php echo($rsautor['idAutor'])?> "> 
+                                               <?php echo(utf8_encode($rsautor['nome'])) ?>
+                                          </option>
+                                     <?php } ?>
+                                  </select><br>
+                        Ativação: <br> 
+                        <label class="switch">
+                          <input type="checkbox"  <?php echo(@$rsSubCatUp['ativacao'] == 1) ? 'checked' : ''?> name="checkAtivacao" 
+                                     > 
+                           <span class="slider round"></span>
+                          </label> <br>
+                         <input type="submit" name="btnSalvarSobre" value="<?php echo($valueBtn)?>" class="spaceBeetween btnEnviar">
+                         <input type="reset" name="btnSalvarSobre" value="Limpar" class="spaceBeetween btnEnviar btnReset">
+                        </div>
+          </form>  
+         
+         <!-- Registros retornados -->
+         <div class="containerColunas centerManualPlus"> 
+         <div class="coluna tituloColunas smallCol" >
+                    Imagem
+            </div>               
+            <div class="coluna tituloColunas smallColPlus">
+                    ISBN
+             </div>
+             <div class="coluna tituloColunas smallColPlus">
+                    Título
+             </div>
+            <div class="coluna tituloColunas smallColPlus">
+                    Autor
+             </div>
+             
+             <div class="coluna tituloColunas smallCol" >
+                    Ações
             </div>
-              
-             
-        
-            <?php 
-                $sqlquery = "select * from tbl_livro order by titulo asc";
-                $selectLivro = mysqli_query($conexao, $sqlquery);
-               while($rsLivro=mysqli_fetch_array($selectLivro)) {
-            ?>
-                    <div class="containerColunas  colunaComFoto">
-                       <div class="coluna " >
-                           <figure>
-                                <img src="<?php echo($rsLivro['imgLivro'])?>" alt="Imagem Sobre" class="imgLivro"
-                                title="Imagem de Fundo">
-                           </figure>
-                           
-                        </div>
-                        <div class="coluna  colMaior">
-                            <?php echo(utf8_encode($rsLivro['titulo']))?>
-                        </div>
-                        <div class="coluna  smallColPlus" >
-                             <?php echo($rsLivro['isbn'])?>
-                        </div>
-                        <div class="coluna  smallCol " >
-                          
-                            <a href="adm.conteudo.php?tab=destaque&ativado=<?php echo($rsLivro['livroEmDestaque'])?>&isbn=<?php echo($rsLivro['isbn'])?>"> 
-                                   <?php
-                                   ?>
-                                <figure>
-                                        <img src="<?php echo($rsLivro['isAtivado'] == 0) ? '../imagens/desativo.png' : '../imagens/active.png' ?>" 
-
-                                        title="Clique para ativar/desativar" alt="excluir" class="imgAtivo" >
-                                </figure>
-                            </a>
-                            
-                         </div>
-                         <div class="coluna  smallCol" >
-                                <a href="adm.produto.php?tab=livro&modo=editarlivro&id=<?php echo($rsLivro['isbn'])?>">
-                                        <figure class="acao">
-                                                <img src="../imagens/edit.png" title="Editar Dados" alt="ViewData" class="linkModal"
-                                                        >
-                                          </figure>
-                                          </a>
-                                           <a href="adm.produto.php?modo=excluir&tab=livro&id=<?php echo($rsLivro['isbn'])?>">
-                                              <figure class="acao">
-                                                    <img src="../imagens/delete.png" title="Excluir Registro" alt="excluir">
-                                               </figure>
-                                            </a>
-                                </div>
-                    </div>  
-           
-             
-            <?php 
-                }
-            ?>
-           
         </div>
+        <?php 
+            $sqlLivAutor = selecionar('vw_livros_autor', 'id');
+
+            $sltLivAutor = mysqli_query($conexao, $sqlLivAutor);
+
+            while($rslivautor = mysqli_fetch_array($sltLivAutor)) {
+        ?>
+
+          <!-- Registros retornados -->
+          <div class="containerColunas centerManualPlus"> 
+          <div class="coluna  smallCol" >
+            <img src="<?php echo($rslivautor['imgLivro'])?>" alt="Imagem Sobre" class="img_small"
+                    title="Imagem de Fundo">
+            </div>                  
+            <div class="coluna  smallColPlus">
+                    <?php echo($rslivautor['isbn'])?>
+             </div>
+             <div class="coluna  smallColPlus">
+                <?php echo($rslivautor['titulo'])?>
+             </div>
+            <div class="coluna  smallColPlus">
+                <?php echo($rslivautor['nome'])?>
+             </div>
+             
+             <div class="coluna  smallCol" >
+             <a href="adm.conteudo.php?tab=promo&modo=editarpromo&id=<?php echo($rsPromos['id'])?>&isbn=<?php echo($rsPromos['isbn'])?>">
+                                            <figure class="acao">
+                                                <img src="../imagens/edit.png" title="Editar Dados" alt="ViewData" class="linkModal"
+                                              >
+                                            </figure>
+                                        </a>
+                                        <a href="adm.conteudo.php?modo=excluir&tab=promo&id=<?php echo($rsPromos['id'])?>">
+                                            <figure class="acao">
+                                                <img src="../imagens/delete.png" title="Excluir Registro" alt="excluir">
+                                            </figure>
+                                        </a>
+            </div>
+        </div>
+        <?php } ?>
+
+        
           <script>
         $(document).ready(function(){
             $("#sltCategoria").on('change', function(){
@@ -531,13 +499,11 @@
                    
 
                 });
-            
-             
-        });
 
-        
+              
+         });
 
-        
+         $('.my-select').chosen({width:"450px"});
     </script>
       
 <?php 

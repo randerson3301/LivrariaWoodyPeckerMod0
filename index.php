@@ -38,14 +38,20 @@
         <title>Home</title>
         <link href="css/reset.css" rel="stylesheet" type="text/css"> 
         <link href="css/style.css" rel="stylesheet" type="text/css">
-        
+        <script src="js/jquery.js"></script>
+        <script src="js/script.js"></script>
+
        
     </head>
     
     <body>
+         <div id="containerModal">
+             <div id="viewDados"></div>
+          </div>
         <?php 
             require_once('header.site.php');
         ?>
+
         <!-- FIM DO Cabeçalho-->
         
         <!-- Conteúdo da page-->
@@ -151,7 +157,10 @@
                                     <div class="containerDetalhes">
                                         <div class = "divisorDetalhes"></div>
                                         <div class="detalhes">
-                                           +Detalhes
+                                          <a href="#" class="modal" onclick="modal(<?php echo($rslivro['isbn'])?>, 
+                                          'modal_livros.php', '#viewDados')">
+                                                +Detalhes
+                                            </a>
                                         </div>
                                     </div>
                                    

@@ -239,7 +239,7 @@ textarea:focus, input:focus{
 /*conteudo geral*/
 #containerGeral {
     width: 1200px;
-    height: 1600px;
+    height: auto;
     min-height: 1600px;
     overflow: hidden;
     background-color: #fff;
@@ -549,11 +549,13 @@ p {
    margin-left: 15px;
    margin-right: 15px;
 }
-#painelRolagem {
-    height: 100%;
-    width: 22%;
-    background-color: #fff;
-    float: left;
+ #painelRolagem {
+        height: auto;
+        min-height: 1500px;
+        width: 22%;
+        overflow: hidden;
+        background-color: #fff;
+        float: left;
 }
 
 .itemRolagem {
@@ -636,9 +638,11 @@ p {
     min-height: 500px;
     line-height: 15px;
     float: left;
-    margin-right: 15px;
+    margin-right: 7px;
+    margin-bottom: 15px;
+    margin-left: 10px;
     font-size: 17px;
-    border:2px solid #dbdbdb;
+    border:2px solid #fff4f4;
     color: #0e6682;
     padding: 6px;
     /*val1: esquerda val2: pra baixo val3: desfoque da cor val4: cor*/
@@ -756,6 +760,73 @@ h2 {
     width: 19px;
 }
 
+/*modal*/
+
+#containerModal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 999;
+    position: fixed;
+    font-family: sans-serif;
+}
+
+#header_modal {
+    width: inherit;
+    height: 80px;
+    background-color: #0a2b60;
+}
+
+.divisorModal {
+    width: 50%;
+    height: 100%;
+    float: left;
+    color: #000;
+    padding: 15px;
+    
+}
+.imgLivroModal {
+    width: 200px;
+    height: 220px;
+   
+   
+    
+}
+.viewDetail {
+    width: 350px;
+    height: 45px;
+    border-radius: 5px;
+    padding-top: 10px;
+   font-size: 25px;
+}
+
+.viewDetailSmall {
+    width: 100px;
+    height: 45px;
+    border-radius: 5px;
+    padding-top: 10px;
+    font-size: 25px;
+}
+.desc {
+    width: 450px;
+    height: 200px;
+    border-radius: 5px;
+}
+
+.shadow3D {
+    box-shadow: 1px 1px 3px 1px #ccc;
+}
+
+#viewDados {
+    width: 1100px;
+    height: 750px;
+    background-color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    
+}
 
 
 /*fim conteúdo*/

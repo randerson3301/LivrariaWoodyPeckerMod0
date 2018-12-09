@@ -1,6 +1,17 @@
 //jquery para causar efeito de smooth scrolling
 $(document).ready(function(){
     teste();
+
+    //abrindo a modal para detalhes do livro
+    $('.modal').click(function(){
+        $('#containerModal').fadeIn(600);
+    });
+
+    //abrindo a modal para detalhes do livro
+    $('.closeModal').click(function(){
+        alert("oi");
+       // $('#containerModal').fadeOut(400);
+    });
         
         mudarImg(slideindex);
         //automatizando o slider
@@ -157,6 +168,17 @@ function teste(){
     }
 }
 
+function modal(idItem, url, ele) {
+    $.ajax({
+        type: "POST", //tipo de envio
+        url: url, //page requisitada
+        //caso o elemento obtenha sucesso ele irá carregar o html dentro da div modal
+        data: {idRegistro: idItem},
+        success: function(dados){
+             $(ele).html(dados);
+        } 
+    })
+}
 
 
 
