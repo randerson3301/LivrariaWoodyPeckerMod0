@@ -45,9 +45,7 @@
                         <div class="coluna tituloColunas colMaiorText">
                                 Mini-Biografia
                          </div>
-                         <div class="coluna tituloColunas ">
-                               Origem
-                         </div>
+                        
                          <div class="coluna tituloColunas smallCol" >
                                 Ações
                         </div>
@@ -72,9 +70,7 @@
                         <div class="coluna  colMaiorText">
                             <?php echo($rsAutor['breveBiografia'])?>
                          </div>
-                         <div class="coluna  ">
-                            <?php echo($rsAutor['cidadeNascimento'])?>
-                         </div>
+                         
                          <div class="coluna  smallCol" >
                          <a href="adm.conteudo.php?tab=autor&modo=editarautor&id=<?php echo($rsAutor['idAutor'])?>#autor">
                             <figure class="acao">

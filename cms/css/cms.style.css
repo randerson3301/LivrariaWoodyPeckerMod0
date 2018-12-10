@@ -196,6 +196,20 @@
     height: 650px;
 }
 
+.borderstats {
+    height: 100%;
+    width: 200px;
+    font-size: 18px;
+    float: left;
+    border-top-color: #fff;
+    border-left-color: #fff;
+    border-bottom: 1px #fff solid;
+   
+}
+
+.percent {
+    margin-bottom: -15px;
+}
 .frmConteudo {
     margin-right: auto;
     margin-left: auto;

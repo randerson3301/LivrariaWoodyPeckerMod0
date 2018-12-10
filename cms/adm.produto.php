@@ -336,8 +336,12 @@
            Produto</button>
         <button class="tablink"  onclick="openForm(event, 'formLivroAutor');" <?php echo(@$openlivautor)?>>
            Livro e Autor</button>
-           <button class="tablink"  onclick="openForm(event, 'stats');">
-           Estatísticas</button>
+          
+           <button class="tablink" title="Caso você NÃO seja ADM, NÃO poderá 
+           visualizar este conteúdo " onclick="openForm(event, 'stats');" 
+           <?php echo($_SESSION['nivel'] != 27) ? 'disabled' : ''?>>
+                 Estatísticas</button>
+              
     </div>
            <!-- Form de Categorias -->
            <div id="formCategoria" class="tabcontent">
@@ -492,7 +496,10 @@
 
                                 $rscliques = mysqli_fetch_array($query_cliques);
                             ?>
-                            Total de Cliques: <?php echo($rscliques['SUM(n_qtdeclique)'])?>
+                            Total de Cliques: <?php 
+                                $soma = $rscliques['SUM(n_qtdeclique)']; 
+                                echo($soma);
+                                ?>
                         </div>
                    </div>
 
@@ -502,21 +509,29 @@
                       $selectLivro = mysqli_query($conexao, $sqlquery);
                      while($rsLivro=mysqli_fetch_array($selectLivro)) {
                   ?>
-                   <div class="containerColunas colunaComFoto"> 
-                    <div class="coluna  " >
+                   <div class="containerColunas colunaComFoto borderstats"> 
+                    <div class="borderstats  " >
                     <img src="<?php echo($rsLivro['imgLivro'])?>" alt="Imagem Sobre" class="imgLivro"
                                       title="Imagem de Fundo">
                        </div>               
-                       <div class="coluna  ">
+                       <div class="borderstats  ">
                             <?php echo($rsLivro['isbn'])?>
                         </div>
-                        <div class="coluna  ">
+                        <div class="borderstats  ">
                              <?php echo(utf8_encode($rsLivro['titulo']))?>
                         </div>
-                       <div class="coluna  ">
-                            <div style="height:30px; color:#0a2b60; margin-left:2px;  background-color:#f2641d; 
-                            width:<?php echo($rsLivro['n_qtdeclique'])?>0px;">
-                                <?php echo($rsLivro['n_qtdeclique'])?>
+                       <div class="borderstats  ">
+                            <div style="height:40px; color:#fff; margin-left:2px;  background-color:#f2641d; 
+                            width:<?php echo($rsLivro['n_qtdeclique'])?>9px;">
+                                <?php 
+                                $qtde_clique = $rsLivro['n_qtdeclique'];
+
+                                $percent_clique = (($qtde_clique / $soma)*100);
+
+                                $percent_clique = number_format($percent_clique, 1, ",", ".");
+                                
+                                echo($percent_clique."%");
+                                ?>
                             </div>
                         </div>
                    </div>

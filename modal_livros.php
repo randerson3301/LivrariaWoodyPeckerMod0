@@ -42,9 +42,15 @@ if($rsConsulta=mysqli_fetch_array($select)) {
     }
 ?>
 <!-- header da modal, q vai conter o logotipo da empresa e um icone para fechamento da modal-->
+<head>
+    <script src="js/script.js"></script>
+</head>
 <div id="header_modal">
+        
+                <img src="imagens/logocms.png" class="img_modal"/>
+            
 <a href="#" class="closeModal" >
-            <figure>
+           <figure>
                 <img src="imagens/delete.png"  alt="fechar" title="Fechar Janela">      
             </figure>
         </a> 

@@ -2,10 +2,12 @@
     require_once("cms/function.php");
     require_once("cms/conexao.php");
 
+    
     $con = conexaoBD();
-
+    //******************Resultados aleatórios **********
     $sqlLivro = 'select * from tbl_livro order by RAND()';
 
+    //******************Filtragem por categoria**********
     if(isset($_GET['sc'])) {
         //echo("epaa");
         
@@ -27,6 +29,16 @@
             
           
     }
+
+    //******************Filtragem por busca**********
+    if(isset($_GET['btnbusca'])) {
+        $q = $_GET['q']; //armazena o que o usuário digitou
+
+        //busca na tabela onde o titulo ou a descricao se iguale ao pattern desejado
+        $sqlLivro ="SELECT * FROM tbl_livro WHERE titulo LIKE '%$q%' OR descricao LIKE '%$q%'";
+
+       // echo($sqlLivro);
+    }
     $sltlivro = mysqli_query($con, $sqlLivro);
 
    
@@ -38,9 +50,14 @@
         <title>Home</title>
         <link href="css/reset.css" rel="stylesheet" type="text/css"> 
         <link href="css/style.css" rel="stylesheet" type="text/css">
+        <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css">
         <script src="js/jquery.js"></script>
         <script src="js/script.js"></script>
-
+        <script src="cms/js/jquery-ui.js"> </script>
+        <script>
+             let titles = [];
+             let title = "";
+        </script>
        
     </head>
     
@@ -87,6 +104,13 @@
                     </div> 
                     <div id="containerContent">
                         <div id="painelRolagem">
+                            <br>
+                            Filtrar por busca:
+                            <form name="frmbusca" method="GET" action="index.php">
+                                <input type="search" id="q" autocomplete="on" class="busca" name="q" placeholder="Digite algo...">
+                                <input type="submit" class="btnbusca" name="btnbusca" value="Buscar">
+                            </form><br>
+                            Filtrar por categoria:
                             <nav > 
                                 <ul>
                                   <?php
@@ -130,7 +154,21 @@
                          </div>
                          <?php 
                             while($rslivro=mysqli_fetch_array($sltlivro)) {
+                                $title = $rslivro['titulo'];
+                                echo("
+                                <script>
+                                   
+                                    title = '$title';
+
+                                   
+                                    titles.push(title);
+                                    
+                                    
+                                    console.log(titles);
+                                </script>
+                                ");
                          ?>
+                         
                          <div class="containerLivro">
                                 <!-- Container da foto -->
                                 <div class="containerLivroFoto">
@@ -143,7 +181,7 @@
                                 <div class="containerLivroDados">
                                      <!-- titulo-->
                                     <div class="tituloLivro">
-                                        <h2><span class="textTitulo">Título:</span>&nbsp;<?php echo($rslivro['titulo'])?></h2>
+                                        <h2><span class="textTitulo">Título:</span>&nbsp;<?php echo($title)?></h2>
                                     </div>
                                     <!-- descrição do livro -->
                                     <div class="descLivro">
@@ -175,7 +213,13 @@
                 <!-- FIM RODAPÉ -->
             </div>
          <!-- usando a biblioteca jquery-->
-        <script src="js/jquery.js"></script>
+       
         <script src="js/script.js"></script>
+        <script>
+            $("#q").autocomplete({
+                source: titles
+            });
+        </script>
+
      </body>
 </html>

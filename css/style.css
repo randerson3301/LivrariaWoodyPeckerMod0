@@ -260,6 +260,38 @@ textarea:focus, input:focus{
     
 }
 
+.closeModal{
+    float: right;
+}
+
+.img_modal {
+    width: 80px;
+    height: 75px;
+    float: none;
+    margin-left: 10px;
+}
+.busca {
+    width: 260px;
+    height: 40px;
+    border-radius: 7px;
+    border: 1px #ccc solid;
+    font-size: 22px;
+    margin-top: 10px;
+    margin-left: 2.8px;
+    color: #0a2b60;
+}
+
+.btnbusca {
+    width: 110px;
+    height: 40px;
+    font-size: 20px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px transparent solid;
+    background-color: #0a2b60;
+    color: #fff;
+}
+
 .containerLinks {
     width: 80%;
     height: 240px;
