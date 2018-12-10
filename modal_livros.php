@@ -45,7 +45,7 @@ if($rsConsulta=mysqli_fetch_array($select)) {
 <div id="header_modal">
 <a href="#" class="closeModal" >
             <figure>
-                <img src="imagens/delete.png"  class="closeModal" alt="fechar" title="Fechar Janela">      
+                <img src="imagens/delete.png"  alt="fechar" title="Fechar Janela">      
             </figure>
         </a> 
 </div>

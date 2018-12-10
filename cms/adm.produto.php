@@ -336,6 +336,8 @@
            Produto</button>
         <button class="tablink"  onclick="openForm(event, 'formLivroAutor');" <?php echo(@$openlivautor)?>>
            Livro e Autor</button>
+           <button class="tablink"  onclick="openForm(event, 'stats');">
+           Estatísticas</button>
     </div>
            <!-- Form de Categorias -->
            <div id="formCategoria" class="tabcontent">
@@ -466,7 +468,61 @@
             </div>
         </div>
         <?php } ?>
+          </div>
+        <!-- Estatisticas do site -->
+        <div id="stats" class="tabcontent">
+              <div class="frmConteudo"> 
+                <div class="containerColunas "> 
+                    <div class="coluna tituloColunas " >
+                               Imagem
+                       </div>               
+                       <div class="coluna tituloColunas ">
+                               ISBN
+                        </div>
+                        <div class="coluna tituloColunas ">
+                               Título
+                        </div>
+                       <div class="coluna tituloColunas ">
+                               Acessos
+                        </div>
+                        <div class="coluna  ">
+                            <?php
+                                $sqlTotalClique = "SELECT SUM(n_qtdeclique) from tbl_livro";
+                                $query_cliques = mysqli_query($conexao, $sqlTotalClique);
 
+                                $rscliques = mysqli_fetch_array($query_cliques);
+                            ?>
+                            Total de Cliques: <?php echo($rscliques['SUM(n_qtdeclique)'])?>
+                        </div>
+                   </div>
+
+                   <!-- resultados -->
+                   <?php 
+                      $sqlquery = "select * from tbl_livro order by titulo asc";
+                      $selectLivro = mysqli_query($conexao, $sqlquery);
+                     while($rsLivro=mysqli_fetch_array($selectLivro)) {
+                  ?>
+                   <div class="containerColunas colunaComFoto"> 
+                    <div class="coluna  " >
+                    <img src="<?php echo($rsLivro['imgLivro'])?>" alt="Imagem Sobre" class="imgLivro"
+                                      title="Imagem de Fundo">
+                       </div>               
+                       <div class="coluna  ">
+                            <?php echo($rsLivro['isbn'])?>
+                        </div>
+                        <div class="coluna  ">
+                             <?php echo(utf8_encode($rsLivro['titulo']))?>
+                        </div>
+                       <div class="coluna  ">
+                            <div style="height:30px; color:#0a2b60; margin-left:2px;  background-color:#f2641d; 
+                            width:<?php echo($rsLivro['n_qtdeclique'])?>0px;">
+                                <?php echo($rsLivro['n_qtdeclique'])?>
+                            </div>
+                        </div>
+                   </div>
+                   <?php } ?>
+              </div>
+        </div>
         
           <script>
         $(document).ready(function(){

@@ -8,9 +8,8 @@ $(document).ready(function(){
     });
 
     //abrindo a modal para detalhes do livro
-    $('.closeModal').click(function(){
-        alert("oi");
-       // $('#containerModal').fadeOut(400);
+    $('.closeModal').click(function() {
+        $('#containerModal').fadeOut(400);
     });
         
         mudarImg(slideindex);
