@@ -68,7 +68,32 @@
         <?php 
             require_once('header.site.php');
         ?>
+           <!-- HTML MOBILE -->
+         <div class="header_mobile"> 
+             <div id="logo_mobile"></div>
+         </div>
 
+         <!-- icon menu -->
+         <div class="icon_menu">
+              <!-- dropdown menu -->
+                <div class="cont_dd shadow3D">
+                    <nav>
+                        <ul>
+                                <li class="item-mob">Autores</li>
+                                <li class="item-mob">Sobre</li>
+                                <li class="item-mob">Promoções</li>
+                                <li class="item-mob">Lojas</li>
+                                <li class="item-mob">Livro do mês</li>
+                                <li class="item-mob">Contato</li>
+                        </ul>
+                    </nav>
+                    
+                </div>
+         </div>
+        
+         <!-- Imagem do mobile -->
+         <div class="img_fundo"></div>
+         
         <!-- FIM DO Cabeçalho-->
         
         <!-- Conteúdo da page-->
@@ -212,9 +237,11 @@
                     <footer></footer>
                 <!-- FIM RODAPÉ -->
             </div>
-         <!-- usando a biblioteca jquery-->
-       
-        <script src="js/script.js"></script>
+           
+         
+         
+            <!-- usando a biblioteca jquery-->
+       <script src="js/script.js"></script>
         <script>
             $("#q").autocomplete({
                 source: titles

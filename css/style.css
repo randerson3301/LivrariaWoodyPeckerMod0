@@ -2,7 +2,111 @@
     box-sizing: border-box;
 }
 
+
+/* CSS PADRÃO --> VALE TANTO PARA MOBILE QUANTO PARA DESKTOP*/
+/*PADRAAAAAAOOOOOOOOOOOOO*/
+body, ul {
+    padding: 0;
+    margin: 0;
+    color: #fff;
+    font-family: sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    
+}
+
+/*retirando a borda azul que fica quando o input é clicado*/
+textarea:focus, input:focus{
+    outline: none;
+    
+}
+.closeModal{
+    float: right;
+}
+
+/*icons das redes sociais*/
+#faceIcon {
+     background-image: url(../imagens/face.png);
+}
+
+#twitterIcon {
+     background-image: url(../imagens/twitter_square-512.png);
+}
+
+#instaIcon {
+     background-image: url(../imagens/insta.png);
+}
+
+#imgSobre {
+    width: inherit;
+    height: inherit;
+}
+
+.first_letter_up {
+    text-transform: capitalize;
+}
+
+.itemdd{
+    width: 0px;
+    height: 0px;
+    color: transparent;
+    font-family: sans-serif;
+    font-size: 19px;
+    text-align: center;
+    padding-top: 7px;
+    margin-left: 220px;
+    margin-top: -12px;
+    margin-bottom: 8px;
+}
+
+.containerLivroFoto {
+    width: 100%;
+    height: 47%;
+    margin-bottom: 15px;
+    
+}
+
+.tituloLivro {
+    width: 100%;
+    height: 28px;
+    font-size: 17px;
+}
+
+.textTitulo {
+    font-weight: 650;
+    color: #f2641d;
+}
+
+
+.preco {
+    width: 100%;
+    height: 9%;
+    margin-top: 10px;
+    font-size: 17px;
+}
+
+#containerModal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 999;
+    position: fixed;
+    font-family: sans-serif;
+}
+
+
+.shadow3D {
+    box-shadow: 1px 1px 3px 1px #ccc;
+}
+
+/*CSS DESKTOP --> ESTILIZAÇÃO DA VERSÃO DESKTOP DO SOFTWARE */
 /*slider*/
+@media screen and (min-width:1200px)
+{
 .slider {
     width: 100%;
     height: 400px;
@@ -62,13 +166,8 @@
 }
 
 /*---------------------------------------*/
-/*CSS*/
-body, ul {
-    padding: 0;
-    margin: 0;
-    color: #fff;
-    font-family: sans-serif;
-}
+
+
 
 header {
     width: 100%;
@@ -81,11 +180,7 @@ header {
 
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
-    
-}
+
 
 /*---------LOGO---------*/
 #logo {
@@ -102,11 +197,6 @@ a {
     
 }
 
-/*retirando a borda azul que fica quando o input é clicado*/
-textarea:focus, input:focus{
-    outline: none;
-    
-}
 
 
 /*-------FIM LOGO---------*/
@@ -260,9 +350,7 @@ textarea:focus, input:focus{
     
 }
 
-.closeModal{
-    float: right;
-}
+
 
 .img_modal {
     width: 80px;
@@ -307,18 +395,7 @@ textarea:focus, input:focus{
     
 }
 
-/*icons das redes sociais*/
-#faceIcon {
-     background-image: url(../imagens/face.png);
-}
 
-#twitterIcon {
-     background-image: url(../imagens/twitter_square-512.png);
-}
-
-#instaIcon {
-     background-image: url(../imagens/insta.png);
-}
 
 .containerLoja {
     width: 100%;
@@ -365,10 +442,7 @@ textarea:focus, input:focus{
     height: 500px;
 }
 
-#imgSobre {
-    width: inherit;
-    height: inherit;
-}
+
 
 #containerForm {
     width: 625px;
@@ -611,22 +685,7 @@ p {
 
 }
 
-.first_letter_up {
-    text-transform: capitalize;
-}
 
-.itemdd{
-    width: 0px;
-    height: 0px;
-    color: transparent;
-    font-family: sans-serif;
-    font-size: 19px;
-    text-align: center;
-    padding-top: 7px;
-    margin-left: 220px;
-    margin-top: -12px;
-    margin-bottom: 8px;
-}
 
 
 /*hover do dropdown*/
@@ -642,14 +701,7 @@ p {
 
 
 
-.containerLivraria {
-    height: 470px;
-    width: 930px;
-    float: left;
-    z-index: 0;
-    position: relative;
 
-}
 
 .promos {
     width: 100%;
@@ -685,15 +737,6 @@ p {
    
 }
 
-
-
-.containerLivroFoto {
-    width: 100%;
-    height: 47%;
-    margin-bottom: 15px;
-    
-}
-
 .imgLivro {
     width: 149px;
     height: 190px;
@@ -720,11 +763,7 @@ p {
     
 }
 
-.tituloLivro {
-    width: 100%;
-    height: 28px;
-    font-size: 17px;
-}
+
 
 .descLivro{
     width: 100%;
@@ -740,10 +779,7 @@ p {
     
 }
 
-.textTitulo {
-    font-weight: 650;
-    color: #f2641d;
-}
+
 
 h2 {
     margin-bottom: 12px;
@@ -751,12 +787,6 @@ h2 {
 }
 
 
-.preco {
-    width: 100%;
-    height: 9%;
-    margin-top: 10px;
-    font-size: 17px;
-}
 
 .containerDetalhes {
     width: 100%;
@@ -794,15 +824,6 @@ h2 {
 
 /*modal*/
 
-#containerModal {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    display: none;
-    z-index: 999;
-    position: fixed;
-    font-family: sans-serif;
-}
 
 #header_modal {
     width: inherit;
@@ -846,9 +867,6 @@ h2 {
     border-radius: 5px;
 }
 
-.shadow3D {
-    box-shadow: 1px 1px 3px 1px #ccc;
-}
 
 #viewDados {
     width: 1100px;
@@ -871,3 +889,89 @@ footer {
     
 }
 /*fim rodape*/
+/*mobile hidden*/
+.cont_geral_mobile {
+    display: none;
+}
+}
+
+/*CSS MOBILE --> ESTILIZAÇÃO DA VERSÃO MOBILE DO SITE*/
+@media screen and (max-device-width:680px){
+    /*escondendo elementos que não aparecerão no layout mobile*/
+    #containerLogin, #slider, #q, .btnbusca, .containerLivro, #containerHeader, 
+    #painelRolagem{
+        display: none;
+    }
+
+    /*estilizando header */
+    .header_mobile{
+        width: 100%;
+        background-color: #0a2b60;
+        height: 200px;
+        padding-top: 30px;
+    }
+
+    #logo_mobile{
+        width: 24%;
+        height: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        background-image: url(../imagens/logocms.png);
+        background-size: 100% 100%;
+    }
+
+    .icon_menu {
+        width: 170px;
+        height: 170px;
+        background-color: #f2641d;
+        background-image: url(../imagens/menu_mob.png);
+        background-size: 90% 90%;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin-left: 45px;
+        margin-top: -80px;
+    }
+
+    .cont_dd {
+        width: 0px;
+        height: 400px;
+        visibility: hidden;
+        margin-left: 140px;
+        color: #000;
+        border-radius: 30px;
+        background-color: #fff;
+      
+    }
+
+    ul {
+        padding: 0;
+        margin: 0;
+        color: #000;
+        font-family: sans-serif;
+    }
+
+    .item-mob {
+        height: 66px;
+        padding: 22px;
+        width: 100%;
+        font-size: 22px;
+        border-bottom: 1px #e5e5e5 solid;
+       
+    }
+    /*icon do menu cria o dropdown*/
+    .icon_menu:hover > .cont_dd {
+      
+        visibility: visible;
+        width: 270px;
+        
+    }
+
+    .img_fundo {
+        width: 98%;
+        height: 220px;
+        margin-right: auto;
+        margin-top: 25px;
+        margin-left: auto;
+        background-image: url('../imagens/bookstore1.jpg');
+    }
+}
