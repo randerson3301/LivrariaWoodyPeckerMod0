@@ -70,7 +70,9 @@
         ?>
            <!-- HTML MOBILE -->
          <div class="header_mobile"> 
+             <a href="index.php">
              <div id="logo_mobile"></div>
+            </a>
          </div>
 
          <!-- icon menu -->
@@ -91,13 +93,14 @@
                 </div>
          </div>
         
-         <!-- Imagem do mobile -->
-         <div class="img_fundo"></div>
+        
          
         <!-- FIM DO Cabeçalho-->
         
         <!-- Conteúdo da page-->
             <div id="containerGeral">
+                
+                 
                
                     <div class="divisorLateral"> 
                     <div class="containerLinks">
@@ -128,6 +131,8 @@
                         </div>
                     </div> 
                     <div id="containerContent">
+                     <!-- Imagem do mobile -->
+                        <div class="img_fundo"></div>
                         <div id="painelRolagem">
                             <br>
                             Filtrar por busca:
@@ -146,9 +151,13 @@
                                     while($rscateg = mysqli_fetch_array($sltcateg)) {
 
                                   ?>
-                                    <a href="?cat=<?php echo($rscateg['id_categoria'])?>">
-                                        <li class="itemRolagem "> <?php echo(utf8_encode($rscateg['categoria']))?> 
-                                    </a>
+                                 
+                                        <li class="itemRolagem " > 
+                                                <a href="index.php?cat=<?php echo($rscateg['id_categoria'])?>">
+                                                <?php echo(utf8_encode($rscateg['categoria']))?> 
+                                            </a>
+                                        </li>
+                                  
                                         <ul class="list_dd">
                                             <?php 
                                                 $sqlsubcat = "select tsb.sub_categoria, tsb.id_sub_categoria from  
